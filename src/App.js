@@ -1,21 +1,34 @@
 import * as React from "react";
 import { Reset } from "styled-reset";
-import { Fragment } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Header from "./components/Header.js";
-import Notice from "./pages/Notice";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Header from "./pages/Header.js";
+import IntroduceCompany from "./pages/IntroduceCompany.js";
+import BoardHeader from "./pages/BoardHeader.js";
+import Notice from "./pages/Notice.js";
+import HomePage from "./pages/Home.js";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Header />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      {
+        path: "/board",
+        element: <BoardHeader />,
+        children: [{ path: "notice", element: <Notice /> }],
+      },
+      { path: "/company", element: <IntroduceCompany /> },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <Fragment>
+    <>
       <Reset />
-      <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route path="/notice" component={Notice} />
-        </Switch>
-      </BrowserRouter>
-    </Fragment>
+      <RouterProvider router={router} />
+    </>
   );
 }
 

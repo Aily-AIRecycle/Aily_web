@@ -1,0 +1,31 @@
+.board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  padding: 0 20% 0 20%;
+}
+
+.menu a {
+  width: 100px;
+  height: 50px;
+  margin-right: 10px;
+  color: #ffffff;
+  background-color: #fbd4c5;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu:last-child {
+  margin-right: -10px;
+}
+
+.menu a:hover,
+.menu a.active,
+.menu a:active {
+  color: #ffffff;
+  background-color: #f8b195;
+}
