@@ -5,9 +5,7 @@ const Header = () => {
   return (
     <>
       <MainNavigation />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
     </>
   );
 };

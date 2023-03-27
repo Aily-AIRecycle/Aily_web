@@ -15,7 +15,9 @@ const MainNavigation = () => {
           <NavLink to="/company">기업 소개</NavLink>
         </li>
         <li className={classes.menu}>메뉴 뭐 있겠지</li>
-        <li className={classes.menu}>로그인</li>
+        <li className={classes.menu}>
+          <NavLink to="/login">로그인</NavLink>
+        </li>
       </ul>
     </header>
   );

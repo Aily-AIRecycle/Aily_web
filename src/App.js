@@ -6,6 +6,7 @@ import IntroduceCompany from "./pages/IntroduceCompany.js";
 import BoardHeader from "./pages/BoardHeader.js";
 import Notice from "./pages/Notice.js";
 import HomePage from "./pages/Home.js";
+import Login from "./pages/Login.js";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
         children: [{ path: "notice", element: <Notice /> }],
       },
       { path: "/company", element: <IntroduceCompany /> },
+      { path: "/login", element: <Login /> },
     ],
   },
 ]);

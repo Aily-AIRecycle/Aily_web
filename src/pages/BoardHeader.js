@@ -5,9 +5,7 @@ function BoardHeader() {
   return (
     <>
       <BoardNavigation />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
     </>
   );
 }
