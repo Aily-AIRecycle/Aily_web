@@ -3,10 +3,11 @@ import { Reset } from "styled-reset";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from "./pages/Header.js";
 import IntroduceCompany from "./pages/IntroduceCompany.js";
-import BoardHeader from "./pages/BoardHeader.js";
+import BoardHeader from "./pages/Board/BoardHeader.js";
 import Notice from "./pages/Notice.js";
 import HomePage from "./pages/Home.js";
 import Login from "./pages/Login.js";
+import BoardContent from "./pages/Board/BoardContent.js";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
       {
         path: "/board",
         element: <BoardHeader />,
-        children: [{ path: "notice", element: <Notice /> }],
+        children: [{ path: "/board/notice", element: <Notice /> }, {path: "/board/notice:articleId", element: <BoardContent/>}],
       },
       { path: "/company", element: <IntroduceCompany /> },
       { path: "/login", element: <Login /> },
