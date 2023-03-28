@@ -1,3 +1,7 @@
-.boardTitle{
-    display: flex;
+.boardTitle {
+  display: flex;
+}
+
+.id {
+  width: 20px;
 }

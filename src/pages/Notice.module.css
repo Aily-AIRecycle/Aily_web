@@ -7,3 +7,8 @@
 .title {
   font-size: 30px;
 }
+
+.list {
+  display: flex;
+  flex-direction: column-reverse;
+}

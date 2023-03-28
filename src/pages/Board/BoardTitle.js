@@ -1,17 +1,15 @@
-// import { Link } from 'react-router-dom';
-// import classes from './BoardTitle.module.css'
+import classes from "./BoardTitle.module.css";
 
-function BoardTitle(props){
-    const id = props.id
-    const title = props.title
-    // const content = props.content
+function BoardTitle(props) {
+  const id = props.id;
+  const title = props.title;
 
-    return <>
-    {/* <Link to={`/board/notice/${id}`} className={classes.boardTitle} state={{id: id, title: title, content: content}}> */}
-        <div>{id}</div>
-        <div>{title}</div>
-    {/* </Link> */}
-    </>
+  return (
+    <div className={classes.boardTitle}>
+      <div className={classes.id}>{id}</div>
+      <div className={classes.title}>{title}</div>
+    </div>
+  );
 }
 
 export default BoardTitle;
