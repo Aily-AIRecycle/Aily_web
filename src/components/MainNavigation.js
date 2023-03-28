@@ -6,17 +6,16 @@ const MainNavigation = () => {
     <header>
       <ul className={classes.header}>
         <li className={classes.menu}>
-          <NavLink to="/">AILY</NavLink>
+          <NavLink to="/" className={({isActive}) => isActive ? classes.active : undefined}>AILY</NavLink>
         </li>
         <li className={classes.menu}>
-          <NavLink to="/board/notice">게시판</NavLink>
+          <NavLink to="/board/notice" className={({isActive}) => isActive ? classes.active : undefined}>게시판</NavLink>
         </li>
         <li className={classes.menu}>
-          <NavLink to="/company">기업 소개</NavLink>
+          <NavLink to="/company" className={({isActive}) => isActive ? classes.active : undefined}>기업 소개</NavLink>
         </li>
-        <li className={classes.menu}>메뉴 뭐 있겠지</li>
         <li className={classes.menu}>
-          <NavLink to="/login">로그인</NavLink>
+          <NavLink to="/login" className={({isActive}) => isActive ? classes.active : undefined}>로그인</NavLink>
         </li>
       </ul>
     </header>
