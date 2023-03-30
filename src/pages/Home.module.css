@@ -1,0 +1,89 @@
+.h1 {
+  font-size: 70px;
+  margin-bottom: 50px;
+}
+
+.h2 {
+  font-size: 40px;
+  color: #726969;
+}
+
+.box1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 500px;
+}
+
+.space {
+  height: 300px;
+}
+
+.background {
+  width: 100vw;
+  height: 680px;
+  background-color: #ffcab5;
+  margin-top: -500px;
+  z-index: -1;
+}
+
+.box2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 2000px;
+}
+
+.qrcode {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.qrSpace {
+  width: 200px;
+}
+
+.box3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffe8df;
+  height: 2050px;
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 470px;
+  background-color: #ffffff;
+  border: 10px solid #f8b195;
+  box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 108px;
+  padding-top: 150px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-top: 200px;
+}
+
+.point h2 {
+  font-size: 40px;
+  margin-left: 20px;
+}
+
+.wallet {
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-bottom: 100px;
+}
+
+.point h1 {
+  font-size: 100px;
+}
