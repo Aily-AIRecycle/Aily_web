@@ -15,8 +15,16 @@
   align-items: center;
 }
 
+.logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo p {
   display: flex;
+  justify-content: center;
   width: 150px;
   font-family: "Waiting for the Sunrise", cursive;
   font-weight: 400;
