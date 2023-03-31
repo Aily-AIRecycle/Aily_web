@@ -1,0 +1,24 @@
+.h1 {
+  font-size: 70px;
+  margin-bottom: 50px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 2050px;
+}
+.img {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 850px;
+}
