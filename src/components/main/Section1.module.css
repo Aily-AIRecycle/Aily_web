@@ -1,10 +1,13 @@
 .h1 {
-  font-size: 70px;
-  margin-bottom: 50px;
+  /* font-size: 70px; */
+  /* font-size: 40px; */
+  font-size: 4vw;
+  margin-bottom: 3vw;
 }
 
 .h2 {
-  font-size: 40px;
+  /* font-size: 40px; */
+  font-size: 2vw;
   color: #726969;
 }
 
@@ -25,4 +28,18 @@
   background-color: #ffcab5;
   margin-top: -500px;
   z-index: -1;
+}
+
+/* :root {
+  --font-size-lg: 5vw;
+  --font-size-md: 4vw;
+  --font-size-sm: 3vw;
+} */
+
+h1 {
+  font-size: var(--font-size-lg);
+}
+
+h2 {
+  font-size: var(--font-size-md);
 }

@@ -2,3 +2,25 @@
   font-family: "Noto Sans KR", sans-serif;
   font: unset;
 } */
+
+/* body {
+  min-height: 100vh;
+} */
+
+:root {
+  --font-size-lg: 5vw;
+  --font-size-md: 4vw;
+  --font-size-sm: 3vw;
+}
+
+h1 {
+  font-size: var(--font-size-lg);
+}
+
+h2 {
+  font-size: var(--font-size-md);
+}
+
+/* body {
+  overflow: hidden;
+} */
