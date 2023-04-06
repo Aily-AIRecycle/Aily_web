@@ -1,6 +1,6 @@
-import { ReactComponent as QrCode } from "../../img/main/qrcode.svg";
-import { ReactComponent as Arrow } from "../../img/main/right_left_arrow.svg";
-import { ReactComponent as RecycleBin } from "../../img/main/recycle_bin.svg";
+import qrPhone from "../../img/main/qrcode.svg";
+import arrow from "../../img/main/right_left_arrow.svg";
+import recycleBin from "../../img/main/recycle_bin.svg";
 import classes from "./Section2.module.css";
 
 function Section2() {
@@ -12,12 +12,13 @@ function Section2() {
       </h2>
       <div className={classes.space} />
       <div className={classes.qrcode}>
-        <QrCode />
+        <img src={qrPhone} alt="qrPhone" className={classes.qrPhone} />
         <div className={classes.qrSpace} />
-        <Arrow />
+        <img src={arrow} alt="arrow" className={classes.arrow} />
         <div className={classes.qrSpace} />
-        <RecycleBin />
+        <img src={recycleBin} alt="recycleBin" className={classes.recycleBin} />
       </div>
+      <div className={classes.space} />
     </div>
   );
 }
