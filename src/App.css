@@ -3,9 +3,10 @@
   font: unset;
 } */
 
-/* body {
-  min-height: 100vh;
-} */
+body,
+#root {
+  width: 100%;
+}
 
 :root {
   --font-size-lg: 5vw;
