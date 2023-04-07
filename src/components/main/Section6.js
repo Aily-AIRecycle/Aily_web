@@ -1,6 +1,6 @@
 import classes from "./Section6.module.css";
-import { ReactComponent as Earth } from "../../img/main/earth.svg";
-import { ReactComponent as Hand } from "../../img/main/hand.svg";
+import earth from "../../img/main/earth.svg";
+import hand from "../../img/main/hand.svg";
 
 function Section6() {
   return (
@@ -10,8 +10,8 @@ function Section6() {
         <h1 className={classes.h1}>Aily와 함께 시작하세요.</h1>
       </div>
       <div className={classes.img}>
-        <Earth />
-        <Hand />
+        <img src={earth} alt="earth" className={classes.earth} />
+        <img src={hand} alt="hand" className={classes.hand} />
       </div>
     </div>
   );

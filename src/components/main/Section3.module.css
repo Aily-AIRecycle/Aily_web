@@ -32,6 +32,7 @@
   padding-left: 50px;
   padding-right: 50px;
   margin-top: 200px;
+  position: relative;
 }
 
 .point h2 {
@@ -39,7 +40,7 @@
   margin-left: 20px;
 }
 
-.wallet {
+.wallet_div {
   width: 600px;
   display: flex;
   align-items: center;
@@ -50,4 +51,89 @@
 
 .point h1 {
   font-size: 100px;
+}
+
+.wallet {
+  width: auto;
+}
+
+.cash {
+  position: absolute;
+  left: 792px;
+  top: 186px;
+}
+
+.coin {
+  position: absolute;
+  left: -370px;
+  bottom: 38px;
+}
+
+.bill {
+  position: absolute;
+  right: 707px;
+  bottom: 486px;
+}
+
+@media (max-width: 2000px) {
+  .h1 {
+    font-size: 3.5vw;
+    margin-bottom: 2.5vw;
+  }
+
+  .h2 {
+    font-size: 2vw;
+  }
+
+  .box3 {
+    height: 102.5vw;
+  }
+
+  .point {
+    width: 25vw;
+    height: 23.5vw;
+    box-shadow: 1vw 1vw 0.5vw rgba(0, 0, 0, 0.25);
+    border: 0.5vw solid #f8b195;
+    border-radius: 5.4vw;
+    padding-top: 7.5vw;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    margin-top: 10vw;
+  }
+
+  .point h2 {
+    font-size: 2vw;
+    margin-left: 1vw;
+  }
+
+  .wallet_div {
+    width: 30vw;
+    padding-bottom: 5vw;
+  }
+
+  .point h1 {
+    font-size: 5vw;
+  }
+
+  .wallet {
+    width: 5vw;
+  }
+
+  .cash {
+    left: 39.6vw;
+    top: 9.3vw;
+    width: 7.5vw;
+  }
+
+  .coin {
+    left: -18.5vw;
+    bottom: 1.9vw;
+    width: 7.5vw;
+  }
+
+  .bill {
+    right: 35.35vw;
+    bottom: 24.3vw;
+    width: 12.1vw;
+  }
 }

@@ -28,7 +28,7 @@
 }
 
 .qrSpace {
-  width: 200px;
+  width: 170px;
 }
 
 .qrPhone {
@@ -42,25 +42,25 @@
 }
 
 @media (max-width: 2000px) {
-  .box2 {
-    padding-top: 15vw;
-  }
-
   .h1 {
-    font-size: 4vw;
-    margin-bottom: 3vw;
-  }
-
-  .space {
-    height: 15vw;
+    font-size: 3.5vw;
+    margin-bottom: 2.5vw;
   }
 
   .h2 {
     font-size: 2vw;
   }
 
+  .box2 {
+    padding-top: 15vw;
+  }
+
+  .space {
+    height: 15vw;
+  }
+
   .qrSpace {
-    width: 10vw;
+    width: 8.5vw;
   }
 
   .qrPhone {
@@ -68,7 +68,7 @@
   }
 
   .arrow {
-    width: 10vw;
+    width: 10.75vw;
   }
 
   .recycleBin {
