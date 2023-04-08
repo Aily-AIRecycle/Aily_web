@@ -1,0 +1,97 @@
+.footer {
+  width: 100%;
+  height: 320px;
+  background-color: #f8b195;
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+}
+.footer_wrap {
+  background-color: #f8b195;
+  margin-top: 30px;
+  width: 80%;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.logo {
+  font-family: "Waiting for the Sunrise";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 66px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 5.18px;
+  margin-right: 30px;
+}
+
+.footer h6 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 2.68px;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 2.68px;
+  margin-top: 30px;
+  color: #ffffff;
+}
+
+.bottom div:first-child h5,
+.bottom div:nth-child(2) h5:first-child,
+.bottom div:last-child h5 {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 2000px) {
+  .footer {
+    width: 100%;
+    height: 16vw;
+  }
+  .footer_wrap {
+    margin-top: 1.5vw;
+    width: 80%;
+  }
+
+  .logo {
+    font-size: 2vw;
+    line-height: 3.3vw;
+    letter-spacing: 0.259vw;
+    margin-right: 1.5vw;
+  }
+
+  .footer h6 {
+    font-size: 0.75vw;
+    line-height: 0.9vw;
+    letter-spacing: 0.134vw;
+  }
+
+  .bottom {
+    font-size: 1vw;
+    line-height: 1.2vw;
+    letter-spacing: 0.134vw;
+    margin-top: 1.5vw;
+  }
+
+  .bottom div:first-child h5,
+  .bottom div:nth-child(2) h5:first-child,
+  .bottom div:last-child h5 {
+    margin-bottom: 1.5vw;
+  }
+}
