@@ -79,3 +79,81 @@
   background-color: #f8b195;
   color: white;
 }
+
+/* width <= 1000 */
+.head_mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 60px;
+}
+
+.head_logo_s {
+  margin-left: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.head_logo_s a {
+  text-decoration: none;
+}
+
+.head_logo_s p {
+  display: flex;
+  justify-content: center;
+  width: 70px;
+  font-family: "Waiting for the Sunrise", cursive;
+  font-weight: 400;
+  font-size: 30px;
+  color: #f8b195;
+}
+
+.head_logo_s p:first-child {
+  font-size: 10px;
+}
+
+.head_mobile img {
+  margin-right: 15px;
+}
+
+.mobile_box {
+  position: fixed;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #f8b195;
+  right: 0px;
+  z-index: 10;
+}
+
+.head_wrap_mobile {
+  display: flex;
+  overflow-x: hidden;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.head_menu_mobile {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu_mobile {
+  height: 50px;
+  margin: 10px 20px 10px 20px;
+}
+
+.menu_mobile a {
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+}
+
+.close {
+  width: 25px;
+  position: absolute;
+  right: 15px;
+  top: 16px;
+}

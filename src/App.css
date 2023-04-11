@@ -2,10 +2,20 @@
   font-family: "Noto Sans KR", sans-serif;
   font: unset;
 } */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 body,
 #root {
   width: 100%;
+  overflow-x: hidden;
 }
 
 :root {
@@ -13,15 +23,3 @@ body,
   --font-size-md: 4vw;
   --font-size-sm: 3vw;
 }
-
-h1 {
-  font-size: var(--font-size-lg);
-}
-
-h2 {
-  font-size: var(--font-size-md);
-}
-
-/* body {
-  overflow: hidden;
-} */
