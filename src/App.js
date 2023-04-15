@@ -10,11 +10,12 @@ import Login from "./pages/Login.js";
 import BoardContent from "./pages/Board/BoardContent.js";
 import Location from "./pages/Location.js";
 import IsRecycle from "./pages/IsRecycle";
+import Footer from "./components/Footer";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Header />,
+    element: [<Header />, <Footer />],
     children: [
       { path: "/", element: <HomePage /> },
       {
