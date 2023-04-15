@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import BoardTitle from "./Board/BoardTitle";
 import classes from "./Notice.module.css";
 
@@ -16,22 +16,12 @@ const Notice = () => {
         <hr />
         <ul className={classes.list}>
           {DUMMY_DATA.map((article) => (
-            <li key={article.id}>
-              <Link
-                to={`/board/notice/${article.id}`}
-                state={{
-                  id: article.id,
-                  title: article.title,
-                  content: article.content,
-                }}
-              >
-                <BoardTitle
-                  id={article.id}
-                  title={article.title}
-                  content={article.content}
-                />
-              </Link>
-            </li>
+            <BoardTitle
+              key={article.id}
+              id={article.id}
+              title={article.title}
+              content={article.content}
+            />
           ))}
         </ul>
       </div>
