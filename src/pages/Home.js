@@ -1,10 +1,10 @@
 import classes from "./Home.module.css";
-import Section1 from "../components/main/Section1";
-import Section2 from "../components/main/Section2";
-import Section3 from "../components/main/Section3";
-import Section4 from "../components/main/Section4";
-import Section5 from "../components/main/Section5";
-import Section6 from "../components/main/Section6";
+import Section1 from "../components/Main/Section1";
+import Section2 from "../components/Main/Section2";
+import Section3 from "../components/Main/Section3";
+import Section4 from "../components/Main/Section4";
+import Section5 from "../components/Main/Section5";
+import Section6 from "../components/Main/Section6";
 
 function HomePage() {
   return (
