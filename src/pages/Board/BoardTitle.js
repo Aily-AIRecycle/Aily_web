@@ -2,12 +2,13 @@ import classes from "./BoardTitle.module.css";
 import { Link } from "react-router-dom";
 
 function BoardTitle(props) {
-  const id = props.id;
-  const title = props.title;
-  const category = props.category;
-  const writer = props.writer;
-  const date = props.date;
-  const content = props.content;
+  const article = props.article;
+  const id = article.id;
+  const title = article.title;
+  const category = article.category;
+  const writer = article.writer;
+  const date = article.date;
+  const content = article.content;
 
   return (
     <li className={classes.boardTitle}>
