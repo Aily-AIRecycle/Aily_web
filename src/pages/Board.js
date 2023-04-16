@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import BoardTitle from "./Board/BoardTitle";
+import BoardTitle from "../components/Board/BoardTitle";
 import classes from "./Board.module.css";
 
 const DUMMY_DATA = [

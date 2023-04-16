@@ -3,11 +3,11 @@ import * as React from "react";
 import { Reset } from "styled-reset";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HeaderAndFooter from "./pages/HeaderAndFooter.js";
-import BoardHeader from "./pages/Board/BoardHeader.js";
+import BoardHeader from "./components/Board/BoardHeader.js";
+import BoardContent from "./components/Board/BoardContent.js";
 import Board from "./pages/Board.js";
 import HomePage from "./pages/Home.js";
 import Login from "./pages/Login.js";
-import BoardContent from "./pages/Board/BoardContent.js";
 import Location from "./pages/Location.js";
 import IsRecycle from "./pages/IsRecycle";
 
