@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import BoardTitle from "./Board/BoardTitle";
-import classes from "./Notice.module.css";
+import classes from "./Board.module.css";
 
 const DUMMY_DATA = [
   { id: "1", title: "첫 글", content: "aily에 오신 것을 환영합니다." },
@@ -8,7 +8,7 @@ const DUMMY_DATA = [
   { id: "3", title: "세번째 글", content: "안녕하세요~" },
 ];
 
-const Notice = () => {
+function Board() {
   return (
     <>
       <div className={classes.notice}>
@@ -16,18 +16,13 @@ const Notice = () => {
         <hr />
         <ul className={classes.list}>
           {DUMMY_DATA.map((article) => (
-            <BoardTitle
-              key={article.id}
-              id={article.id}
-              title={article.title}
-              content={article.content}
-            />
+            <BoardTitle key={article.id} article={article} />
           ))}
         </ul>
       </div>
       <Outlet />
     </>
   );
-};
+}
 
-export default Notice;
+export default Board;

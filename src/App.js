@@ -4,7 +4,7 @@ import { Reset } from "styled-reset";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HeaderAndFooter from "./pages/HeaderAndFooter.js";
 import BoardHeader from "./pages/Board/BoardHeader.js";
-import Notice from "./pages/Notice.js";
+import Board from "./pages/Board.js";
 import HomePage from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import BoardContent from "./pages/Board/BoardContent.js";
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         path: "/board",
         element: <BoardHeader />,
         children: [
-          { path: "/board/notice", element: <Notice /> },
+          { path: "/board/notice", element: <Board /> },
           { path: "/board/notice/:articleId", element: <BoardContent /> },
         ],
       },
