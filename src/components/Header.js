@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import classes from "./MainNavigation.module.css";
+import classes from "./Header.module.css";
 import { Link } from "react-router-dom";
 import bars from "../../src/img/header/bars-solid.svg";
 import x from "../../src/img/header/x-solid.svg";
-import MainNavigationList from "./MainNavigationList";
+import HeaderList from "./HeaderList";
 
-function MainNavigation() {
+function Header() {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [menuShow, setMenuShow] = useState(false);
 
@@ -33,7 +33,7 @@ function MainNavigation() {
               <p>AiLY</p>
             </Link>
           </div>
-          <MainNavigationList ul={classes.head_menu} li={classes.menu} />
+          <HeaderList ul={classes.head_menu} li={classes.menu} />
         </div>
       </header>
     );
@@ -57,7 +57,7 @@ function MainNavigation() {
               onClick={menuHandler}
               className={classes.close}
             />
-            <MainNavigationList
+            <HeaderList
               ul={classes.head_menu_mobile}
               li={classes.menu_mobile}
               onClick={menuHandler}
@@ -69,4 +69,4 @@ function MainNavigation() {
   }
   return header;
 }
-export default MainNavigation;
+export default Header;

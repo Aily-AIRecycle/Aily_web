@@ -2,7 +2,7 @@ import "./App.css";
 import * as React from "react";
 import { Reset } from "styled-reset";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Header from "./pages/Header.js";
+import HeaderAndFooter from "./pages/HeaderAndFooter.js";
 import BoardHeader from "./pages/Board/BoardHeader.js";
 import Notice from "./pages/Notice.js";
 import HomePage from "./pages/Home.js";
@@ -14,7 +14,7 @@ import IsRecycle from "./pages/IsRecycle";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Header />,
+    element: <HeaderAndFooter />,
     children: [
       { path: "/", element: <HomePage /> },
       {

@@ -1,15 +1,15 @@
 import { Outlet } from "react-router-dom";
-import MainNavigation from "../components/MainNavigation";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const Header = () => {
+function HeaderAndFooter() {
   return (
     <>
-      <MainNavigation />
+      <Header />
       <Outlet />
       <Footer />
     </>
   );
-};
+}
 
-export default Header;
+export default HeaderAndFooter;

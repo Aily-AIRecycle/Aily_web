@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function MainNavigationList(props) {
+function HeaderList(props) {
   return (
     <ul className={props.ul}>
       <li className={props.li}>
@@ -21,4 +21,4 @@ function MainNavigationList(props) {
   );
 }
 
-export default MainNavigationList;
+export default HeaderList;
