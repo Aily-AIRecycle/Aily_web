@@ -1,12 +1,11 @@
-.notice {
-  padding-top: 150px;
+.board {
   padding-left: 20%;
   padding-right: 20%;
   padding-bottom: 150px;
 }
 
-.title {
-  font-size: 30px;
+.hr {
+  margin-top: 30px;
 }
 
 .list {
