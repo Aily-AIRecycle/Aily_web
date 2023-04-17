@@ -7,61 +7,59 @@ function BoardNavigation() {
     <>
       <img src={board} alt="board" className={classes.board_img} />
       <header>
-        <nav>
-          <ul className={classes.board}>
-            <li className={classes.menu}>
-              <NavLink
-                to="/board"
-                className={({ isActive }) =>
-                  isActive ? classes.active : undefined
-                }
-                end
-              >
-                전체
-              </NavLink>
-            </li>
-            <li className={classes.menu}>
-              <NavLink
-                to="/board/notice"
-                className={({ isActive }) =>
-                  isActive ? classes.active : undefined
-                }
-              >
-                공지
-              </NavLink>
-            </li>
-            <li className={classes.menu}>
-              <NavLink
-                to="/board/q&a"
-                className={({ isActive }) =>
-                  isActive ? classes.active : undefined
-                }
-              >
-                Q&A
-              </NavLink>
-            </li>
-            <li className={classes.menu}>
-              <NavLink
-                to="/board/f&a"
-                className={({ isActive }) =>
-                  isActive ? classes.active : undefined
-                }
-              >
-                F&A
-              </NavLink>
-            </li>
-            <li className={classes.menu}>
-              <NavLink
-                to="/board/suggestions"
-                className={({ isActive }) =>
-                  isActive ? classes.active : undefined
-                }
-              >
-                건의사항
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
+        <ul className={classes.board}>
+          <li className={classes.menu}>
+            <NavLink
+              to="/board"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+              end
+            >
+              전체
+            </NavLink>
+          </li>
+          <li className={classes.menu}>
+            <NavLink
+              to="/board/notice"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              공지
+            </NavLink>
+          </li>
+          <li className={classes.menu}>
+            <NavLink
+              to="/board/q&a"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              Q&A
+            </NavLink>
+          </li>
+          <li className={classes.menu}>
+            <NavLink
+              to="/board/f&a"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              F&A
+            </NavLink>
+          </li>
+          <li className={classes.menu}>
+            <NavLink
+              to="/board/suggestions"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              건의사항
+            </NavLink>
+          </li>
+        </ul>
       </header>
     </>
   );
