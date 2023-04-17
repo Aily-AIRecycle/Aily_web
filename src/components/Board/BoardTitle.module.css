@@ -36,7 +36,6 @@
 
 .id,
 .category,
-title,
 .writer,
 .date {
   display: flex;

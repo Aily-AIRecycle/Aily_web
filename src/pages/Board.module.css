@@ -4,11 +4,50 @@
   padding-bottom: 150px;
 }
 
-.hr {
-  margin-top: 30px;
-}
-
 .list {
   display: flex;
   flex-direction: column-reverse;
+}
+
+.boardHead {
+  display: flex;
+  height: 50px;
+  margin-top: 30px;
+  align-items: center;
+  border-top: 2px solid #726969;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.id {
+  width: 10%;
+}
+
+.category {
+  width: 20%;
+}
+
+.title {
+  width: 50%;
+}
+
+.title a {
+  text-decoration: none;
+  color: black;
+}
+
+.writer {
+  width: 10%;
+}
+
+.date {
+  width: 20%;
+}
+
+.id,
+.category,
+.title,
+.writer,
+.date {
+  display: flex;
+  justify-content: center;
 }

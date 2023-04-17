@@ -37,7 +37,13 @@ function Board() {
   return (
     <>
       <div className={classes.board}>
-        <hr className={classes.hr} />
+        <div className={classes.boardHead}>
+          <div className={classes.id}>No</div>
+          <div className={classes.category}>카테고리</div>
+          <div className={classes.title}>제목</div>
+          <div className={classes.writer}>작성자</div>
+          <div className={classes.date}>작성일</div>
+        </div>
         <ul className={classes.list}>
           {DUMMY_DATA.filter(
             (article) => parseInt(params.boardId) === article.category_id
