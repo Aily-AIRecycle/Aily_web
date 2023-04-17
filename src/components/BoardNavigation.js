@@ -41,12 +41,12 @@ function BoardNavigation() {
           </li>
           <li className={classes.menu}>
             <NavLink
-              to="/board/f&a"
+              to="/board/faq"
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
             >
-              F&A
+              FAQ
             </NavLink>
           </li>
           <li className={classes.menu}>
