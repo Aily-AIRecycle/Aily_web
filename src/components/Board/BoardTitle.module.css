@@ -1,7 +1,44 @@
 .boardTitle {
   display: flex;
+  height: 50px;
+  align-items: center;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.boardTitle:hover {
+  background-color: #f0f0f0;
 }
 
 .id {
-  width: 20px;
+  width: 10%;
+}
+
+.category {
+  width: 20%;
+}
+
+.title {
+  width: 50%;
+}
+
+.title a {
+  text-decoration: none;
+  color: black;
+}
+
+.writer {
+  width: 10%;
+}
+
+.date {
+  width: 20%;
+}
+
+.id,
+.category,
+title,
+.writer,
+.date {
+  display: flex;
+  justify-content: center;
 }
