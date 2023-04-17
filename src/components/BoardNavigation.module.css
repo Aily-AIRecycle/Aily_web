@@ -3,9 +3,8 @@
 }
 .board {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
+  margin-top: 300px;
+  margin-left: 20px;
   padding: 0 20% 0 20%;
 }
 
