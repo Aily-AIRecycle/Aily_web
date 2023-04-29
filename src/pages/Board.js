@@ -1,5 +1,5 @@
 import { Outlet, useParams } from "react-router-dom";
-import BoardTitle from "../components/Board/BoardTitle";
+import BoardFilter from "../components/Board/BoardFilter";
 import classes from "./Board.module.css";
 
 const DUMMY_DATA = [
@@ -32,14 +32,6 @@ const DUMMY_DATA = [
   },
 ];
 
-const category_type = { notice: 1, "q&a": 2, faq: 3, suggestion: 4 };
-
-function boardFilter(params) {
-  return DUMMY_DATA.filter(
-    (article) => category_type[params.boardName] === article.category_id
-  ).map((article) => <BoardTitle key={article.id} article={article} />);
-}
-
 function Board() {
   const params = useParams();
 
@@ -54,11 +46,7 @@ function Board() {
           <div className={classes.date}>작성일</div>
         </div>
         <ul className={classes.list}>
-          {params.boardName
-            ? boardFilter(params)
-            : DUMMY_DATA.map((article) => (
-                <BoardTitle key={article.id} article={article} />
-              ))}
+          <BoardFilter boardName={params.boardName} data={DUMMY_DATA} />
         </ul>
       </div>
       <Outlet />
