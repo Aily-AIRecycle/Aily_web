@@ -34,6 +34,12 @@ const DUMMY_DATA = [
 
 const category_type = { notice: 1, "q&a": 2, faq: 3, suggestion: 4 };
 
+function boardFilter(params) {
+  return DUMMY_DATA.filter(
+    (article) => category_type[params.boardName] === article.category_id
+  ).map((article) => <BoardTitle key={article.id} article={article} />);
+}
+
 function Board() {
   const params = useParams();
 
@@ -48,11 +54,11 @@ function Board() {
           <div className={classes.date}>작성일</div>
         </div>
         <ul className={classes.list}>
-          {DUMMY_DATA.filter(
-            (article) => category_type[params.boardName] === article.category_id
-          ).map((article) => (
-            <BoardTitle key={article.id} article={article} />
-          ))}
+          {params.boardName
+            ? boardFilter(params)
+            : DUMMY_DATA.map((article) => (
+                <BoardTitle key={article.id} article={article} />
+              ))}
         </ul>
       </div>
       <Outlet />
