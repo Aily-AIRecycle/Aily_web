@@ -32,8 +32,11 @@ const DUMMY_DATA = [
   },
 ];
 
+const category_type = { notice: 1, "q&a": 2, faq: 3, suggestion: 4 };
+
 function Board() {
   const params = useParams();
+
   return (
     <>
       <div className={classes.board}>
@@ -46,7 +49,7 @@ function Board() {
         </div>
         <ul className={classes.list}>
           {DUMMY_DATA.filter(
-            (article) => parseInt(params.boardId) === article.category_id
+            (article) => category_type[params.boardName] === article.category_id
           ).map((article) => (
             <BoardTitle key={article.id} article={article} />
           ))}

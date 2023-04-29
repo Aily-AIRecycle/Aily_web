@@ -16,7 +16,7 @@ function BoardTitle(props) {
       <div className={classes.category}>{category}</div>
       <div className={classes.title}>
         <Link
-          to={`/board/notice/${id}`}
+          to={`${id}`}
           state={{
             id: id,
             title: title,

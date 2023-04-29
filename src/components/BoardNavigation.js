@@ -21,7 +21,7 @@ function BoardNavigation() {
           </li>
           <li className={classes.menu}>
             <NavLink
-              to="/board/1"
+              to="/board/notice"
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
@@ -31,7 +31,7 @@ function BoardNavigation() {
           </li>
           <li className={classes.menu}>
             <NavLink
-              to="/board/2"
+              to="/board/q&a"
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
@@ -41,7 +41,7 @@ function BoardNavigation() {
           </li>
           <li className={classes.menu}>
             <NavLink
-              to="/board/3"
+              to="/board/faq"
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
@@ -51,7 +51,7 @@ function BoardNavigation() {
           </li>
           <li className={classes.menu}>
             <NavLink
-              to="/board/4"
+              to="/board/suggestion"
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
