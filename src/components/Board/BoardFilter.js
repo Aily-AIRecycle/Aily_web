@@ -8,10 +8,16 @@ function BoardFilter(props) {
       .filter(
         (article) => category_type[props.boardName] === article.category_id
       )
-      .map((article) => <BoardTitle key={article.id} article={article} />);
+      .map((article) => (
+        <BoardTitle
+          key={article.id}
+          article={article}
+          boardName={props.boardName}
+        />
+      ));
   } else {
     return props.data.map((article) => (
-      <BoardTitle key={article.id} article={article} />
+      <BoardTitle key={article.id} article={article} boardName={"entire"} />
     ));
   }
 }
