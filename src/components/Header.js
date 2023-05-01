@@ -14,7 +14,10 @@ function Header() {
       setInnerWidth(window.innerWidth);
     };
     window.addEventListener("resize", resizeListener);
-  });
+    return () => {
+      window.removeEventListener("resize", resizeListener);
+    };
+  }, []);
   console.log("innerWidth", innerWidth);
 
   function menuHandler() {
