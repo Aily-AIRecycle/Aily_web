@@ -9,6 +9,7 @@ import HomePage from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Location from "./pages/Location.js";
 import IsRecycle from "./pages/IsRecycle";
+import Join from "./pages/Join";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: "/location", element: <Location /> },
       { path: "/isRecycle", element: <IsRecycle /> },
       { path: "/login", element: <Login /> },
+      { path: "/join", element: <Join /> },
     ],
   },
 ]);
