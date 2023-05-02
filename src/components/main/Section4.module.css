@@ -18,7 +18,7 @@
 }
 
 .content {
-  width: 1920px;
+  width: 100%;
   margin-top: 390px;
   display: flex;
   justify-content: space-between;
@@ -163,7 +163,6 @@
   }
 
   .content {
-    width: 96vw;
     margin-top: 19.5vw;
   }
 
