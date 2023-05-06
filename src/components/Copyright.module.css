@@ -1,0 +1,23 @@
+.div {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin-top: 80px;
+}
+
+.logo {
+  font-family: "Waiting for the Sunrise";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 3px;
+  margin-right: 22px;
+}
+
+.text {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 15px;
+}

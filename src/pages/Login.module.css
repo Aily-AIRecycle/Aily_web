@@ -3,12 +3,18 @@
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+  overflow: hidden;
 }
 
 .title {
-  font-size: 30px;
+  font-size: 50px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   margin-top: 100px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  color: #f8b195;
+  font-family: "Waiting for the Sunrise";
+  text-decoration: none;
 }
 
 .login {
@@ -16,33 +22,88 @@
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  width: 500px;
-  height: 250px;
-  border: solid 1px #bcbcbc;
-  border-radius: 10px;
+  width: 600px;
+  /* width: 785px; */
+  /* width: 500px; */
+  /* height: 554px; */
+  height: 424px;
+  border: solid 1px #9a9a9a;
+  border-radius: 20px;
+  /* filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.2)); */
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
-input {
-  width: 400px;
-  height: 30px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border: #bcbcbc solid 1px;
-  padding: 0px;
+.div {
+  /* width: 650px; */
+  width: 80%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #d9d9d9;
+  /* margin-bottom: 5px; */
 }
+
+.input {
+  margin-left: 10px;
+  width: 100%;
+  /* height: 80px; */
+  height: 40px;
+  border: 0px;
+  padding: 0px;
+  font-size: 18px;
+  font-family: "Inter";
+}
+
+/* input:focus {
+  border: 1px solid red;
+} */
 
 #submit {
+  border-radius: 10px;
+  /* width: 650px; */
+  width: 80%;
+  height: 64px;
   background-color: #f8b195;
   color: white;
   border: 0px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Inter";
+  margin-top: 40px;
 }
 
 #submit:hover {
   background-color: #f58e65;
+}
+
+.move {
+  margin-top: 30px;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.move a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  font-size: 15px;
+  font-family: "Inter";
+}
+
+.find a:first-child {
+  padding-right: 10px;
+  border-right: 1px solid #d9d9d9;
+}
+
+.find a:last-child {
+  padding-left: 10px;
 }
