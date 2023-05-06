@@ -29,7 +29,7 @@ form {
   align-items: center;
 }
 
-input {
+.input {
   width: 400px;
   height: 30px;
   border-radius: 10px;
