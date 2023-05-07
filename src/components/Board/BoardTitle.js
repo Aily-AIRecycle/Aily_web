@@ -21,6 +21,8 @@ function BoardTitle(props) {
             id: id,
             title: title,
             content: content,
+            writer: writer,
+            date: date,
           }}
         >
           {title}
