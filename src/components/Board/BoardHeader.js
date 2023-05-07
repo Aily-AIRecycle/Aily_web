@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import BoardNavigation from "../../components/BoardNavigation";
+import BoardNavigation from "../BoardNavigation";
 
 function BoardHeader() {
   return (
