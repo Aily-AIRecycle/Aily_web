@@ -16,7 +16,7 @@ function BoardContent() {
             <li>{article.date}</li>
           </ul>
         </div>
-        <div className={classes.content}>{article.content}</div>
+        <pre className={classes.content}>{article.content}</pre>
         <div className={classes.list_wrap}>
           <div className={classes.list} onClick={() => navigate(-1)}>
             목록보기

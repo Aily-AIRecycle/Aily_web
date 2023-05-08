@@ -9,11 +9,13 @@
 }
 
 .menu a {
-  width: 100px;
+  width: 80px;
   height: 50px;
   margin-right: 10px;
-  color: #ffffff;
-  background-color: #fbd4c5;
+  color: black;
+  font-family: "Inter";
+  font-weight: 400;
+  background-color: #f0f0f0;
   border-radius: 10px;
   text-decoration: none;
   display: flex;
@@ -28,6 +30,7 @@
 .menu a:hover,
 .menu a.active,
 .menu a:active {
-  color: #ffffff;
-  background-color: #f8b195;
+  color: black;
+  font-family: "Inter";
+  background-color: #ffe8df;
 }
