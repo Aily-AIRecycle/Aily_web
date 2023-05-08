@@ -7,6 +7,7 @@ import lockCheck from "../img/join/lock-check.svg";
 import user from "../img/login/user.svg";
 import calendar from "../img/join/calendar.svg";
 import email from "../img/join/email.svg";
+import gender from "../img/join/venus-mars-solid.svg";
 import IconBox from "../components/UI/IconBox";
 import Button from "../components/UI/Button";
 
@@ -74,11 +75,14 @@ function Join() {
                 />
               </div>
             </div>
-            {/* <select>
-              <option defaultChecked>성별</option>
-              <option value="M">남자</option>
-              <option value="F">여자</option>
-            </select> */}
+            <div className={classes.formControl}>
+              <IconBox img={gender} />
+              <select className={`${classes.input} ${classes.longInput}`}>
+                <option defaultChecked>성별</option>
+                <option value="M">남자</option>
+                <option value="F">여자</option>
+              </select>
+            </div>
             <div className={classes.formControl}>
               <IconBox img={email} />
               <input placeholder="이메일" className={classes.input} />
