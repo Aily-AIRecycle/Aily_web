@@ -63,6 +63,7 @@ function Login() {
                 className={classes.input}
                 type="id"
                 placeholder="이메일"
+                name="email"
                 value={email.value}
                 {...email}
               />
@@ -73,6 +74,7 @@ function Login() {
                 className={classes.input}
                 type="password"
                 placeholder="비밀번호"
+                name="password"
                 value={password.value}
                 {...password}
               />
