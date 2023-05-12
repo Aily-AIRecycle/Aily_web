@@ -1,17 +1,32 @@
 import classes from "./Join.module.css";
 import CopyRight from "../components/Copyright";
 import { Link } from "react-router-dom";
-import idCard from "../img/join/id-card-solid.svg";
 import lock from "../img/login/lock.svg";
 import lockCheck from "../img/join/lock-check.svg";
 import user from "../img/login/user.svg";
 import calendar from "../img/join/calendar.svg";
-import email from "../img/join/email.svg";
-import gender from "../img/join/venus-mars-solid.svg";
+import emailImg from "../img/join/email.svg";
+import genderImg from "../img/join/venus-mars-solid.svg";
+import phone from "../img/join/phone-solid.svg";
 import IconBox from "../components/UI/IconBox";
 import Button from "../components/UI/Button";
+import useInput from "../hooks/use-input";
+import { useEffect } from "react";
+import Password from "../components/Join/Password";
 
 function Join() {
+  const email = useInput("");
+  const nickname = useInput("");
+  const birth = useInput("");
+  const year = useInput("");
+  const month = useInput("");
+  const day = useInput("");
+  const gender = useInput("");
+
+  useEffect(() => {
+    console.log(gender.value);
+  }, [gender.value]);
+
   return (
     <>
       <main className={classes.main}>
@@ -19,42 +34,49 @@ function Join() {
           Aily
         </Link>
 
-        <h3 className={classes.h3}>회원가입</h3>
+        <h3 className={classes.h3}>회원 정보를 입력해주세요.</h3>
         <div className={classes.join}>
           <form className={classes.form}>
             <div className={classes.formControl}>
-              <IconBox img={idCard} />
+              <IconBox img={emailImg} />
               <input
-                type="id"
-                placeholder="아이디 (이메일)"
+                placeholder="이메일"
                 className={classes.input}
+                name="email"
+                {...email}
               />
-              <Button value="중복확인" />
+              <Button value="인증" />
             </div>
+
             <div className={classes.formControl}>
               <IconBox img={lock} />
-              <input
-                type="password"
-                placeholder="비밀번호"
-                className={`${classes.input} ${classes.longInput}`}
-              />
+              <Password placeholder={"비밀번호"} name="password" />
             </div>
+
             <div className={classes.formControl}>
               <IconBox img={lockCheck} />
-              <input
-                type="password"
-                placeholder="비밀번호 확인"
-                className={`${classes.input} ${classes.longInput}`}
-              />
+              <Password placeholder={"비밀번호 확인"} name="checkPassword" />
             </div>
+
             <div className={classes.formControl}>
               <IconBox img={user} />
               <input
                 type="text"
                 placeholder="이름"
                 className={`${classes.input} ${classes.longInput}`}
+                name="nickname"
+                {...nickname}
               />
             </div>
+
+            <div className={classes.formControl}>
+              <IconBox img={phone} />
+              <input
+                placeholder="전화번호 입력"
+                className={`${classes.input} ${classes.longInput}`}
+              />
+            </div>
+
             <div className={classes.formControl}>
               <IconBox img={calendar} />
               <div className={classes.birth}>
@@ -62,33 +84,35 @@ function Join() {
                   type="number"
                   placeholder="년 (4자)"
                   className={classes.input}
+                  {...year}
                 />
                 <input
                   type="number"
                   placeholder="월"
                   className={classes.input}
+                  {...month}
                 />
                 <input
                   type="number"
                   placeholder="일"
                   className={classes.input}
+                  {...day}
                 />
               </div>
             </div>
+
             <div className={classes.formControl}>
-              <IconBox img={gender} />
-              <select className={`${classes.input} ${classes.longInput}`}>
+              <IconBox img={genderImg} />
+              <select
+                className={`${classes.input} ${classes.longInput}`}
+                {...gender}
+              >
                 <option defaultChecked>성별</option>
                 <option value="M">남자</option>
                 <option value="F">여자</option>
               </select>
             </div>
-            <div className={classes.formControl}>
-              <IconBox img={email} />
-              <input placeholder="이메일" className={classes.input} />
-              <Button value="인증" />
-            </div>
-            {/* <input placeholder="전화번호 입력" className={classes.input} /> */}
+
             <input type="submit" value="회원가입" id={classes.submit} />
           </form>
         </div>
