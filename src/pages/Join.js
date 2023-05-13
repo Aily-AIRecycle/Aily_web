@@ -11,21 +11,35 @@ import phone from "../img/join/phone-solid.svg";
 import IconBox from "../components/UI/IconBox";
 import Button from "../components/UI/Button";
 import useInput from "../hooks/use-input";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Password from "../components/Join/Password";
 
 function Join() {
   const email = useInput("");
-  const nickname = useInput("");
-  const birth = useInput("");
+  const name = useInput("");
+  const phoneNumber = useInput("");
+  const [birth, setBirth] = useState("");
   const year = useInput("");
   const month = useInput("");
   const day = useInput("");
   const gender = useInput("");
 
   useEffect(() => {
-    console.log(gender.value);
-  }, [gender.value]);
+    console.log("이메일: ", email.value);
+    console.log("이름: ", name.value);
+    console.log("전화번호: ", phoneNumber.value);
+    console.log("생년월일: ", birth);
+    console.log("성별: ", gender.value);
+  }, [email.value, name.value, phoneNumber.value, birth, gender.value]);
+
+  useEffect(() => {
+    setBirth(year.value + "-" + month.value + "-" + day.value);
+  }, [year.value, month.value, day.value]);
+
+  function joinHander(event) {
+    event.preventDefault();
+    return;
+  }
 
   return (
     <>
@@ -65,7 +79,7 @@ function Join() {
                 placeholder="이름"
                 className={`${classes.input} ${classes.longInput}`}
                 name="nickname"
-                {...nickname}
+                {...name}
               />
             </div>
 
@@ -74,6 +88,8 @@ function Join() {
               <input
                 placeholder="전화번호 입력"
                 className={`${classes.input} ${classes.longInput}`}
+                name="phonenumber"
+                {...phoneNumber}
               />
             </div>
 
@@ -83,23 +99,31 @@ function Join() {
                 <input
                   type="number"
                   placeholder="년 (4자)"
+                  min="1900"
+                  max="2023"
                   className={classes.input}
                   {...year}
                 />
                 <input
                   type="number"
                   placeholder="월"
+                  min="1"
+                  max="12"
                   className={classes.input}
                   {...month}
                 />
                 <input
                   type="number"
                   placeholder="일"
+                  min="1"
+                  max="31"
                   className={classes.input}
                   {...day}
                 />
               </div>
             </div>
+
+            <input type="hidden" name="birth" value={birth} />
 
             <div className={classes.formControl}>
               <IconBox img={genderImg} />
@@ -113,7 +137,12 @@ function Join() {
               </select>
             </div>
 
-            <input type="submit" value="회원가입" id={classes.submit} />
+            <input
+              type="submit"
+              value="회원가입"
+              id={classes.submit}
+              onClick={joinHander}
+            />
           </form>
         </div>
         <CopyRight />
