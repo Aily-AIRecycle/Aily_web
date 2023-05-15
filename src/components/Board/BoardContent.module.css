@@ -57,8 +57,6 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-}
-
-.list:hover {
-  cursor: pointer;
+  text-decoration: none;
+  color: black;
 }

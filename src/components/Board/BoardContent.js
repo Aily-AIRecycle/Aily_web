@@ -1,8 +1,7 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import classes from "./BoardContent.module.css";
 
 function BoardContent() {
-  const navigate = useNavigate();
   const a = useLocation();
   const article = a.state;
 
@@ -18,9 +17,9 @@ function BoardContent() {
         </div>
         <pre className={classes.content}>{article.content}</pre>
         <div className={classes.list_wrap}>
-          <div className={classes.list} onClick={() => navigate(-1)}>
+          <Link className={classes.list} to=".." relative="path">
             목록보기
-          </div>
+          </Link>
         </div>
       </div>
     </>
