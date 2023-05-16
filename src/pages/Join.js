@@ -47,9 +47,10 @@ function Join() {
         <Link to="/" className={classes.title}>
           Aily
         </Link>
-
-        <h3 className={classes.h3}>회원 정보를 입력해주세요.</h3>
         <div className={classes.join}>
+          <div className={classes.sub_title}>
+            <h3 className={classes.h3}>회원 정보를 입력해주세요.</h3>
+          </div>
           <form className={classes.form}>
             <div className={classes.formControl}>
               <IconBox img={emailImg} />

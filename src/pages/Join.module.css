@@ -16,10 +16,14 @@
   text-decoration: none;
 }
 
+.sub_title {
+  width: 100%;
+}
+
 .h3 {
   font-family: "Inter";
   margin-bottom: 25px;
-  margin-right: 436px;
+  margin-left: 0px;
   font-weight: 500;
 }
 .join {
