@@ -1,97 +1,160 @@
-.footer {
-  width: 100%;
-  height: 320px;
-  background-color: #f8b195;
-  display: flex;
-  justify-content: center;
-  color: #ffffff;
-}
-.footer_wrap {
-  background-color: #f8b195;
-  margin-top: 30px;
-  width: 80%;
-}
-
-.top {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.logo {
-  font-family: "Waiting for the Sunrise";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 40px;
-  line-height: 66px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 5.18px;
-  margin-right: 30px;
-}
-
-.footer h6 {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 2.68px;
-}
-
-.bottom {
-  display: flex;
-  justify-content: space-between;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: 2.68px;
-  margin-top: 30px;
-  color: #ffffff;
-}
-
-.bottom div:first-child h5,
-.bottom div:nth-child(2) h5:first-child,
-.bottom div:last-child h5 {
-  margin-bottom: 30px;
-}
-
-@media (max-width: 2000px) {
+@media(min-width: 701px){
   .footer {
     width: 100%;
     height: 16vw;
+    background-color: #f8b195;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+    font-family: 'Inter';
   }
+  
   .footer_wrap {
-    margin-top: 1.5vw;
+    background-color: #f8b195;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 80%;
+    height: 100%;
   }
-
+  
+  
+  .top {
+    display: flex;
+    align-items: flex-end;
+  }
+  
   .logo {
-    font-size: 2vw;
-    line-height: 3.3vw;
-    letter-spacing: 0.259vw;
     margin-right: 1.5vw;
+    width: 3.25vw;
   }
-
+  
   .footer h6 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
     font-size: 0.75vw;
     line-height: 0.9vw;
+    display: flex;
+    align-items: center;
     letter-spacing: 0.134vw;
   }
-
+  
   .bottom {
-    font-size: 1vw;
-    line-height: 1.2vw;
-    letter-spacing: 0.134vw;
+    display: flex;
+    justify-content: space-between;
     margin-top: 1.5vw;
+    color: #ffffff;
   }
-
-  .bottom div:first-child h5,
-  .bottom div:nth-child(2) h5:first-child,
-  .bottom div:last-child h5 {
+  
+  .bottom h5{
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1vw;
+    line-height: 1.5vw;
+    letter-spacing: 0.134vw;
+  }
+  
+  .ceo{
     margin-bottom: 1.5vw;
   }
+  
+  .address{
+    display: flex;
+  }
+  
+  .email{
+    margin-bottom: 1.5vw;
+  }
+  
+  .time_table {
+    display: flex;
+  }
+  
+  .tel h5{
+    margin-bottom: 1.5vw;
+  }
+  
+}
+
+@media (max-width: 700px){
+  .footer {
+    width: 100%;
+    height: 100vw;
+    background-color: #f8b195;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+    font-family: 'Inter';
+  }
+  
+  .footer_wrap {
+    background-color: #f8b195;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+  }
+  
+  
+  .top {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .logo {
+    margin-right: 3vw;
+    width: 10vw;
+  }
+  
+  .footer h6 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2.5vw;
+    line-height: 3vw;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.4467vw;
+  }
+  
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5vw;
+    color: #ffffff;
+  }
+  
+  .bottom h5{
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 3.3333vw;
+    line-height: 5vw;
+    letter-spacing: 0.4467vw;
+  }
+  
+  .ceo{
+    margin-bottom: 5vw;
+  }
+  
+  .address{
+    display: flex;
+    margin-bottom: 5vw;
+  }
+  
+  .email{
+    margin-bottom: 5vw;
+  }
+  
+  .time_table {
+    display: flex;
+    margin-bottom: 5vw;
+  }
+  
+  .tel h5:first-child{
+    margin-bottom: 5vw;
+  } 
 }
