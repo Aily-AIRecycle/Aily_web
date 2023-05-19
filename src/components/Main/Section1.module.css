@@ -3,55 +3,72 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 500px;
 }
 
-.h1 {
-  font-size: 70px;
-  margin-bottom: 50px;
+.h1{
+  font-weight: 400;
 }
 
 .h2 {
-  font-size: 40px;
   color: #726969;
-}
-
-.space {
-  height: 300px;
+  font-weight: 300;
 }
 
 .background {
-  width: 100vw;
-  height: 680px;
   background-color: #ffcab5;
-  margin-top: -500px;
   z-index: -1;
 }
 
-@media (max-width: 2000px) {
+/* web */
+@media (min-width: 751px) {
   .box1 {
-    padding-top: 25vw;
+    padding-top: 20vw;
   }
-
+  
   .h1 {
-    font-size: 3.5vw;
-    margin-bottom: 2.5vw;
+    font-size: 2.625vw;
+    margin-bottom: 1.875vw;
   }
-
+  
   .h2 {
-    font-size: 2vw;
+    font-size: 1.5vw;
+    margin-bottom: 13vw;
   }
 
-  .space {
-    height: 15vw;
+  .phone{
+    width: 25vw;
   }
-
-  .phone {
-    width: 29vw;
-  }
-
+  
   .background {
-    height: 34vw;
-    margin-top: -25vw;
+    width: 100vw;
+    height: 32vw;
+    margin-top: -24vw;
+  }
+}
+
+/* mobile */
+@media (max-width: 750px) {
+  .box1 {
+    padding-top: 37.5vw;
+  }
+  
+  .h1 {
+    font-size: 6vw;
+    margin-bottom: 5vw;
+  }
+  
+  .h2 {
+    font-size: 3.5vw;
+    margin-bottom: 28vw;
+  }
+
+  .phone{
+    width: 45vw;
+  }
+  
+  .background {
+    width: 100vw;
+    height: 60vw;
+    margin-top: -40vw;
   }
 }

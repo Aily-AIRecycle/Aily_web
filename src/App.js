@@ -1,5 +1,4 @@
 import "./App.css";
-import { Reset } from "styled-reset";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HeaderAndFooter from "./pages/HeaderAndFooter.js";
 import BoardHeader from "./components/Board/BoardHeader.js";
@@ -37,7 +36,6 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <Reset />
       <RouterProvider router={router} />
     </>
   );
