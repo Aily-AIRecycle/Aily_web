@@ -10,7 +10,6 @@ function Section2() {
       <h2 className={classes.h2}>
         간편한 QR코드 인증으로 Aily 이용이 가능합니다.
       </h2>
-      <div className={classes.space} />
       <div className={classes.qrcode}>
         <img src={qrPhone} alt="qrPhone" className={classes.qrPhone} />
         <div className={classes.qrSpace} />
@@ -18,7 +17,6 @@ function Section2() {
         <div className={classes.qrSpace} />
         <img src={recycleBin} alt="recycleBin" className={classes.recycleBin} />
       </div>
-      <div className={classes.space} />
     </div>
   );
 }
