@@ -8,9 +8,10 @@ function Section3() {
   return (
     <div className={classes.box3}>
       <h1 className={classes.h1}>포인트 제도</h1>
-      <h2 className={classes.h2}>
-        분리수거할 때 적립되는 포인트는 현금처럼 사용이 가능합니다.
-      </h2>
+      <div className={classes.description}>
+        <h2 className={classes.h2}>분리수거할 때 적립되는 포인트는&nbsp;</h2>
+        <h2 className={classes.h2}>현금처럼 사용이 가능합니다.</h2>
+      </div>
       <div className={classes.point}>
         <div className={classes.wallet_div}>
           <img src={wallet} alt="wallet" className={classes.wallet} />
