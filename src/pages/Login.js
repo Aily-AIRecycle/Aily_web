@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Copyright from "../components/Copyright";
 import axios from "axios";
 import useInput from "../hooks/use-input";
+import titleLogo from "../img/title_logo.svg";
 
 function Login() {
   const email = useInput("");
@@ -52,13 +53,13 @@ function Login() {
   return (
     <>
       <main className={classes.main}>
-        <Link to="/" className={classes.title}>
-          Aily
+        <Link to="/">
+          <img src={titleLogo} className={classes.logo} />
         </Link>
         <div className={classes.login}>
           <form>
             <div className={classes.div}>
-              <img src={user} alt="id" width="25px" />
+              <img src={user} alt="id" className={classes.img} />
               <input
                 className={classes.input}
                 type="id"
@@ -69,7 +70,7 @@ function Login() {
               />
             </div>
             <div className={classes.div}>
-              <img src={lock} alt="password" width="25px" />
+              <img src={lock} alt="password" className={classes.img} />
               <input
                 className={classes.input}
                 type="password"
@@ -90,8 +91,6 @@ function Login() {
             <div className={classes.find}>
               <Link>아이디 찾기</Link>
               <Link>비밀번호 찾기</Link>
-            </div>
-            <div>
               <Link to="/join">회원가입</Link>
             </div>
           </div>

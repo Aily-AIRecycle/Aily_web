@@ -1,28 +1,22 @@
 import classes from "./Footer.module.css";
-import logo from '../img/main/footer_logo.svg'
+import logo from "../img/main/footer_logo.svg";
 
 function Footer() {
   return (
     <div className={classes.footer}>
       <div className={classes.footer_wrap}>
         <div className={classes.top}>
-          <img src={logo} className={classes.logo}/>
+          <img src={logo} className={classes.logo} />
           <h6>Copyright 2023. Aily. All rights reserved.</h6>
         </div>
         <div className={classes.bottom}>
           <div className={classes.address_wrap}>
             <h5 className={classes.ceo}>대표이사 : 홍길동</h5>
             <div className={classes.address}>
-              <h5>
-                주소 :&nbsp;
-              </h5>
+              <h5>주소 :&nbsp;</h5>
               <div>
-                <h5>
-                  서울특별시 구로구 경인로 445 
-                </h5>
-                <h5>
-                  [구]고척동 62-160
-                </h5>
+                <h5>서울특별시 구로구 경인로 445</h5>
+                <h5>[구]고척동 62-160</h5>
               </div>
             </div>
           </div>

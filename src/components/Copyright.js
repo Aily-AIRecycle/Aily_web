@@ -1,9 +1,10 @@
 import classes from "./Copyright.module.css";
+import miniLogo from "../img/mini_logo.svg";
 
 function Copyright() {
   return (
     <div className={classes.div}>
-      <h4 className={classes.logo}>Aily</h4>
+      <img src={miniLogo} className={classes.logo} />
       <h6 className={classes.text}>
         Copyright 2023. Aily. All rights reserved.
       </h6>

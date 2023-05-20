@@ -4,17 +4,12 @@
   flex-wrap: wrap;
   align-items: center;
   overflow: hidden;
+  margin-top: 100px;
 }
 
-.title {
-  font-size: 50px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  margin-top: 100px;
+.logo {
+  width: 80px;
   margin-bottom: 30px;
-  color: #f8b195;
-  font-family: "Waiting for the Sunrise";
-  text-decoration: none;
 }
 
 .login {
@@ -23,13 +18,11 @@
   justify-content: center;
   align-content: center;
   width: 600px;
-  /* width: 785px; */
-  /* width: 500px; */
-  /* height: 554px; */
+  width: 500px;
   height: 424px;
+  height: 350px;
   border: solid 1px #9a9a9a;
   border-radius: 20px;
-  /* filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.2)); */
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -41,42 +34,40 @@ form {
 }
 
 .div {
-  /* width: 650px; */
   width: 80%;
-  height: 64px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #d9d9d9;
-  /* margin-bottom: 5px; */
+}
+
+.img {
+  width: 20px;
+  margin-left: 10px;
 }
 
 .input {
   margin-left: 10px;
   width: 100%;
-  /* height: 80px; */
-  height: 40px;
   border: 0px;
   padding: 0px;
   font-size: 18px;
-  font-family: "Inter";
 }
 
-/* input:focus {
-  border: 1px solid red;
-} */
+.input:focus {
+  outline: none;
+}
 
 #submit {
   border-radius: 10px;
-  /* width: 650px; */
   width: 80%;
-  height: 64px;
+  height: 50px;
   background-color: #f8b195;
   color: white;
   border: 0px;
   font-size: 20px;
   font-weight: 600;
-  font-family: "Inter";
   margin-top: 40px;
 }
 
@@ -88,22 +79,122 @@ form {
   margin-top: 30px;
   width: 80%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .move a {
   text-decoration: none;
   color: #000000;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 15px;
-  font-family: "Inter";
 }
 
-.find a:first-child {
+.find a {
   padding-right: 10px;
+  padding-left: 10px;
   border-right: 1px solid #d9d9d9;
 }
 
 .find a:last-child {
-  padding-left: 10px;
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 100px;
+  }
+
+  .logo {
+    width: 80px;
+    margin-bottom: 30px;
+  }
+
+  .login {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 90%;
+    height: 80vw;
+    border: solid 1px #9a9a9a;
+    border-radius: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .div {
+    width: 80%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  .img {
+    width: 20px;
+    margin-left: 10px;
+  }
+
+  .input {
+    margin-left: 10px;
+    width: 100%;
+    border: 0px;
+    padding: 0px;
+    font-size: 18px;
+  }
+
+  .input:focus {
+    outline: none;
+  }
+
+  #submit {
+    border-radius: 10px;
+    width: 80%;
+    height: 50px;
+    background-color: #f8b195;
+    color: white;
+    border: 0px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 40px;
+  }
+
+  #submit:hover {
+    background-color: #f58e65;
+  }
+
+  .move {
+    margin-top: 30px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .move a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 400;
+    font-size: 15px;
+  }
+
+  .find a {
+    padding-right: 10px;
+    padding-left: 10px;
+    border-right: 1px solid #d9d9d9;
+  }
+
+  .find a:last-child {
+    border: 0;
+  }
 }
