@@ -1,6 +1,5 @@
 import { apiKey } from "../../apikey";
 import classes from "./Section5.module.css";
-import map_detail from "../../img/main/map_detail.svg";
 import { useCallback, useEffect, useRef } from "react";
 
 function Section5() {
@@ -61,7 +60,6 @@ function Section5() {
       </h2>
       <div className={classes.map_box}>
         <div className={classes.map} ref={mapElement}></div>
-        <img src={map_detail} alt="detail" className={classes.map_detail} />
       </div>
     </div>
   );
