@@ -1,4 +1,4 @@
-@media(min-width: 701px){
+@media (min-width: 751px) {
   .footer {
     width: 100%;
     height: 16vw;
@@ -6,9 +6,9 @@
     display: flex;
     justify-content: center;
     color: #ffffff;
-    font-family: 'Inter';
+    font-family: "Inter";
   }
-  
+
   .footer_wrap {
     background-color: #f8b195;
     display: flex;
@@ -17,18 +17,17 @@
     width: 80%;
     height: 100%;
   }
-  
-  
+
   .top {
     display: flex;
     align-items: flex-end;
   }
-  
+
   .logo {
     margin-right: 1.5vw;
     width: 3.25vw;
   }
-  
+
   .footer h6 {
     font-family: "Inter";
     font-style: normal;
@@ -39,15 +38,15 @@
     align-items: center;
     letter-spacing: 0.134vw;
   }
-  
+
   .bottom {
     display: flex;
     justify-content: space-between;
     margin-top: 1.5vw;
     color: #ffffff;
   }
-  
-  .bottom h5{
+
+  .bottom h5 {
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
@@ -55,30 +54,29 @@
     line-height: 1.5vw;
     letter-spacing: 0.134vw;
   }
-  
-  .ceo{
+
+  .ceo {
     margin-bottom: 1.5vw;
   }
-  
-  .address{
+
+  .address {
     display: flex;
   }
-  
-  .email{
+
+  .email {
     margin-bottom: 1.5vw;
   }
-  
+
   .time_table {
     display: flex;
   }
-  
-  .tel h5{
+
+  .tel h5 {
     margin-bottom: 1.5vw;
   }
-  
 }
 
-@media (max-width: 700px){
+@media (max-width: 750px) {
   .footer {
     width: 100%;
     height: 100vw;
@@ -86,9 +84,9 @@
     display: flex;
     justify-content: center;
     color: #ffffff;
-    font-family: 'Inter';
+    font-family: "Inter";
   }
-  
+
   .footer_wrap {
     background-color: #f8b195;
     display: flex;
@@ -97,18 +95,17 @@
     width: 80%;
     height: 100%;
   }
-  
-  
+
   .top {
     display: flex;
     align-items: flex-end;
   }
-  
+
   .logo {
     margin-right: 3vw;
     width: 10vw;
   }
-  
+
   .footer h6 {
     font-family: "Inter";
     font-style: normal;
@@ -119,15 +116,15 @@
     align-items: center;
     letter-spacing: 0.4467vw;
   }
-  
+
   .bottom {
     display: flex;
     flex-direction: column;
     margin-top: 5vw;
     color: #ffffff;
   }
-  
-  .bottom h5{
+
+  .bottom h5 {
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
@@ -135,26 +132,26 @@
     line-height: 5vw;
     letter-spacing: 0.4467vw;
   }
-  
-  .ceo{
+
+  .ceo {
     margin-bottom: 5vw;
   }
-  
-  .address{
+
+  .address {
     display: flex;
     margin-bottom: 5vw;
   }
-  
-  .email{
+
+  .email {
     margin-bottom: 5vw;
   }
-  
+
   .time_table {
     display: flex;
     margin-bottom: 5vw;
   }
-  
-  .tel h5:first-child{
+
+  .tel h5:first-child {
     margin-bottom: 5vw;
-  } 
+  }
 }
