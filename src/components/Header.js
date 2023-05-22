@@ -1,24 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import classes from "./Header.module.css";
 import { Link } from "react-router-dom";
 import bars from "../../src/img/header/bars-solid.svg";
 import x from "../../src/img/header/x-solid.svg";
 import HeaderList from "./HeaderList";
+import useWindowWidth from "../hooks/use-windowWidth";
 
 function Header() {
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const windowWidth = useWindowWidth();
   const [menuShow, setMenuShow] = useState(false);
-
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", resizeListener);
-    return () => {
-      window.removeEventListener("resize", resizeListener);
-    };
-  }, []);
-  console.log("innerWidth", innerWidth);
 
   function menuHandler() {
     setMenuShow(!menuShow);
@@ -26,7 +16,7 @@ function Header() {
   }
 
   let header;
-  if (innerWidth > 1000) {
+  if (windowWidth > 1000) {
     header = (
       <header className={classes.head_wrap}>
         <div className={classes.head}>
