@@ -13,6 +13,7 @@ import Button from "../components/UI/Button";
 import useInput from "../hooks/use-input";
 import { useEffect, useState } from "react";
 import Password from "../components/Join/Password";
+import titleLogo from "../img/title_logo.svg";
 
 function Join() {
   const email = useInput("");
@@ -45,7 +46,7 @@ function Join() {
     <>
       <main className={classes.main}>
         <Link to="/" className={classes.title}>
-          Aily
+          <img src={titleLogo} className={classes.logo} />
         </Link>
         <div className={classes.join}>
           <div className={classes.sub_title}>
