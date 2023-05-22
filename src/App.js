@@ -1,5 +1,9 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  redirect,
+  RouterProvider,
+} from "react-router-dom";
 import HeaderAndFooter from "./pages/HeaderAndFooter.js";
 import BoardHeader from "./components/Board/BoardHeader.js";
 import BoardContent from "./components/Board/BoardContent.js";
@@ -22,6 +26,13 @@ const router = createBrowserRouter([
         children: [
           { path: "/board", element: <Board /> },
           { path: "/board/:boardName", element: <Board /> },
+          {
+            path: "/board/entire",
+            element: <Board />,
+            loader: () => {
+              return redirect("/board");
+            },
+          },
           { path: "/board/:boardName/:articleId", element: <BoardContent /> },
         ],
       },

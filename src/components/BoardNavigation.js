@@ -1,11 +1,22 @@
+import useWindowWidth from "../hooks/use-windowWidth";
 import classes from "./BoardNavigation.module.css";
-import { NavLink } from "react-router-dom";
-import board from "../../src/img/board/board.svg";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function BoardNavigation() {
-  return (
-    <>
-      <img src={board} alt="board" className={classes.board_img} />
+  const windowWidth = useWindowWidth();
+
+  const [selectedOption, setSelectedOption] = useState("");
+  const navigate = useNavigate();
+
+  const optionChangeHandler = (event) => {
+    setSelectedOption(event.target.value);
+    navigate(event.target.value);
+  };
+
+  let header;
+  if (windowWidth > 1000) {
+    header = (
       <header>
         <ul className={classes.board}>
           <li className={classes.menu}>
@@ -61,6 +72,26 @@ function BoardNavigation() {
           </li>
         </ul>
       </header>
+    );
+  } else {
+    header = (
+      <select
+        value={selectedOption}
+        onChange={optionChangeHandler}
+        className={classes.select}
+      >
+        <option value="/board">전체</option>
+        <option value="/board/notice">공지 </option>
+        <option value="/board/q&a">Q&A</option>
+        <option value="/board/faq">FAQ</option>
+        <option value="/board/suggestion">건의사항</option>
+      </select>
+    );
+  }
+  return (
+    <>
+      <div className={classes.board_title}>게시판</div>
+      <>{header}</>
     </>
   );
 }

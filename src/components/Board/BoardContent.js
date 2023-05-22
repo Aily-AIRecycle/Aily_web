@@ -15,12 +15,14 @@ function BoardContent() {
             <li>{article.date}</li>
           </ul>
         </div>
-        <pre className={classes.content}>{article.content}</pre>
-        <div className={classes.list_wrap}>
-          <Link className={classes.list} to=".." relative="path">
-            목록보기
-          </Link>
+        <div className={classes.content_wrap}>
+          <pre className={classes.content}>{article.content}</pre>
         </div>
+      </div>
+      <div className={classes.list_wrap}>
+        <Link className={classes.list} to=".." relative="path">
+          목록보기
+        </Link>
       </div>
     </>
   );
