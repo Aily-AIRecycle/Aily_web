@@ -28,7 +28,7 @@ function Section4() {
         </ul>
         <div className={classes.aily}>
           <h1>홍대입구역 Aily</h1>
-          <h3>상세정보 ></h3>
+          <h3>상세정보 {">"}</h3>
           <div className={classes.type}>
             <div className={classes.normal}>
               <h5 className={classes.h5}>일반</h5>
