@@ -1,10 +1,13 @@
 .h1 {
-  font-weight: 400;
+  font-weight: 700;
+  font-family: Pretendard;
+  color: #3E3E3E;
 }
 
 .h2 {
-  color: #726969;
+  color: #767676;
   font-weight: 300;
+  font-family: Pretendard;
 }
 
 .box3 {

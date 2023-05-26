@@ -23,7 +23,8 @@
 }
 
 .head_logo {
-  width: 100px;
+  width: 48px;
+  height: 48px;
 }
 
 .head_menu {
@@ -62,21 +63,37 @@
 .menu a:hover,
 .menu a:active,
 .menu a.active {
-  position: relative;
+  color: #F8b195;
+  top: 5px;
 }
 
-.menu a:hover::after,
-.menu a:active::after,
-.menu a.active::after {
+.menu a {
+  position: relative;
+  transition: color 0.3s ease;
+  top: 0;
+  transition: color 0.3s, top 0.3s;
+}
+
+.menu a::after {
   content: "";
   position: absolute;
-  bottom: 20px;
-  left: 40%;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 20%;
-  height: 2px; /* 바의 높이 조정 */
-  background-color: #f8b195; /* 바의 색상 설정 */
+  height: 2px;
+  background-color: #f8b195;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center bottom;
+  opacity: 0;
+}
+
+.menu a:hover::after {
+  transform: translateX(-50%) translateY(5px); /* 아래로 5px 내려가도록 변경 */
+  opacity: 1; /* 텍스트 밑줄 표시 */
 
 }
+
 
 
 /* width <= 1000 */
