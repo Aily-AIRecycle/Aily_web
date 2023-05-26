@@ -1,8 +1,11 @@
 .h1 {
-  font-weight: 400;
+  font-weight: 700;
+  font-family: Pretendard;
 }
 .h2 {
   font-weight: 300;
+  font-family: Pretendard;
+  color: #767676;
 }
 .box4 {
   height: 100vh;
