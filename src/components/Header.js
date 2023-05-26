@@ -3,6 +3,7 @@ import classes from "./Header.module.css";
 import { Link } from "react-router-dom";
 import bars from "../../src/img/header/bars-solid.svg";
 import x from "../../src/img/header/x-solid.svg";
+import logo from "../img/aily_logo.svg";
 import HeaderList from "./HeaderList";
 import useWindowWidth from "../hooks/use-windowWidth";
 
@@ -20,12 +21,9 @@ function Header() {
     header = (
       <header className={classes.head_wrap}>
         <div className={classes.head}>
-          <div className={classes.head_logo}>
-            <Link to="/">
-              <p>Ai Recycling</p>
-              <p>AiLY</p>
-            </Link>
-          </div>
+          <Link to="/">
+            <img src={logo} alt="logo" className={classes.head_logo} />
+          </Link>
           <HeaderList ul={classes.head_menu} li={classes.menu} />
         </div>
       </header>
@@ -34,12 +32,9 @@ function Header() {
     header = (
       <div className={classes.head_wrap_mobile}>
         <header className={classes.head_mobile}>
-          <div className={classes.head_logo_s}>
-            <Link to="/">
-              <p>Ai Recycling</p>
-              <p>AiLY</p>
-            </Link>
-          </div>
+          <Link to="/">
+            <img src={logo} alt="logo" className={classes.head_logo_s} />
+          </Link>
           <img src={bars} alt="bars" onClick={menuHandler}></img>
         </header>
         {menuShow && (

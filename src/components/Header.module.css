@@ -22,25 +22,8 @@
   align-items: center;
 }
 
-.head_logo a {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.head_logo p {
-  display: flex;
-  justify-content: center;
-  width: 150px;
-  font-family: "Waiting for the Sunrise", cursive;
-  font-weight: 400;
-  font-size: 40px;
-  color: #f8b195;
-}
-
-.head_logo p:first-child {
-  font-size: 15px;
+.head_logo {
+  width: 100px;
 }
 
 .head_menu {
@@ -106,28 +89,8 @@
 }
 
 .head_logo_s {
-  margin-left: 10px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.head_logo_s a {
-  text-decoration: none;
-}
-
-.head_logo_s p {
-  display: flex;
-  justify-content: center;
-  width: 70px;
-  font-family: "Waiting for the Sunrise", cursive;
-  font-weight: 400;
-  font-size: 30px;
-  color: #f8b195;
-}
-
-.head_logo_s p:first-child {
-  font-size: 10px;
+  margin-left: 20px;
+  height: 40px;
 }
 
 .head_mobile img {
@@ -157,6 +120,8 @@
 }
 
 .menu_mobile {
+  display: flex;
+  align-items: center;
   height: 50px;
   margin: 10px 20px 10px 20px;
 }
