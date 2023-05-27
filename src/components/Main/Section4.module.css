@@ -1,10 +1,8 @@
 .h1 {
   font-weight: 700;
-  font-family: Pretendard;
 }
 .h2 {
   font-weight: 300;
-  font-family: Pretendard;
   color: #767676;
 }
 .box4 {
@@ -144,7 +142,6 @@
   }
 }
 
-
 @media (max-width: 750px) {
   .h1 {
     font-size: 6.5vw;
@@ -215,7 +212,7 @@
   .type {
     display: flex;
     justify-content: space-between;
-    margin-top:12vw;
+    margin-top: 12vw;
   }
 
   .normal {

@@ -26,7 +26,6 @@
 }
 
 .h3 {
-  font-family: "Inter";
   margin-bottom: 25px;
   margin-left: 0px;
   font-weight: 500;
@@ -87,7 +86,6 @@
 
 .input::placeholder {
   color: #9a9a9a;
-  font-family: "Inter";
   font-weight: 500;
   font-size: 13px;
 }
@@ -120,7 +118,6 @@
   border: 0px;
   font-size: 20px;
   font-weight: 600;
-  font-family: "Inter";
   margin-top: 40px;
 }
 

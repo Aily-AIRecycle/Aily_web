@@ -6,7 +6,6 @@
     display: flex;
     justify-content: center;
     color: #ffffff;
-    font-family: "Pretendard";
   }
 
   .footer_wrap {
@@ -29,7 +28,6 @@
   }
 
   .footer h6 {
-    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 0.75vw;
@@ -47,7 +45,6 @@
   }
 
   .bottom h5 {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 400;
     font-size: 0.9vw;
@@ -84,7 +81,6 @@
     display: flex;
     justify-content: center;
     color: #ffffff;
-    font-family: "Pretendard";
   }
 
   .footer_wrap {
@@ -107,7 +103,6 @@
   }
 
   .footer h6 {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 400;
     font-size: 2.5vw;
@@ -125,7 +120,6 @@
   }
 
   .bottom h5 {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 400;
     font-size: 3.3333vw;
