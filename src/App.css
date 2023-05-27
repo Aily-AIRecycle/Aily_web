@@ -15,7 +15,6 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	/* font: inherit; */
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -56,10 +55,6 @@ body,
 #root {
   width: 100%;
   overflow-x: hidden;
-}
-
-* {
-  font-family: "Noto Sans KR", sans-serif;
 }
 
 @font-face {
@@ -123,4 +118,8 @@ body,
 	font-weight: 100;
 	font-display: swap;
 	src: local('Pretendard Thin'),  url('./fonts/woff/Pretendard-Thin.woff') format('woff');
+}
+
+* {
+	font-family: 'Pretendard';
 }

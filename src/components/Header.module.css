@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  font-family: "Pretendard";
+
   font-weight: 500;
 }
 
@@ -49,7 +49,6 @@
   align-items: center;
   justify-content: center;
   font-size: 16px;
-
 }
 
 .menu a,
@@ -57,13 +56,13 @@
 .menu a:visited,
 .menu a:hover {
   text-decoration: none;
-  color: #3E3E3E ;
+  color: #3e3e3e;
 }
 
 .menu a:hover,
 .menu a:active,
 .menu a.active {
-  color: #F8b195;
+  color: #f8b195;
   top: 5px;
 }
 
@@ -91,10 +90,7 @@
 .menu a:hover::after {
   transform: translateX(-50%) translateY(5px); /* 아래로 5px 내려가도록 변경 */
   opacity: 1; /* 텍스트 밑줄 표시 */
-
 }
-
-
 
 /* width <= 1000 */
 .head_mobile {
