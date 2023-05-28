@@ -15,30 +15,11 @@ import eyeOff from "../img/join/eye-off.svg";
 import { useEffect, useState } from "react";
 import titleLogo from "../img/title_logo.svg";
 import ErrorText from "../components/UI/ErrorText";
+import useFormValidation from "../hooks/use-formValidation";
 
 function Join() {
   const [passwordShown, setPasswordShown] = useState(false);
   const [checkPasswordShown, setCheckPasswordShown] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    checkPassword: "",
-    nickname: "",
-    phonenumber: "",
-    birth: "",
-    gender: "",
-  });
-
-  const [hasErrors, setHasErros] = useState({
-    email: false,
-    password: false,
-    checkPassword: false,
-    nickname: false,
-    phonenumber: false,
-    birth: false,
-    gender: false,
-  });
-
   function passwordEyeHandler() {
     setPasswordShown((prev) => !prev);
   }
@@ -46,116 +27,44 @@ function Join() {
     setCheckPasswordShown((prev) => !prev);
   }
 
+  const checkPassword = (v) => {
+    if (formData.password === v) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex =
+    /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+  const nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
+  const phoneRegex = /^01(?:0|1|[6-9])\d{4}\d{4}$/;
+  const birthRegex =
+    /^(?:(?:19|20)\d{2})(?:(?:(?:0[1-9]|1[0-2])(?:0[1-9]|1\d|2[0-8]))|(?:02(?:29))|(?:(?:0[13-9]|1[0-2])(?:29|30))|(?:0[13578]|1[02])31)$/;
+
+  const validationRules = {
+    email: (value) => emailRegex.test(value),
+    password: (value) => passwordRegex.test(value),
+    checkPassword: (value) => checkPassword(value),
+    nickname: (value) => nameRegex.test(value),
+    phonenumber: (value) => phoneRegex.test(value),
+    birth: (value) => birthRegex.test(value),
+    gender: () => {},
+  };
+
+  const [formData, errors, onChangeHandler] =
+    useFormValidation(validationRules);
+
   // 값 변화에 따라 콘솔에 출력
   useEffect(() => {
     console.log(formData);
-  }, [formData]);
+    console.log(errors);
+  }, [formData, errors]);
 
   useEffect(() => {
-    console.log(hasErrors);
-  }, [hasErrors]);
-
-  console.log("re");
-  const onChangeEmail = (e) => {
-    // 이메일 검사: 올바른 형식이어야 함
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (!emailRegex.test(value)) {
-      setHasErros({ ...hasErrors, [name]: true });
-    } else {
-      setHasErros({ ...hasErrors, [name]: false });
-    }
-  };
-
-  const onChangePassword = (e) => {
-    // 8자 이상, 16자 이하의 비밀번호
-    const passwordRegex =
-      /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
-
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (!passwordRegex.test(value)) {
-      setHasErros({ ...hasErrors, password: true });
-    } else {
-      setHasErros({ ...hasErrors, password: false });
-    }
-  };
-
-  const onChangeCheckPassword = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (formData.password !== value) {
-      setHasErros({ ...hasErrors, checkPassword: true });
-    } else {
-      setHasErros({ ...hasErrors, checkPassword: false });
-    }
-  };
-
-  const onChangeName = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (value.trim() === "") {
-      setHasErros({ ...hasErrors, nickname: true });
-    } else {
-      setHasErros({ ...hasErrors, nickname: false });
-    }
-  };
-
-  const onChangePhone = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    const phoneRegex = /^01(?:0|1|[6-9])\d{4}\d{4}$/;
-    if (!phoneRegex.test(value)) {
-      setHasErros({ ...hasErrors, phonenumber: true });
-    } else {
-      setHasErros({ ...hasErrors, phonenumber: false });
-    }
-  };
-
-  const onChangeBirth = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    const birthRegex =
-      /^(?:(?:19|20)\d{2})(?:(?:(?:0[1-9]|1[0-2])(?:0[1-9]|1\d|2[0-8]))|(?:02(?:29))|(?:(?:0[13-9]|1[0-2])(?:29|30))|(?:0[13578]|1[02])31)$/;
-    if (!birthRegex.test(value)) {
-      setHasErros({ ...hasErrors, birth: true });
-    } else {
-      setHasErros({ ...hasErrors, birth: false });
-    }
-  };
-
-  const onChangeGender = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+    console.log(errors);
+  }, [errors]);
 
   function joinHander(event) {
     event.preventDefault();
@@ -180,11 +89,11 @@ function Join() {
                 className={`${classes.input} ${classes.shortInput}`}
                 name="email"
                 value={formData.email}
-                onChange={onChangeEmail}
+                onChange={onChangeHandler}
               />
               <Button value="인증" />
             </div>
-            {hasErrors.email && (
+            {errors.email && (
               <ErrorText text="올바른 이메일 형식을 입력해주세요." />
             )}
             <div className={classes.formControl}>
@@ -196,7 +105,7 @@ function Join() {
                   className={classes.password_input}
                   name="password"
                   value={formData.password}
-                  onChange={onChangePassword}
+                  onChange={onChangeHandler}
                 />
                 <img
                   src={passwordShown ? eyeOn : eyeOff}
@@ -206,10 +115,10 @@ function Join() {
                 />
               </div>
             </div>
-            {hasErrors.password && (
+            {errors.password && (
               <ErrorText text="비밀번호는 8자리 이상, 16자 이하여야 합니다." />
             )}
-            {hasErrors.password && (
+            {errors.password && (
               <ErrorText text="영문/숫자/특수문자(공백 제외)를 포함하여야 합니다." />
             )}
             <div className={classes.formControl}>
@@ -221,7 +130,7 @@ function Join() {
                   className={classes.password_input}
                   name="checkPassword"
                   value={formData.checkPassword}
-                  onChange={onChangeCheckPassword}
+                  onChange={onChangeHandler}
                 />
                 <img
                   src={checkPasswordShown ? eyeOn : eyeOff}
@@ -231,7 +140,7 @@ function Join() {
                 />
               </div>
             </div>
-            {hasErrors.checkPassword && (
+            {errors.checkPassword && (
               <ErrorText text="비밀번호가 일치하지 않습니다." />
             )}
             <div className={classes.formControl}>
@@ -242,10 +151,10 @@ function Join() {
                 className={`${classes.input} ${classes.longInput}`}
                 name="nickname"
                 value={formData.nickname}
-                onChange={onChangeName}
+                onChange={onChangeHandler}
               />
             </div>
-            {hasErrors.nickname && <ErrorText text="이름을 입력해주세요." />}
+            {errors.nickname && <ErrorText text="이름을 입력해주세요." />}
             <div className={classes.formControl}>
               <IconBox img={phone} />
               <input
@@ -253,10 +162,10 @@ function Join() {
                 className={classes.input}
                 name="phonenumber"
                 value={formData.phonenumber}
-                onChange={onChangePhone}
+                onChange={onChangeHandler}
               />
             </div>
-            {hasErrors.phonenumber && (
+            {errors.phonenumber && (
               <ErrorText text="올바른 휴대폰 번호를 입력해주세요." />
             )}
             <div className={classes.formControl}>
@@ -266,19 +175,17 @@ function Join() {
                 className={classes.input}
                 name="birth"
                 value={formData.birth}
-                onChange={onChangeBirth}
+                onChange={onChangeHandler}
               />
             </div>
-            {hasErrors.birth && (
-              <ErrorText text="생년월일을 다시 확인해주세요." />
-            )}
+            {errors.birth && <ErrorText text="생년월일을 다시 확인해주세요." />}
             {/* 성별은 선택사항 */}
             <div className={classes.formControl}>
               <IconBox img={genderImg} />
               <select
                 className={classes.input}
                 value={formData.gender}
-                onChange={onChangeGender}
+                onChange={onChangeHandler}
                 name="gender"
               >
                 <option value="" defaultChecked disabled>
