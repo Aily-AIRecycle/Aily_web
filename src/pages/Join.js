@@ -166,7 +166,7 @@ function Join() {
     <>
       <main className={classes.main}>
         <Link to="/" className={classes.title}>
-          <img src={titleLogo} className={classes.logo} />
+          <img src={titleLogo} alt="aily" className={classes.logo} />
         </Link>
         <div className={classes.join}>
           <div className={classes.sub_title}>
@@ -200,6 +200,7 @@ function Join() {
                 />
                 <img
                   src={passwordShown ? eyeOn : eyeOff}
+                  alt=""
                   width="20px"
                   onClick={passwordEyeHandler}
                 />
@@ -224,6 +225,7 @@ function Join() {
                 />
                 <img
                   src={checkPasswordShown ? eyeOn : eyeOff}
+                  alt=""
                   width="20px"
                   onClick={passwordCheckEyeHandler}
                 />
