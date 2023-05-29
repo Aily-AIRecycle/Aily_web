@@ -13,6 +13,7 @@ import Login from "./pages/Login.js";
 import Join from "./pages/Join.js";
 import Location from "./pages/Location.js";
 import IsRecycle from "./pages/IsRecycle";
+import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
   },
   { path: "/login", element: <Login /> },
   { path: "/join", element: <Join /> },
+  { path: "/*", element: <NotFound /> },
 ]);
 
 function App() {
