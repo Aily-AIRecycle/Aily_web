@@ -13,7 +13,7 @@ import Login from "./pages/Login.js";
 import Join from "./pages/Join.js";
 import Location from "./pages/Location.js";
 import IsRecycle from "./pages/IsRecycle";
-import MyInfo from "./pages/MyInfo";
+import MyInfo from "./pages/MyPage";
 
 const user_email = sessionStorage.getItem("user_email");
 const router = createBrowserRouter([
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       },
       { path: "/location", element: <Location /> },
       { path: "/isRecycle", element: <IsRecycle /> },
-      user_email ? { path: "/myInfo", element: <MyInfo /> } : {},
+      user_email ? { path: "/myPage", element: <MyInfo /> } : {},
     ],
   },
   !user_email ? { path: "/login", element: <Login /> } : {},

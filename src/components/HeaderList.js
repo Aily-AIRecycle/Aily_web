@@ -22,7 +22,7 @@ function HeaderList(props) {
         {!user_email ? (
           <Link to="/login">로그인</Link>
         ) : (
-          <Link to="/myInfo">
+          <Link to="/myPage">
             <div>
               <img src={user} />
             </div>
