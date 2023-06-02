@@ -1,0 +1,104 @@
+@media (min-width: 1000px) {
+  .board_title {
+    width: 100%;
+    height: 350px;
+    background: rgb(248, 177, 149);
+    background: linear-gradient(
+            212deg,
+            rgba(248, 177, 149, 1) 0%,
+            rgba(255, 245, 241, 1) 11%,
+            rgba(255, 255, 255, 1) 15%,
+            rgba(255, 250, 248, 1) 19%,
+            rgba(248, 177, 149, 1) 44%,
+            rgba(248, 177, 149, 1) 55%,
+            rgba(255, 250, 248, 1) 78%,
+            rgba(255, 251, 250, 1) 84%,
+            rgba(255, 248, 245, 1) 87%,
+            rgba(250, 196, 174, 1) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* font-size: 50px; */
+    font-size: 70px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    color: white;
+  }
+
+
+  .board {
+    display: flex;
+    justify-content: flex-start;
+    margin: 100px 10% 0 10%;
+  }
+
+  .menu a {
+    width: 50px;
+    height: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 15px;
+    color: #767676;
+    font-weight: 500;
+    background-color: #f8f8f8;
+    border-radius: 25px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Pretendard, serif;
+  }
+
+  .menu:last-child a {
+    margin-right: -10px;
+  }
+
+  .menu a:hover,
+  .menu a.active,
+  .menu a:active {
+    color: white;
+    background-color: #0d0d0d;
+  }
+}
+
+@media (max-width: 1000px) {
+  .board_title {
+    width: 100%;
+    height: 30vw;
+    background: rgb(248, 177, 149);
+    background: linear-gradient(
+            212deg,
+            rgba(248, 177, 149, 1) 0%,
+            rgba(255, 245, 241, 1) 11%,
+            rgba(255, 255, 255, 1) 15%,
+            rgba(255, 250, 248, 1) 19%,
+            rgba(248, 177, 149, 1) 44%,
+            rgba(248, 177, 149, 1) 55%,
+            rgba(255, 250, 248, 1) 78%,
+            rgba(255, 251, 250, 1) 84%,
+            rgba(255, 248, 245, 1) 87%,
+            rgba(250, 196, 174, 1) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7vw;
+    font-weight: 500;
+    letter-spacing: 0.25vw;
+    color: white;
+  }
+}
+
+.select {
+  width: 100px;
+  height: 30px;
+  border: 1px solid #d9d9d9;
+  border-radius: 20px;
+  background-color: white;
+  margin-left: 10%;
+  margin-top: 10%;
+  padding-left: 10px;
+}
