@@ -8,8 +8,8 @@ const markerPositions = [
 ];
 
 const LocationMap = () => {
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  const [latitude, setLatitude] = useState(37.500051267389296);
+  const [longitude, setLongitude] = useState(126.86798816343797);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
