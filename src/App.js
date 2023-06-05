@@ -14,6 +14,7 @@ import Join from "./pages/Join.js";
 import Location from "./pages/Location.js";
 import IsRecycle from "./pages/IsRecycle";
 import NotFound from "./pages/NotFound";
+import StatsScreen from "./pages/StatsScreen";
 
 const router = createBrowserRouter([
   {
@@ -39,10 +40,12 @@ const router = createBrowserRouter([
       },
       { path: "/location", element: <Location /> },
       { path: "/isRecycle", element: <IsRecycle /> },
+      { path: "/stats", element: <StatsScreen/> },
     ],
   },
   { path: "/login", element: <Login /> },
   { path: "/join", element: <Join /> },
+  
   { path: "/*", element: <NotFound /> },
 ]);
 
