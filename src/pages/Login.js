@@ -57,7 +57,7 @@ function Login() {
           <img src={titleLogo} className={classes.logo} />
         </Link>
         <div className={classes.login}>
-          <form>
+          <form className={classes.form}>
             <div className={classes.div}>
               <img src={user} alt="id" className={classes.img} />
               <input
