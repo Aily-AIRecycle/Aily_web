@@ -5,7 +5,7 @@
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-color: #fff9f6;
+  background-color: white;
 }
 
 .h1 {
@@ -33,13 +33,12 @@
 
   .h2 {
     font-size: 1.5vw;
-    margin-bottom: 8vw;
+    margin-bottom: 8vh;
   }
 
   .map {
-    width: 30.5vw;
-    height: 19.5vw;
-    border: 0.175vw solid #ffcab5;
+    width: 40vw;
+    height: 40vh;
   }
 
   .map_img {
