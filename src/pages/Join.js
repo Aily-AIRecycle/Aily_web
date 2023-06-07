@@ -13,13 +13,18 @@ import Button from "../components/UI/Button";
 import eyeOn from "../img/join/eye-on.svg";
 import eyeOff from "../img/join/eye-off.svg";
 import { useEffect, useState } from "react";
-import titleLogo from "../img/title_logo.svg";
+import logo from "../img/aily_logo.svg";
 import ErrorText from "../components/UI/ErrorText";
 import useFormValidation from "../hooks/use-formValidation";
+import axios from "axios";
 
 function Join() {
   const [passwordShown, setPasswordShown] = useState(false);
   const [checkPasswordShown, setCheckPasswordShown] = useState(false);
+
+  const [authNumber, setAuthNumber] = useState("");
+  const [authError, setAuthError] = useState(false);
+
   function passwordEyeHandler() {
     setPasswordShown((prev) => !prev);
   }
@@ -63,25 +68,81 @@ function Join() {
   }, [formData, errors]);
 
   useEffect(() => {
-    console.log(errors);
-  }, [errors]);
+    console.log(authNumber);
+  }, [authNumber]);
+
+  const authChangeHandler = (e) => {
+    setAuthNumber(e.target.value);
+  };
 
   function joinHander(event) {
     event.preventDefault();
-    return;
+    if (
+      !errors.email ||
+      !errors.password ||
+      !errors.checkPassword ||
+      !errors.birth ||
+      !errors.nickname ||
+      !errors.gender ||
+      !errors.phonenumber ||
+      !authError
+    ) {
+      alert("입력 정보를 다시 확인해주세요.");
+    } else {
+      axios
+        .post("member/member/join", {
+          email: formData.email,
+          password: formData.password,
+          nickname: formData.nickname,
+          birth: formData.birth,
+          gender: formData.gender,
+          phonenumber: formData.phonenumber,
+        })
+        .then(() => {
+          alert("회원가입이 완료되었습니다.");
+          document.location.href = "/";
+        })
+        .catch();
+    }
+  }
+
+  function authEmailHandler() {
+    axios
+      .post("member/member/EmailCheck", { email: formData.email })
+      .then((res) => {
+        // 중복 아니면 res = 'yes'
+        if (res.data) {
+          axios
+            .post("member/member/auth-email", {
+              email: formData.email,
+            })
+            .then((res) => {
+              // 코드랑 사용자가 입력한 인증번호가 같으면
+              if (res.data === authNumber) {
+                setAuthError(false);
+              } else {
+                setAuthError(true);
+              }
+            })
+            .catch();
+        } else {
+          alert("이미 존재하는 이메일입니다.");
+        }
+      })
+      .catch();
   }
 
   return (
     <>
       <main className={classes.main}>
         <Link to="/" className={classes.title}>
-          <img src={titleLogo} alt="aily" className={classes.logo} />
+          <img src={logo} alt="aily" className={classes.logo} />
         </Link>
         <div className={classes.join}>
           <div className={classes.sub_title}>
             <h3 className={classes.h3}>회원 정보를 입력해주세요.</h3>
           </div>
-          <form className={classes.form} onSubmit={joinHander}>
+          <form className={classes.form}>
             <div className={classes.formControl}>
               <IconBox img={emailImg} />
               <input
@@ -91,11 +152,25 @@ function Join() {
                 value={formData.email}
                 onChange={onChangeHandler}
               />
-              <Button value="인증" />
+              <Button value="인증" onClick={authEmailHandler} />
             </div>
             {errors.email && (
               <ErrorText text="올바른 이메일 형식을 입력해주세요." />
             )}
+
+            {/* 이메일 중복체크 */}
+            <div className={classes.formControl}>
+              <IconBox img={emailImg} />
+              <input
+                type="text"
+                placeholder="인증번호 입력"
+                className={`${classes.input} ${classes.longInput}`}
+                value={authNumber}
+                onChange={authChangeHandler}
+              />
+            </div>
+            {authError && <ErrorText text="인증번호가 일치하지 않습니다." />}
+
             <div className={classes.formControl}>
               <IconBox img={lock} />
               <div className={classes.password}>
@@ -196,7 +271,12 @@ function Join() {
               </select>
             </div>
 
-            <input type="submit" value="회원가입" id={classes.submit} />
+            <input
+              type="submit"
+              value="회원가입"
+              id={classes.submit}
+              onClick={joinHander}
+            />
           </form>
         </div>
         <CopyRight />

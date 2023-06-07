@@ -1,7 +1,7 @@
 import qrPhone from "../../img/main/qrcode.svg";
 import arrow from "../../img/main/right_left_arrow.svg";
-import recycleBin from "../../img/main/recycle_bin.svg";
 import classes from "./Section2.module.css";
+import logo from "../../img/aily_logo.svg";
 
 function Section2() {
   return (
@@ -15,7 +15,7 @@ function Section2() {
         <div className={classes.qrSpace} />
         <img src={arrow} alt="arrow" className={classes.arrow} />
         <div className={classes.qrSpace} />
-        <img src={recycleBin} alt="recycleBin" className={classes.recycleBin} />
+        <img src={logo} alt="logo" className={classes.logo} />
       </div>
     </div>
   );

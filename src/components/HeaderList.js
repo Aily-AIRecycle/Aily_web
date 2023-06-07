@@ -15,6 +15,9 @@ function HeaderList(props) {
         <Link to="/isRecycle">재활용 여부 검색</Link>
       </li>
       <li className={props.li} onClick={props.onClick}>
+        <Link to="/stats">통계</Link>
+      </li>
+      <li className={props.li} onClick={props.onClick}>
         <Link to="/login">로그인</Link>
       </li>
     </ul>
