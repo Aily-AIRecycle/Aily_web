@@ -2,7 +2,6 @@ import classes from "./Join.module.css";
 import CopyRight from "../components/Copyright";
 import { Link } from "react-router-dom";
 import lock from "../img/login/lock.svg";
-import lockCheck from "../img/join/lock-check.svg";
 import user from "../img/login/user.svg";
 import calendar from "../img/join/calendar.svg";
 import emailImg from "../img/join/email.svg";
@@ -20,25 +19,15 @@ import axios from "axios";
 
 function Join() {
   const [passwordShown, setPasswordShown] = useState(false);
-  const [checkPasswordShown, setCheckPasswordShown] = useState(false);
 
   const [authNumber, setAuthNumber] = useState("");
+  const [resAuthNumber, setResAuthNumber] = useState("");
   const [authError, setAuthError] = useState(false);
+
 
   function passwordEyeHandler() {
     setPasswordShown((prev) => !prev);
   }
-  function passwordCheckEyeHandler() {
-    setCheckPasswordShown((prev) => !prev);
-  }
-
-  const checkPassword = (v) => {
-    if (formData.password === v) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex =
@@ -51,11 +40,10 @@ function Join() {
   const validationRules = {
     email: (value) => emailRegex.test(value),
     password: (value) => passwordRegex.test(value),
-    checkPassword: (value) => checkPassword(value),
     nickname: (value) => nameRegex.test(value),
     phonenumber: (value) => phoneRegex.test(value),
     birth: (value) => birthRegex.test(value),
-    gender: () => {},
+    gender: (value) => value,
   };
 
   const [formData, errors, onChangeHandler] =
@@ -71,6 +59,17 @@ function Join() {
     console.log(authNumber);
   }, [authNumber]);
 
+  useEffect(() => {
+    console.log("받아온 값과 입력 값: ", resAuthNumber, authNumber);
+    if (resAuthNumber === "") {
+      setAuthError(false);
+    } else if (resAuthNumber === authNumber) {
+      setAuthError(false);
+    } else {
+      setAuthError(true);
+    }
+  }, [resAuthNumber, authNumber]);
+
   const authChangeHandler = (e) => {
     setAuthNumber(e.target.value);
   };
@@ -80,7 +79,6 @@ function Join() {
     if (
       !errors.email ||
       !errors.password ||
-      !errors.checkPassword ||
       !errors.birth ||
       !errors.nickname ||
       !errors.gender ||
@@ -111,18 +109,16 @@ function Join() {
       .post("member/member/EmailCheck", { email: formData.email })
       .then((res) => {
         // 중복 아니면 res = 'yes'
-        if (res.data) {
+        if (res.data === "yes") {
+          console.log(res.data);
           axios
             .post("member/member/auth-email", {
               email: formData.email,
             })
             .then((res) => {
-              // 코드랑 사용자가 입력한 인증번호가 같으면
-              if (res.data === authNumber) {
-                setAuthError(false);
-              } else {
-                setAuthError(true);
-              }
+              console.log(res);
+              console.log(res.data);
+              setResAuthNumber((res.data).toString());
             })
             .catch();
         } else {
@@ -130,6 +126,7 @@ function Join() {
         }
       })
       .catch();
+
   }
 
   return (
@@ -195,28 +192,6 @@ function Join() {
             )}
             {errors.password && (
               <ErrorText text="영문/숫자/특수문자(공백 제외)를 포함하여야 합니다." />
-            )}
-            <div className={classes.formControl}>
-              <IconBox img={lockCheck} />
-              <div className={classes.password}>
-                <input
-                  type={checkPasswordShown ? "text" : "password"}
-                  placeholder="비밀번호 확인"
-                  className={classes.password_input}
-                  name="checkPassword"
-                  value={formData.checkPassword}
-                  onChange={onChangeHandler}
-                />
-                <img
-                  src={checkPasswordShown ? eyeOn : eyeOff}
-                  alt=""
-                  width="20px"
-                  onClick={passwordCheckEyeHandler}
-                />
-              </div>
-            </div>
-            {errors.checkPassword && (
-              <ErrorText text="비밀번호가 일치하지 않습니다." />
             )}
             <div className={classes.formControl}>
               <IconBox img={user} />

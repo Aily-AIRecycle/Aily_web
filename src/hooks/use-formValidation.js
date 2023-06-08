@@ -4,7 +4,6 @@ const useFormValidation = (validationRules) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    checkPassword: "",
     nickname: "",
     phonenumber: "",
     birth: "",
@@ -14,7 +13,6 @@ const useFormValidation = (validationRules) => {
   const [errors, setErrors] = useState({
     email: false,
     password: false,
-    checkPassword: false,
     nickname: false,
     phonenumber: false,
     birth: false,
