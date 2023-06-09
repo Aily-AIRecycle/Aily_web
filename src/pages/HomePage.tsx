@@ -3,7 +3,6 @@ import Section2 from "@/components/HomePage/Section2";
 import Section3 from "@/components/HomePage/Section3";
 import Section4 from "@/components/HomePage/Section4";
 import Section5 from "@/components/HomePage/Section5";
-import Section6 from "@/components/HomePage/Section6";
 import classes from "@/pages/styles/HomePage.module.css";
 
 
@@ -16,7 +15,6 @@ function HomePage()
       <Section3 />
       <Section4 />
       <Section5 />
-      <Section6 />
     </div>
   );
 }
