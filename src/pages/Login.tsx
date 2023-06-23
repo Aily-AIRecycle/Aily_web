@@ -1,19 +1,17 @@
-import classes from "./Login.module.css";
-import user from "../img/login/user.svg";
-import lock from "../img/login/lock.svg";
+import classes from "./styles/Login.module.css";
+import user from "img/login/user.svg";
+import lock from "img/login/lock.svg";
 import { Link } from "react-router-dom";
 import Copyright from "@/components/Copyright";
 import axios from "axios";
 import useInput from "../hooks/use-input";
-import logo from "../img/aily_logo.svg";
+import logo from "img/aily_logo.svg";
 
-function Login()
-{
+function Login() {
   const email = useInput("");
   const password = useInput("");
 
-  function loginHandler(event: any)
-  {
+  function loginHandler(event: any) {
     event.preventDefault();
 
     console.log("click login");
@@ -25,8 +23,7 @@ function Login()
         email: email.value,
         password: password.value,
       })
-      .then((res) =>
-      {
+      .then((res) => {
         console.log(res);
         if (res.data.email === email.value) {
           if (res.data.password === "") {

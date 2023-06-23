@@ -1,90 +1,54 @@
+"use client";
 import useWindowWidth from "@/hooks/use-windowWidth";
 import classes from "@/components/styles/BoardNavigation.module.css";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-function BoardNavigation()
-{
+function BoardNavigation() {
   const windowWidth = useWindowWidth();
 
   const [selectedOption, setSelectedOption] = useState("");
-  const navigate = useNavigate();
+  const router = useRouter();
 
-  const optionChangeHandler = (event: any) =>
-  {
+  const optionChangeHandler = (event: any) => {
     setSelectedOption(event.target.value);
-    navigate(event.target.value);
+    // navigate(event.target.value);
+    router.push(event.target.value);
   };
 
   let header;
-  if (windowWidth > 1000)
-  {
+  if (windowWidth > 1000) {
     header = (
-      <header>
+      <div className={classes.board_wrap}>
         <ul className={classes.board}>
           <li className={classes.menu}>
-            <NavLink
-              to="/board"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-              end
-            >
-              전체
-            </NavLink>
+            <Link href="/board/all">전체</Link>
           </li>
           <li className={classes.menu}>
-            <NavLink
-              to="/board/notice"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              공지
-            </NavLink>
+            <Link href="/board/notice">공지</Link>
           </li>
           <li className={classes.menu}>
-            <NavLink
-              to="/board/q&a"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              Q&A
-            </NavLink>
+            <Link href="/board/q&a">Q&A</Link>
           </li>
           <li className={classes.menu}>
-            <NavLink
-              to="/board/faq"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              FAQ
-            </NavLink>
+            <Link href="/board/faq">FAQ</Link>
           </li>
           <li className={classes.menu}>
-            <NavLink
-              to="/board/suggestion"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              건의사항
-            </NavLink>
+            <Link href="/board/suggestion">건의사항</Link>
           </li>
         </ul>
-      </header>
+      </div>
     );
-  } else
-  {
+  } else {
     header = (
       <select
         value={selectedOption}
         onChange={optionChangeHandler}
         className={classes.select}
       >
-        <option value="/board">전체</option>
+        <option value="/board/all">전체</option>
         <option value="/board/notice">공지 </option>
         <option value="/board/q&a">Q&A</option>
         <option value="/board/faq">FAQ</option>

@@ -1,8 +1,7 @@
 import classes from "@/components/Board/styles/BoardTitle.module.css";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
-function BoardTitle(props: any)
-{
+function BoardTitle(props: any) {
   const article = props.article;
   const id = article.id;
   const title = article.title;
@@ -17,14 +16,14 @@ function BoardTitle(props: any)
       <div className={classes.category}>{category}</div>
       <div className={classes.title}>
         <Link
-          to={`/board/${props.boardName}/${id}`}
-          state={{
-            id: id,
-            title: title,
-            content: content,
-            writer: writer,
-            date: date,
-          }}
+          href={`/board/${props.boardName}/${id}`}
+          // state={{
+          //   id: id,
+          //   title: title,
+          //   content: content,
+          //   writer: writer,
+          //   date: date,
+          // }}
         >
           {title}
         </Link>

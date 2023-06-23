@@ -1,56 +1,25 @@
 "use client";
-import BoardContent from "@/components/Board/BoardContent";
-import BoardHeader from "@/components/Board/BoardHeader";
-import Board from "@/pages/Board";
-import HeaderAndFooter from "@/pages/HeaderAndFooter";
-import HomePage from "@/pages/HomePage";
-import IsRecycle from "@/pages/IsRecycle";
-import Join from "@/pages/Join";
-import Login from "@/pages/Login";
-import NotFound from "@/pages/NotFound";
-import StatsScreen from "@/pages/StatsScreen";
-import {
-  RouterProvider,
-  createBrowserRouter,
-  redirect,
-} from "react-router-dom";
+import Section1 from "@/components/HomePage/Section1";
+import Section2 from "@/components/HomePage/Section2";
+import Section3 from "@/components/HomePage/Section3";
+import Section4 from "@/components/HomePage/Section4";
+import Section5 from "@/components/HomePage/Section5";
+import classes from "@/app/Homepage.module.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <>
-      <RouterProvider router={router} />
+      <Header />
+      <div className={classes.home}>
+        <Section1 />
+        <Section2 />
+        <Section3 />
+        <Section4 />
+        <Section5 />
+      </div>
+      <Footer />
     </>
   );
 }
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HeaderAndFooter />,
-    children: [
-      { path: "/", element: <HomePage /> },
-      {
-        path: "/board",
-        element: <BoardHeader />,
-        children: [
-          { path: "/board", element: <Board /> },
-          { path: "/board/:boardName", element: <Board /> },
-          {
-            path: "/board/entire",
-            element: <Board />,
-            loader: () => {
-              return redirect("/board");
-            },
-          },
-          { path: "/board/:boardName/:articleId", element: <BoardContent /> },
-        ],
-      },
-      { path: "/location", element: <Location /> },
-      { path: "/isRecycle", element: <IsRecycle /> },
-      { path: "/stats", element: <StatsScreen /> },
-    ],
-  },
-  { path: "/login", element: <Login /> },
-  { path: "/join", element: <Join /> },
-  { path: "/*", element: <NotFound /> },
-]);

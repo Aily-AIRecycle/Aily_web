@@ -1,6 +1,9 @@
-import { Outlet, useParams } from "react-router-dom";
+"use client";
 import BoardFilter from "@/components/Board/BoardFilter";
 import classes from "@/pages/styles/Board.module.css";
+import BoardNavigation from "@/components/BoardNavigation";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const DUMMY_DATA = [
   {
@@ -34,12 +37,11 @@ const DUMMY_DATA = [
   },
 ];
 
-function Board()
-{
-  const params = useParams();
-
+function Page({ params }: { params: { category: string } }) {
   return (
     <>
+      <Header />
+      <BoardNavigation />
       <div className={classes.board}>
         <div className={classes.boardHead}>
           <div className={classes.id}>No</div>
@@ -49,12 +51,12 @@ function Board()
           <div className={classes.date}>작성일</div>
         </div>
         <ul className={classes.list}>
-          <BoardFilter boardName={params.boardName} data={DUMMY_DATA} />
+          <BoardFilter boardName={params.category} data={DUMMY_DATA} />
         </ul>
       </div>
-      <Outlet />
+      <Footer />
     </>
   );
 }
 
-export default Board;
+export default Page;

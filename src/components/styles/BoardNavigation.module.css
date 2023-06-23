@@ -1,36 +1,14 @@
 @media (min-width: 1000px) {
-  .board_title {
+  .board_wrap {
     width: 100%;
-    height: 350px;
-    background: rgb(248, 177, 149);
-    background: linear-gradient(
-            212deg,
-            rgba(248, 177, 149, 1) 0%,
-            rgba(255, 245, 241, 1) 11%,
-            rgba(255, 255, 255, 1) 15%,
-            rgba(255, 250, 248, 1) 19%,
-            rgba(248, 177, 149, 1) 44%,
-            rgba(248, 177, 149, 1) 55%,
-            rgba(255, 250, 248, 1) 78%,
-            rgba(255, 251, 250, 1) 84%,
-            rgba(255, 248, 245, 1) 87%,
-            rgba(250, 196, 174, 1) 100%
-    );
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* font-size: 50px; */
-    font-size: 70px;
-    font-weight: 500;
-    letter-spacing: 5px;
-    color: white;
+    height: 300px;
   }
-
-
   .board {
+    width: 80%;
+    height: 300px;
     display: flex;
     justify-content: flex-start;
-    margin: 100px 10% 0 10%;
+    align-items: center;
   }
 
   .menu a {
@@ -61,34 +39,6 @@
   .menu a:active {
     color: white;
     background-color: #0d0d0d;
-  }
-}
-
-@media (max-width: 1000px) {
-  .board_title {
-    width: 100%;
-    height: 30vw;
-    background: rgb(248, 177, 149);
-    background: linear-gradient(
-            212deg,
-            rgba(248, 177, 149, 1) 0%,
-            rgba(255, 245, 241, 1) 11%,
-            rgba(255, 255, 255, 1) 15%,
-            rgba(255, 250, 248, 1) 19%,
-            rgba(248, 177, 149, 1) 44%,
-            rgba(248, 177, 149, 1) 55%,
-            rgba(255, 250, 248, 1) 78%,
-            rgba(255, 251, 250, 1) 84%,
-            rgba(255, 248, 245, 1) 87%,
-            rgba(250, 196, 174, 1) 100%
-    );
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 7vw;
-    font-weight: 500;
-    letter-spacing: 0.25vw;
-    color: white;
   }
 }
 

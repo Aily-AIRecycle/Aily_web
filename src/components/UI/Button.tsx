@@ -1,7 +1,6 @@
-import classes from "@components/UI/styles/Button.module.css";
+import classes from "@/components/UI/styles/Button.module.css";
 
-function Button(props: any)
-{
+function Button(props: any) {
   return (
     <>
       <input
