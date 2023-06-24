@@ -1,10 +1,12 @@
-import classes from "./styles/Login.module.css";
-import user from "img/login/user.svg";
-import lock from "img/login/lock.svg";
-import { Link } from "react-router-dom";
+"use client";
+import classes from "./Login.module.css";
+import user from "img/join/user.svg";
+import lock from "img/join/lock.svg";
+import Link from "next/link";
+import Image from "next/image";
 import Copyright from "@/components/Copyright";
 import axios from "axios";
-import useInput from "../hooks/use-input";
+import useInput from "@/hooks/use-input";
 import logo from "img/aily_logo.svg";
 
 function Login() {
@@ -52,30 +54,34 @@ function Login() {
   return (
     <>
       <main className={classes.main}>
-        <Link to="/">
-          <img src={logo} className={classes.logo} />
+        <Link href="/">
+          <Image
+            src={logo}
+            width={100}
+            height={100}
+            alt="logo"
+            className={classes.logo}
+          />
         </Link>
         <div className={classes.login}>
           <form className={classes.form}>
             <div className={classes.div}>
-              <img src={user} alt="id" className={classes.img} />
+              <Image src={user} alt="id" className={classes.img} />
               <input
                 className={classes.input}
                 type="id"
                 placeholder="이메일"
                 name="email"
-                value={email.value}
                 {...email}
               />
             </div>
             <div className={classes.div}>
-              <img src={lock} alt="password" className={classes.img} />
+              <Image src={lock} alt="password" className={classes.img} />
               <input
                 className={classes.input}
                 type="password"
                 placeholder="비밀번호"
                 name="password"
-                value={password.value}
                 {...password}
               />
             </div>
@@ -88,9 +94,9 @@ function Login() {
           </form>
           <div className={classes.move}>
             <div className={classes.find}>
-              <Link to={"#"}>아이디 찾기</Link>
-              <Link to={"#"}>비밀번호 찾기</Link>
-              <Link to="/join">회원가입</Link>
+              <Link href={"#"}>아이디 찾기</Link>
+              <Link href={"#"}>비밀번호 찾기</Link>
+              <Link href="/join">회원가입</Link>
             </div>
           </div>
         </div>

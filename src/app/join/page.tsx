@@ -1,21 +1,23 @@
-import classes from "./styles/Join.module.css";
-import CopyRight from "../components/Copyright";
-import { Link } from "react-router-dom";
-import lock from "img/login/lock.svg";
-import user from "img/login/user.svg";
+"use client";
+import classes from "./Join.module.scss";
+import CopyRight from "../../components/Copyright";
+import Link from "next/link";
+import lock from "img/join/lock.svg";
+import user from "img/join/user.svg";
 import calendar from "img/join/calendar.svg";
 import emailImg from "img/join/email.svg";
-import genderImg from "img/join/venus-mars-solid.svg";
+import auth from "img/join/auth.svg";
+import genderImg from "img/join/gender.svg";
 import phone from "img/join/phone-solid.svg";
-import IconBox from "../components/UI/IconBox";
-import Button from "../components/UI/Button";
+import Button from "../../components/UI/Button";
 import eyeOn from "img/join/eye-on.svg";
 import eyeOff from "img/join/eye-off.svg";
 import { useEffect, useState } from "react";
 import logo from "img/aily_logo.svg";
-import ErrorText from "../components/UI/ErrorText";
-import useFormValidation from "../hooks/use-formValidation";
+import ErrorText from "../../components/UI/ErrorText";
+import useFormValidation from "../../hooks/use-formValidation";
 import axios from "axios";
+import Image from "next/image";
 
 function Join(): JSX.Element {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -37,16 +39,16 @@ function Join(): JSX.Element {
     /^(?:(?:19|20)\d{2})(?:(?:(?:0[1-9]|1[0-2])(?:0[1-9]|1\d|2[0-8]))|(?:02(?:29))|(?:(?:0[13-9]|1[0-2])(?:29|30))|(?:0[13578]|1[02])31)$/;
 
   const validationRules = {
-    email: (value) => emailRegex.test(value),
-    password: (value) => passwordRegex.test(value),
-    nickname: (value) => nameRegex.test(value),
-    phonenumber: (value) => phoneRegex.test(value),
-    birth: (value) => birthRegex.test(value),
-    gender: (value) => value,
+    email: (value: any) => emailRegex.test(value),
+    password: (value: any) => passwordRegex.test(value),
+    nickname: (value: any) => nameRegex.test(value),
+    phonenumber: (value: any) => phoneRegex.test(value),
+    birth: (value: any) => birthRegex.test(value),
+    gender: (value: any) => value,
   };
 
-  const [formData, errors, onChangeHandler] =
-    useFormValidation<string>(validationRules);
+  const [formData, errors, onChangeHandler]: any =
+    useFormValidation(validationRules);
 
   // 값 변화에 따라 콘솔에 출력
   useEffect(() => {
@@ -69,11 +71,11 @@ function Join(): JSX.Element {
     }
   }, [resAuthNumber, authNumber]);
 
-  const authChangeHandler = (e) => {
+  const authChangeHandler = (e: any) => {
     setAuthNumber(e.target.value);
   };
 
-  function joinHander(event: React.FormEvent<HTMLFormElement>): void {
+  function joinHander(event: any) {
     event.preventDefault();
     if (
       !errors.email ||
@@ -130,81 +132,73 @@ function Join(): JSX.Element {
   return (
     <>
       <main className={classes.main}>
-        <Link to="/" className={classes.title}>
-          <img src={logo} alt="aily" className={classes.logo} />
+        <Link href="/" className={classes.title}>
+          <Image src={logo} alt="aily" />
         </Link>
-        <div className={classes.join}>
-          <div className={classes.sub_title}>
-            <h3 className={classes.h3}>회원 정보를 입력해주세요.</h3>
-          </div>
-          <form className={classes.form}>
-            <div className={classes.formControl}>
-              <IconBox img={emailImg} />
+        <form>
+          <div className={classes.section1}>
+            <div className={classes.form_control}>
+              <Image src={emailImg} width={25} alt="@" />
               <input
                 placeholder="이메일"
-                className={`${classes.input} ${classes.shortInput}`}
+                className={classes.input}
                 name="email"
                 value={formData.email}
                 onChange={onChangeHandler}
               />
-              <Button value="인증" onClick={authEmailHandler} />
+              <Button value="인증메일 전송" onClick={authEmailHandler} />
             </div>
-            {errors.email && (
-              <ErrorText text="올바른 이메일 형식을 입력해주세요." />
-            )}
-
-            {/* 이메일 중복체크 */}
-            <div className={classes.formControl}>
-              <IconBox img={emailImg} />
+            <div className={classes.form_control}>
+              <Image src={auth} width={25} alt="auth" />
               <input
                 type="text"
                 placeholder="인증번호 입력"
-                className={`${classes.input} ${classes.longInput}`}
+                className={classes.input}
                 value={authNumber}
                 onChange={authChangeHandler}
               />
             </div>
-            {authError && <ErrorText text="인증번호가 일치하지 않습니다." />}
-
-            <div className={classes.formControl}>
-              <IconBox img={lock} />
-              <div className={classes.password}>
-                <input
-                  type={passwordShown ? "text" : "password"}
-                  placeholder="비밀번호"
-                  className={classes.password_input}
-                  name="password"
-                  value={formData.password}
-                  onChange={onChangeHandler}
-                />
-                <img
-                  src={passwordShown ? eyeOn : eyeOff}
-                  alt=""
-                  width="20px"
-                  onClick={passwordEyeHandler}
-                />
-              </div>
+            <div className={classes.form_control}>
+              <Image src={lock} width={25} alt="password" />
+              <input
+                type={passwordShown ? "text" : "password"}
+                placeholder="비밀번호"
+                className={classes.input}
+                name="password"
+                value={formData.password}
+                onChange={onChangeHandler}
+              />
+              <Image
+                src={passwordShown ? eyeOn : eyeOff}
+                alt="eye"
+                onClick={passwordEyeHandler}
+              />
             </div>
-            {errors.password && (
-              <ErrorText text="비밀번호는 8자리 이상, 16자 이하여야 합니다." />
-            )}
-            {errors.password && (
-              <ErrorText text="영문/숫자/특수문자(공백 제외)를 포함하여야 합니다." />
-            )}
-            <div className={classes.formControl}>
-              <IconBox img={user} />
+          </div>
+          {errors.email && (
+            <ErrorText text="올바른 이메일 형식을 입력해주세요." />
+          )}
+          {authError && <ErrorText text="인증번호가 일치하지 않습니다." />}
+          {errors.password && (
+            <ErrorText text="비밀번호는 8자리 이상, 16자 이하여야 합니다." />
+          )}
+          {errors.password && (
+            <ErrorText text="영문/숫자/특수문자(공백 제외)를 포함하여야 합니다." />
+          )}
+          <div className={classes.section2}>
+            <div className={classes.form_control}>
+              <Image src={user} width={25} alt="name" />
               <input
                 type="text"
                 placeholder="이름"
-                className={`${classes.input} ${classes.longInput}`}
+                className={classes.input}
                 name="nickname"
                 value={formData.nickname}
                 onChange={onChangeHandler}
               />
             </div>
-            {errors.nickname && <ErrorText text="이름을 입력해주세요." />}
-            <div className={classes.formControl}>
-              <IconBox img={phone} />
+            <div className={classes.form_control}>
+              <Image src={phone} width={25} alt="phone" />
               <input
                 placeholder="휴대폰 번호 입력"
                 className={classes.input}
@@ -213,11 +207,8 @@ function Join(): JSX.Element {
                 onChange={onChangeHandler}
               />
             </div>
-            {errors.phonenumber && (
-              <ErrorText text="올바른 휴대폰 번호를 입력해주세요." />
-            )}
-            <div className={classes.formControl}>
-              <IconBox img={calendar} />
+            <div className={classes.form_control}>
+              <Image src={calendar} width={25} alt="calendar" />
               <input
                 placeholder="생년월일 8자 입력"
                 className={classes.input}
@@ -226,10 +217,8 @@ function Join(): JSX.Element {
                 onChange={onChangeHandler}
               />
             </div>
-            {errors.birth && <ErrorText text="생년월일을 다시 확인해주세요." />}
-            {/* 성별은 선택사항 */}
-            <div className={classes.formControl}>
-              <IconBox img={genderImg} />
+            <div className={classes.form_control}>
+              <Image src={genderImg} width={25} alt="gender" />
               <select
                 className={classes.input}
                 value={formData.gender}
@@ -243,15 +232,19 @@ function Join(): JSX.Element {
                 <option value="F">여자</option>
               </select>
             </div>
-
-            <input
-              type="submit"
-              value="회원가입"
-              id={classes.submit}
-              onClick={joinHander}
-            />
-          </form>
-        </div>
+          </div>
+          {errors.nickname && <ErrorText text="이름을 입력해주세요." />}
+          {errors.phonenumber && (
+            <ErrorText text="올바른 휴대폰 번호를 입력해주세요." />
+          )}
+          {errors.birth && <ErrorText text="생년월일을 다시 확인해주세요." />}
+          <input
+            type="submit"
+            value="회원가입"
+            id={classes.submit}
+            onClick={joinHander}
+          />
+        </form>
         <CopyRight />
       </main>
     </>
