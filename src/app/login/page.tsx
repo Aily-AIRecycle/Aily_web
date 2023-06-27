@@ -1,6 +1,6 @@
 "use client";
-import classes from "./Login.module.css";
-import user from "img/join/user.svg";
+import classes from "./Login.module.scss";
+import emailImg from "img/join/email.svg";
 import lock from "img/join/lock.svg";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,10 +8,12 @@ import Copyright from "@/components/Copyright";
 import axios from "axios";
 import useInput from "@/hooks/use-input";
 import logo from "img/aily_logo.svg";
+import { useState } from "react";
 
 function Login() {
   const email = useInput("");
   const password = useInput("");
+  const [ischecked, setChecked] = useState(false);
 
   function loginHandler(event: any) {
     event.preventDefault();
@@ -30,8 +32,13 @@ function Login() {
         if (res.data.email === email.value) {
           if (res.data.password === "") {
             console.log("======================", "로그인 성공");
-            sessionStorage.setItem("user_email", email.value); // sessionStorage에 email를 user_email라는 key 값으로 저장
-            sessionStorage.setItem("name", res.data.nickname); // sessionStorage에 email를 user_email라는 key 값으로 저장
+            if (ischecked){
+              localStorage.setItem("user_email", email.value);
+              localStorage.setItem('name', res.data.nickname);
+            } else{
+              sessionStorage.setItem("user_email", email.value); // sessionStorage에 email를 user_email라는 key 값으로 저장
+              sessionStorage.setItem("name", res.data.nickname); // sessionStorage에 email를 user_email라는 key 값으로 저장
+            }
             document.location.href = "/";
           } else {
             console.log(
@@ -51,7 +58,10 @@ function Login() {
       .catch();
   }
 
-  return (
+  function checkClickHandler() {
+  setChecked(!ischecked)
+}  
+return (
     <>
       <main className={classes.main}>
         <Link href="/">
@@ -65,25 +75,33 @@ function Login() {
         </Link>
         <div className={classes.login}>
           <form className={classes.form}>
-            <div className={classes.div}>
-              <Image src={user} alt="id" className={classes.img} />
-              <input
-                className={classes.input}
-                type="id"
-                placeholder="이메일"
-                name="email"
-                {...email}
-              />
+            <div className={classes.form_list}>
+              <div className={classes.div}>
+                <Image src={emailImg} width={25} alt="id" />
+                <input
+                  className={classes.input}
+                  type="id"
+                  placeholder="이메일"
+                  name="email"
+                  {...email}
+                />
+              </div>
+              <div className={classes.div}>
+                <Image src={lock} width={25} alt="password" />
+                <input
+                  className={classes.input}
+                  type="password"
+                  placeholder="비밀번호"
+                  name="password"
+                  {...password}
+                />
+              </div>
             </div>
-            <div className={classes.div}>
-              <Image src={lock} alt="password" className={classes.img} />
-              <input
-                className={classes.input}
-                type="password"
-                placeholder="비밀번호"
-                name="password"
-                {...password}
-              />
+            <div className={classes.check_wrap}>
+              <input type='checkbox' id={classes.check_btn} checked={ischecked} />
+              <label htmlFor="check_btn" onClick={checkClickHandler}>
+                <span>로그인 상태 유지</span>
+              </label>
             </div>
             <input
               type="submit"
