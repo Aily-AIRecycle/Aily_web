@@ -7,7 +7,7 @@ import Image from "next/image";
 import Copyright from "@/components/Copyright";
 import axios from "axios";
 import useInput from "@/hooks/use-input";
-import logo from "img/aily_logo.svg";
+import logo from "img/join/aily_logo.svg";
 import { useState } from "react";
 
 function Login() {
@@ -67,8 +67,8 @@ return (
         <Link href="/">
           <Image
             src={logo}
-            width={100}
-            height={100}
+            // width={100}
+            // height={100}
             alt="logo"
             className={classes.logo}
           />
@@ -114,8 +114,8 @@ return (
             <div className={classes.find}>
               <Link href={"#"}>아이디 찾기</Link>
               <Link href={"#"}>비밀번호 찾기</Link>
-              <Link href="/join">회원가입</Link>
             </div>
+              <Link href="/join">회원가입</Link>
           </div>
         </div>
         <Copyright />
