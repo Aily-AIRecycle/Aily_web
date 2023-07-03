@@ -1,8 +1,7 @@
 "use client";
 import useWindowWidth from "@/hooks/use-windowWidth";
-import classes from "@/components/styles/BoardNavigation.module.css";
+import classes from "@/components/Board/styles/BoardNavigation.module.scss";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -14,12 +13,12 @@ function BoardNavigation() {
 
   const optionChangeHandler = (event: any) => {
     setSelectedOption(event.target.value);
-    // navigate(event.target.value);
     router.push(event.target.value);
   };
 
   let header;
-  if (windowWidth > 1000) {
+  if (windowWidth === null) {
+  } else if (windowWidth > 1000) {
     header = (
       <div className={classes.board_wrap}>
         <ul className={classes.board}>
@@ -58,7 +57,12 @@ function BoardNavigation() {
   }
   return (
     <>
-      {/*<div className={classes.board_title}>게시판</div>*/}
+      <div className={classes.board_title}>
+        <ul>
+          <li>AiLY의 모든 것</li>
+          <li>무엇이든 물어보세요</li>
+        </ul>
+      </div>
       <>{header}</>
     </>
   );

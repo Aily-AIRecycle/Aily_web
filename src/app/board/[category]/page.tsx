@@ -1,7 +1,7 @@
 "use client";
 import BoardFilter from "@/components/Board/BoardFilter";
-import classes from "@/pages/styles/Board.module.css";
-import BoardNavigation from "@/components/BoardNavigation";
+import classes from "@/app/board/[category]/Board.module.css";
+import BoardNavigation from "@/components/Board/BoardNavigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
