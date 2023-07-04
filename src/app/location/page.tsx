@@ -6,16 +6,16 @@ import { Provider } from "react-redux";
 import store from "@/store/index";
 import Header from "@/components/Header";
 
-function Location() {
+function Location(): JSX.Element {
   return (
     <>
       <Header />
-    <Provider store={store} >
-      <div className={classes.location}>
-      <LocationSearch />
-      <LocationMap />
-      </div>
-    </Provider>
+      <Provider store={store}>
+        <div className={classes.location}>
+          <LocationSearch />
+          <LocationMap />
+        </div>
+      </Provider>
     </>
   );
 }
