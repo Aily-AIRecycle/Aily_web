@@ -31,7 +31,7 @@ const markerSlice = createSlice({
         ],
       };
     },
-    clear(state) {
+    clear() {
       return { marker: [] };
     },
   },

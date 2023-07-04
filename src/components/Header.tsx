@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import classes from "@/components/styles/Header.module.scss";
 import HeaderList from "@/components/HeaderList";
 import useWindowWidth from "@/hooks/use-windowWidth";
@@ -9,7 +9,7 @@ import bars from "img/header/bars-solid.svg";
 import x from "img/header/x-solid.svg";
 import logo from "img/aily_logo.svg";
 
-function Header() {
+const Header = (): ReactElement | null => {
   const windowWidth = useWindowWidth();
   const [menuShow, setMenuShow] = useState<boolean>(false);
 
@@ -66,6 +66,6 @@ function Header() {
       </div>
     );
   }
-  return header;
+  return header || null;
 }
 export default Header;

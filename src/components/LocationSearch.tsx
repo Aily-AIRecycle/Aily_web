@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./LocationSearch.module.css";
 import { useEffect, useState } from "react";
-import { keywordActions } from "../store/keyword";
-import { resultActions } from "../store/result";
+import { keywordActions } from "@/store/keyword";
+import { resultActions } from "@/store/result";
 
 const LocationSearch = () => {
   const dispatch = useDispatch();
-  const markers = useSelector((state) => state.marker.marker);
-  const result = useSelector((state) => state.result.result);
+  const markers = useSelector((state: any) => state.marker.marker);
+  const result = useSelector((state: any) => state.result.result);
 
   const [inputKeyword, setKeyword] = useState("");
 
-  const keywordChangeHandler = (e) => {
+  const keywordChangeHandler = (e: any) => {
     setKeyword(e.target.value.trim());
   };
 
@@ -38,7 +38,7 @@ const LocationSearch = () => {
     console.log(markers);
   }, [markers]);
 
-  const submitHandler = (e) => {
+  const submitHandler = (e:any) => {
     e.preventDefault();
   };
 
@@ -60,7 +60,7 @@ const LocationSearch = () => {
       )}
       <ul className={classes.list}>
         {markers &&
-          markers.map((marker) => (
+          markers.map((marker: any) => (
             <li key={marker.id} className={classes.li}>
               <span className={classes.title}>{marker.title}</span>
               <span className={classes.address}>{marker.address}</span>

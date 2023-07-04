@@ -11,8 +11,8 @@ export default function LocationLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <Provider store={store}>{children}</Provider>
+    <><head></head>
+      <>{children}</>
     </>
   );
 }
