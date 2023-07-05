@@ -1,6 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialMarkerState = {
+interface Marker {}
+
+interface MarkerState {
+  marker: Marker[];
+}
+
+const initialMarkerState: MarkerState = {
   marker: [],
 };
 
@@ -8,27 +14,9 @@ const markerSlice = createSlice({
   name: "marker",
   initialState: initialMarkerState,
   reducers: {
-    markerClicked(state, action) {
+    markerList(state, action: PayloadAction<Location>) {
       return {
-        marker: [
-          {
-            id: action.payload.id,
-            title: action.payload.title,
-            address: action.payload.address,
-          },
-        ],
-      };
-    },
-    markerList(state, action) {
-      return {
-        marker: [
-          {
-            id: action.payload.id,
-            title: action.payload.title,
-            address: action.payload.address,
-          },
-          ...state.marker,
-        ],
+        marker: [action.payload, ...state.marker],
       };
     },
     clear() {

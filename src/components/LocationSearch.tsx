@@ -6,7 +6,7 @@ import { resultActions } from "@/store/result";
 
 const LocationSearch = () => {
   const dispatch = useDispatch();
-  const markers = useSelector((state: any) => state.marker.marker);
+  const locations = useSelector((state: any) => state.location.location);
   const result = useSelector((state: any) => state.result.result);
 
   const [inputKeyword, setKeyword] = useState("");
@@ -25,7 +25,7 @@ const LocationSearch = () => {
   }, [result]);
 
   const resultBlurHandler = () => {
-    markers.length
+    locations.length
       ? dispatch(resultActions.show())
       : dispatch(resultActions.hide());
   };
@@ -35,10 +35,10 @@ const LocationSearch = () => {
   }, [inputKeyword]);
 
   useEffect(() => {
-    console.log(markers);
-  }, [markers]);
+    console.log(locations);
+  }, [locations]);
 
-  const submitHandler = (e:any) => {
+  const submitHandler = (e: any) => {
     e.preventDefault();
   };
 
@@ -55,12 +55,12 @@ const LocationSearch = () => {
       </form>
       {result && (
         <div className={classes.result}>
-          <span>검색된 {markers.length}대의 Aily가 있습니다.</span>
+          <span>검색된 {locations.length}대의 Aily가 있습니다.</span>
         </div>
       )}
       <ul className={classes.list}>
-        {markers &&
-          markers.map((marker: any) => (
+        {locations &&
+          locations.map((marker: any) => (
             <li key={marker.id} className={classes.li}>
               <span className={classes.title}>{marker.title}</span>
               <span className={classes.address}>{marker.address}</span>

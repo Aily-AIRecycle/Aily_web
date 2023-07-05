@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import classes from "@/components/LocationMap.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { locationActions } from "@/store/location";
 import { markerActions } from "@/store/marker";
 import { resultActions } from "@/store/result";
 
@@ -9,6 +10,8 @@ declare global {
     kakao: any;
   }
 }
+
+let map: any;
 
 const markerPositions = [
   {
@@ -35,10 +38,9 @@ const markerPositions = [
 ];
 
 const LocationMap = () => {
-  const [latitude, setLatitude] = useState(37.500051267389296);
-  const [longitude, setLongitude] = useState(126.86798816343797);
   const dispatch = useDispatch();
   const keyword = useSelector((state: any) => state.keyword.keyword);
+  const markers = useSelector((state: any) => state.marker.marker);
   const [kakaoMapsLoaded, setKakaoMapsLoaded] = useState(false);
 
   const onLoadKakaoAPI = useCallback(() => {
@@ -47,6 +49,7 @@ const LocationMap = () => {
     });
   }, []);
 
+  // kakao API 불러오기
   useEffect(() => {
     const script = document.createElement("script");
     script.async = false;
@@ -60,14 +63,18 @@ const LocationMap = () => {
     };
   }, []);
 
+  // 지도 생성, 지도 컨트롤 생성
   useEffect(() => {
     if (kakaoMapsLoaded) {
       const container = document.getElementById("map");
       let options = {
-        center: new window.kakao.maps.LatLng(latitude, longitude),
-        level: 5,
+        center: new window.kakao.maps.LatLng(
+          37.500051267389296,
+          126.86798816343797
+        ),
+        level: 7,
       };
-      let map = new window.kakao.maps.Map(container, options);
+      map = new window.kakao.maps.Map(container, options);
 
       let mapTypeControl = new window.kakao.maps.MapTypeControl();
       let zoomControl = new window.kakao.maps.ZoomControl();
@@ -78,6 +85,20 @@ const LocationMap = () => {
       );
 
       map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
+    }
+  }, [kakaoMapsLoaded]);
+
+  useEffect(() => {
+    if (kakaoMapsLoaded) {
+      if (markers) {
+        markers.map((marker: any) => {
+          marker.setMap(null);
+          console.log(marker);
+        });
+      }
+
+      dispatch(markerActions.clear());
+      dispatch(locationActions.clear());
 
       markerPositions
         .filter(
@@ -85,49 +106,43 @@ const LocationMap = () => {
             data.title.includes(keyword) || data.address.includes(keyword)
         )
         .map((data) => {
+          if (keyword) {
+            dispatch(
+              locationActions.locationList({
+                id: data.id,
+                title: data.title,
+                address: data.address,
+              })
+            );
+          }
           const marker = new window.kakao.maps.Marker({
-            map: map,
             position: new window.kakao.maps.LatLng(data.lat, data.lng),
             title: data.title,
           });
 
           window.kakao.maps.event.addListener(marker, "click", () => {
             dispatch(
-              markerActions.markerClicked({
+              locationActions.locationClicked({
                 id: data.id,
                 title: data.title,
                 address: data.address,
               })
             );
             dispatch(resultActions.show());
-            setLatitude(data.lat);
-            setLongitude(data.lng);
+
+            // 마커를 중심으로 부드럽게 움직임
+            map.panTo(new window.kakao.maps.LatLng(data.lat, data.lng));
           });
+
+          // 마커 그리기
+          marker.setMap(map);
+          // 마커 추가
+          dispatch(markerActions.markerList(marker));
+
           return null;
         });
     }
-  }, [latitude, longitude, keyword, dispatch, kakaoMapsLoaded]);
-
-  useEffect(() => {
-    dispatch(markerActions.clear({}));
-    markerPositions
-      .filter(
-        (data) => data.title.includes(keyword) || data.address.includes(keyword)
-      )
-      .map((data) => {
-        keyword &&
-          dispatch(
-            markerActions.markerList({
-              id: data.id,
-              title: data.title,
-              address: data.address,
-            })
-          );
-        setLatitude(data.lat);
-        setLongitude(data.lng);
-        return null;
-      });
-  }, [keyword, dispatch]);
+  }, [keyword, kakaoMapsLoaded, dispatch]);
 
   return <div id="map" className={classes.map}></div>;
 };
