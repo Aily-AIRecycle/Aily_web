@@ -14,8 +14,8 @@ import eyeOn from "img/join/eye-on.svg";
 import eyeOff from "img/join/eye-off.svg";
 import { useEffect, useState } from "react";
 import logo from "img/aily_logo.svg";
-import ErrorText from "../../components/UI/ErrorText";
-import useFormValidation from "../../hooks/use-formValidation";
+import ErrorText from "@/components/UI/ErrorText";
+import useFormValidation from "@/hooks/use-formValidation";
 import axios from "axios";
 import Image from "next/image";
 
@@ -50,18 +50,7 @@ function Join(): JSX.Element {
   const [formData, errors, onChangeHandler]: any =
     useFormValidation(validationRules);
 
-  // 값 변화에 따라 콘솔에 출력
   useEffect(() => {
-    console.log(formData);
-    console.log(errors);
-  }, [formData, errors]);
-
-  useEffect(() => {
-    console.log(authNumber);
-  }, [authNumber]);
-
-  useEffect(() => {
-    console.log("받아온 값과 입력 값: ", resAuthNumber, authNumber);
     if (resAuthNumber === "") {
       setAuthError(false);
     } else if (resAuthNumber === authNumber) {
@@ -78,16 +67,20 @@ function Join(): JSX.Element {
   function joinHander(event: any) {
     event.preventDefault();
     if (
-      !errors.email ||
-      !errors.password ||
-      !errors.birth ||
-      !errors.nickname ||
-      !errors.gender ||
-      !errors.phonenumber ||
-      !authError
+      !errors.email &&
+      !errors.password &&
+      !errors.birth &&
+      !errors.nickname &&
+      !errors.gender &&
+      !errors.phonenumber &&
+      !authError &&
+      formData.email &&
+      formData.password &&
+      formData.nickname &&
+      formData.birth &&
+      formData.gender &&
+      formData.phonenumber
     ) {
-      alert("입력 정보를 다시 확인해주세요.");
-    } else {
       axios
         .post("member/member/join", {
           email: formData.email,
@@ -102,6 +95,8 @@ function Join(): JSX.Element {
           document.location.href = "/";
         })
         .catch();
+    } else {
+      alert("입력 정보를 다시 확인해주세요.");
     }
   }
 
@@ -111,14 +106,11 @@ function Join(): JSX.Element {
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {
-          console.log(res.data);
           axios
             .post("member/member/auth-email", {
               email: formData.email,
             })
             .then((res) => {
-              console.log(res);
-              console.log(res.data);
               setResAuthNumber(res.data.toString());
             })
             .catch();
