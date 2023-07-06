@@ -1,7 +1,7 @@
 "use client";
 import { ReactElement, useState } from "react";
-import classes from "@/components/styles/Header.module.scss";
-import HeaderList from "@/components/HeaderList";
+import classes from "@/components/UI/styles/Header.module.scss";
+import HeaderList from "@/components/UI/HeaderList";
 import useWindowWidth from "@/hooks/use-windowWidth";
 import Link from "next/link";
 import Image from "next/image";
@@ -67,5 +67,5 @@ const Header = (): ReactElement | null => {
     );
   }
   return header || null;
-}
+};
 export default Header;

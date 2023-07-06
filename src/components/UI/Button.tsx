@@ -1,4 +1,4 @@
-import classes from "@/components/UI/styles/Button.module.css";
+import classes from "@/components/UI/styles/Button.module.scss";
 
 function Button(props: any) {
   return (

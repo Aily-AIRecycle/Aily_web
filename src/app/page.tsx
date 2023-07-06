@@ -4,9 +4,9 @@ import Section2 from "@/components/HomePage/Section2";
 import Section3 from "@/components/HomePage/Section3";
 import Section4 from "@/components/HomePage/Section4";
 import Section5 from "@/components/HomePage/Section5";
-import classes from "@/app/Homepage.module.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import classes from "@/app/Homepage.module.scss";
+import Header from "@/components/UI/Header";
+import Footer from "@/components/UI/Footer";
 
 export default function Home() {
   return (

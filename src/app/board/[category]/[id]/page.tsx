@@ -1,11 +1,10 @@
 "use client";
-import React from "react";
 import Link from "next/link";
-import classes from "@/components/Board/styles/BoardContent.module.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import ARTICLE_DATA from "@/components/Board/article";
+import classes from "@/app/board/[category]/[id]/BoardContent.module.scss";
+import Header from "@/components/UI/Header";
+import Footer from "@/components/UI/Footer";
 import BoardNavigation from "@/components/Board/BoardNavigation";
+import ARTICLE_DATA from "@/components/Board/article";
 
 function Page({ params }: { params: { id: string } }): JSX.Element {
   const article = ARTICLE_DATA.filter(

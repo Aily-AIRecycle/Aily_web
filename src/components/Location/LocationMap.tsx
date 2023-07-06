@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import classes from "@/components/LocationMap.module.css";
+import classes from "@/components/Location/styles/LocationMap.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { locationActions } from "@/store/location";
 import { markerActions } from "@/store/marker";

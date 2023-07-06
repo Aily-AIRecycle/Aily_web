@@ -1,6 +1,6 @@
 "use client";
 import classes from "./Join.module.scss";
-import CopyRight from "../../components/Copyright";
+import CopyRight from "../../components/UI/Copyright";
 import Link from "next/link";
 import lock from "img/join/lock.svg";
 import user from "img/join/user.svg";

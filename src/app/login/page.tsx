@@ -4,7 +4,7 @@ import emailImg from "img/join/email.svg";
 import lock from "img/join/lock.svg";
 import Link from "next/link";
 import Image from "next/image";
-import Copyright from "@/components/Copyright";
+import Copyright from "@/components/UI/Copyright";
 import axios from "axios";
 import useInput from "@/hooks/use-input";
 import logo from "img/join/aily_logo.svg";
@@ -32,12 +32,14 @@ function Login() {
         if (res.data.email === email.value) {
           if (res.data.password === "") {
             console.log("======================", "로그인 성공");
-            if (ischecked){
+            if (ischecked) {
               localStorage.setItem("user_email", email.value);
-              localStorage.setItem('name', res.data.nickname);
-            } else{
-              sessionStorage.setItem("user_email", email.value); // sessionStorage에 email를 user_email라는 key 값으로 저장
-              sessionStorage.setItem("name", res.data.nickname); // sessionStorage에 email를 user_email라는 key 값으로 저장
+              localStorage.setItem("name", res.data.nickname);
+              localStorage.setItem("phone_number", res.data.phonenumber);
+            } else {
+              sessionStorage.setItem("user_email", email.value);
+              sessionStorage.setItem("name", res.data.nickname);
+              localStorage.setItem("phone_number", res.data.phonenumber);
             }
             document.location.href = "/";
           } else {
@@ -59,9 +61,9 @@ function Login() {
   }
 
   function checkClickHandler() {
-  setChecked(!ischecked)
-}  
-return (
+    setChecked(!ischecked);
+  }
+  return (
     <>
       <main className={classes.main}>
         <Link href="/">
@@ -98,7 +100,11 @@ return (
               </div>
             </div>
             <div className={classes.check_wrap}>
-              <input type='checkbox' id={classes.check_btn} checked={ischecked} />
+              <input
+                type="checkbox"
+                id={classes.check_btn}
+                checked={ischecked}
+              />
               <label htmlFor="check_btn" onClick={checkClickHandler}>
                 <span>로그인 상태 유지</span>
               </label>
@@ -115,7 +121,7 @@ return (
               <Link href={"#"}>아이디 찾기</Link>
               <Link href={"#"}>비밀번호 찾기</Link>
             </div>
-              <Link href="/join">회원가입</Link>
+            <Link href="/join">회원가입</Link>
           </div>
         </div>
         <Copyright />

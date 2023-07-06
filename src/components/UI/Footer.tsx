@@ -1,5 +1,5 @@
 "use client";
-import classes from "@/components/styles/Footer.module.scss";
+import classes from "@/components/UI/styles/Footer.module.scss";
 import logo from "img/footer_logo.svg";
 import github from "img/github.svg";
 import Image from "next/image";

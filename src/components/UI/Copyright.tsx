@@ -1,4 +1,4 @@
-import classes from "@/components/styles/Copyright.module.css";
+import classes from "@/components/UI/styles/Copyright.module.scss";
 import miniLogo from "img/mini_logo.svg";
 import Image from "next/image";
 

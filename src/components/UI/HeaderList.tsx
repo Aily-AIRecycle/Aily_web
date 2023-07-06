@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 function HeaderList(props: any) {
+  // const;
   return (
     <ul className={props.ul}>
       <li className={props.li}>

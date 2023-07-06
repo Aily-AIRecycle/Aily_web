@@ -1,9 +1,9 @@
 "use client";
 import BoardFilter from "@/components/Board/BoardFilter";
-import classes from "@/app/board/[category]/Board.module.css";
+import classes from "@/app/board/[category]/Board.module.scss";
 import BoardNavigation from "@/components/Board/BoardNavigation";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/UI/Header";
+import Footer from "@/components/UI/Footer";
 import { Provider } from "react-redux";
 import store from "@/store";
 

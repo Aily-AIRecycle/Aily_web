@@ -1,4 +1,4 @@
-import classes from "@/components/Board/styles/BoardTitle.module.css";
+import classes from "@/components/Board/styles/BoardTitle.module.scss";
 import Link from "next/link";
 
 function BoardTitle(props: any) {

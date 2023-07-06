@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import classes from "./LocationSearch.module.css";
+import classes from "@/components/Location/styles/LocationSearch.module.scss";
 import { useEffect, useState } from "react";
 import { keywordActions } from "@/store/keyword";
 import { resultActions } from "@/store/result";
