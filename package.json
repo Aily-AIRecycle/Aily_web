@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://aliy.store:8072/member",
   "dependencies": {
+    "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^1.9.5",
     "@remix-run/router": "^1.7.1",
     "@testing-library/jest-dom": "^5.16.5",
