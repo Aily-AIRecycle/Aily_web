@@ -13,7 +13,7 @@ import Button from "../../components/UI/Button";
 import eyeOn from "img/join/eye-on.svg";
 import eyeOff from "img/join/eye-off.svg";
 import { useEffect, useState } from "react";
-import logo from "img/aily_logo.svg";
+import logo from "img/join/aily_logo.svg";
 import ErrorText from "@/components/UI/ErrorText";
 import useFormValidation from "@/hooks/use-formValidation";
 import axios from "axios";
@@ -167,16 +167,17 @@ function Join(): JSX.Element {
               />
             </div>
           </div>
-          {errors.email && (
-            <ErrorText text="올바른 이메일 형식을 입력해주세요." />
-          )}
-          {authError && <ErrorText text="인증번호가 일치하지 않습니다." />}
-          {errors.password && (
-            <ErrorText text="비밀번호는 8자리 이상, 16자 이하여야 합니다." />
-          )}
-          {errors.password && (
-            <ErrorText text="영문/숫자/특수문자(공백 제외)를 포함하여야 합니다." />
-          )}
+          <div className={classes.error_area1}>
+            {errors.email && (
+              <ErrorText text="· 이메일: 올바른 이메일 형식을 입력해주세요." />
+            )}
+            {authError && (
+              <ErrorText text="· 인증번호: 인증번호가 일치하지 않습니다." />
+            )}
+            {errors.password && (
+              <ErrorText text="· 비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요." />
+            )}
+          </div>
           <div className={classes.section2}>
             <div className={classes.form_control}>
               <Image src={user} width={25} alt="name" />
@@ -192,7 +193,7 @@ function Join(): JSX.Element {
             <div className={classes.form_control}>
               <Image src={phone} width={25} alt="phone" />
               <input
-                placeholder="휴대폰 번호 입력"
+                placeholder="휴대폰 번호"
                 className={classes.input}
                 name="phonenumber"
                 value={formData.phonenumber}
@@ -202,7 +203,7 @@ function Join(): JSX.Element {
             <div className={classes.form_control}>
               <Image src={calendar} width={25} alt="calendar" />
               <input
-                placeholder="생년월일 8자 입력"
+                placeholder="생년월일 8자"
                 className={classes.input}
                 name="birth"
                 value={formData.birth}
@@ -225,11 +226,17 @@ function Join(): JSX.Element {
               </select>
             </div>
           </div>
-          {errors.nickname && <ErrorText text="이름을 입력해주세요." />}
-          {errors.phonenumber && (
-            <ErrorText text="올바른 휴대폰 번호를 입력해주세요." />
-          )}
-          {errors.birth && <ErrorText text="생년월일을 다시 확인해주세요." />}
+          <div className={classes.error_area2}>
+            {errors.nickname && (
+              <ErrorText text="· 이름: 이름을 입력해주세요." />
+            )}
+            {errors.phonenumber && (
+              <ErrorText text="· 전화번호: 올바른 전화번호를 입력해주세요." />
+            )}
+            {errors.birth && (
+              <ErrorText text="· 생년월일: 생년월일을 다시 확인해주세요." />
+            )}
+          </div>
           <input
             type="submit"
             value="회원가입"
