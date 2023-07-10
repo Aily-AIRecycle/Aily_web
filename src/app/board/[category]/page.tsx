@@ -22,7 +22,6 @@ function Page({ params }: { params: { category: string } }) {
             <div className={classes.date}>작성일</div>
           </div>
           <ul className={classes.list}>
-            {/* <BoardFilter boardName={params.category} data={DUMMY_DATA} /> */}
             <BoardFilter boardName={params.category} />
           </ul>
         </div>
