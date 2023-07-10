@@ -3,13 +3,22 @@ import useWindowWidth from "@/hooks/use-windowWidth";
 import classes from "@/components/Board/styles/BoardNavigation.module.scss";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+
+const menuData = [
+  { name: "전체", path: "all" },
+  { name: "공지사항", path: "notice" },
+  { name: "Q&A", path: "q&a" },
+  { name: "FAQ", path: "faq" },
+  { name: "건의사항", path: "suggestion" },
+];
 
 function BoardNavigation() {
   const windowWidth = useWindowWidth();
 
   const [selectedOption, setSelectedOption] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
 
   const optionChangeHandler = (event: any) => {
     setSelectedOption(event.target.value);
@@ -22,21 +31,15 @@ function BoardNavigation() {
     header = (
       <div className={classes.board_wrap}>
         <ul className={classes.board}>
-          <li className={classes.menu}>
-            <Link href="/board/all">전체</Link>
-          </li>
-          <li className={classes.menu}>
-            <Link href="/board/notice">공지</Link>
-          </li>
-          <li className={classes.menu}>
-            <Link href="/board/q&a">Q&A</Link>
-          </li>
-          <li className={classes.menu}>
-            <Link href="/board/faq">FAQ</Link>
-          </li>
-          <li className={classes.menu}>
-            <Link href="/board/suggestion">건의사항</Link>
-          </li>
+          {menuData.map((menu) => (
+            <li
+              className={`${classes.menu} ${
+                pathname === `/board/${menu.path}` ? classes.active : ""
+              }`}
+            >
+              <Link href={`/board/${menu.path}`}>{menu.name}</Link>
+            </li>
+          ))}
         </ul>
       </div>
     );
@@ -47,11 +50,9 @@ function BoardNavigation() {
         onChange={optionChangeHandler}
         className={classes.select}
       >
-        <option value="/board/all">전체</option>
-        <option value="/board/notice">공지 </option>
-        <option value="/board/q&a">Q&A</option>
-        <option value="/board/faq">FAQ</option>
-        <option value="/board/suggestion">건의사항</option>
+        {menuData.map((menu) => (
+          <option value={`/board/${menu.path}`}>{menu.name}</option>
+        ))}
       </select>
     );
   }
