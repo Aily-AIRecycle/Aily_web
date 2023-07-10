@@ -1,4 +1,14 @@
-const ARTICLE_DATA = [
+export type Article = {
+  id: string;
+  category: string;
+  category_id: number;
+  title: string;
+  writer: string;
+  content: string;
+  date: string;
+};
+
+const ARTICLE_DATA: Article[] = [
   {
     id: "1",
     category: "공지",
