@@ -1,34 +1,25 @@
-import useIntersectionObserver from '@/hooks/user-intersectionObserver';
-import { useInView, useSpring, animated } from '@react-spring/web';
-import { useRef } from 'react';
+import { useInView, useSpring, animated, to } from '@react-spring/web';
 
 function Section2()
 {
-  const triggerRef = useRef<HTMLDivElement | null>(null);;
-  const dataRef = useIntersectionObserver(triggerRef, {
-    freezeOnceVisible: true
-  });
-  const [ref1, arrowtop] = useInView(() => ({
+  const [ref, inView] = useInView();
+  const arrowtop = useSpring({
     from: { x: "-50px" },
-    to: { x: dataRef?.isIntersecting ? "0px" : "0px" },
-  }))
-  const [ref2, arrowbottom] = useInView(() => ({
+    to: { x: inView ? "0px" : "-50px" },
+    delay: 200
+  });
+
+  const arrowbottom = useSpring({
     from: { x: "50px" },
-    to: { x: dataRef?.isIntersecting ? "0px" : "0px" },
-  }))
-  const [refqr, qrphone] = useInView(() => ({
-    config: {
-      duration: 4000,
-    },
+    to: { x: inView ? "0px" : "50px" },
+    delay: 200
+  });
+
+  const fadeIn = useSpring({
     from: { opacity: 0 },
-    to: { opacity: 1 },
-  }))
-  const [refai, AiLYre] = useInView(() => ({
-    config: {
-      duration: 4000,
-    }, from: { opacity: 0 },
-    to: { opacity: 1 },
-  }))
+    to: { opacity: inView ? 1 : 0 },
+    delay: 800,
+  });
 
   return (
     <div className="w-screen aspect-[16/10]">
@@ -39,14 +30,34 @@ function Section2()
         </h2>
       </div>
       <div className="items-center place-content-center w-screen flex aspect-[18/1] mb-[13.4vh] mq:mb-[6vh]">
-        <animated.img ref={refqr} style={qrphone} src="img/main/qrphone.png" alt="qrPhone" className="w-[18vw] mq:w-[25vw]" />
+        <animated.img
+          style={{ ...fadeIn }}
+          src="img/main/qrphone.png"
+          alt="qrPhone"
+          className="w-[18vw] mq:w-[25vw]"
+        />
         <div className="w-[8.9vw] mq:w-[15vw] ml-[7.3vw] mr-[7.3vw]">
-          <animated.img ref={ref1} style={arrowtop} src="img/main/arrowtop.png" alt="arrowtop" />
-          <animated.img ref={ref2} style={arrowbottom} src="img/main/arrowbottom.png" alt="arrowbottom" />
+          <animated.img
+            ref={ref}
+            style={{ ...arrowtop }}
+            src="img/main/arrowtop.png"
+            alt="arrowtop"
+          />
+          <animated.img
+            ref={ref}
+            style={{ ...arrowbottom }}
+            src="img/main/arrowbottom.png"
+            alt="arrowbottom"
+          />
         </div>
-        <animated.img ref={refai} style={AiLYre} src="img/main/AiLYre.png" alt="aily" className="w-[23vw] mq:w-[30vw]" />
+        <animated.img
+          ref={ref}
+          style={{ ...fadeIn }}
+          src="img/main/AiLYre.png"
+          alt="aily"
+          className="w-[23vw] mq:w-[30vw]"
+        />
       </div>
-      <div ref={triggerRef} />
     </div>
   );
 }
