@@ -5,10 +5,11 @@ import Header from "@/components/UI/Header";
 import Footer from "@/components/UI/Footer";
 import BoardNavigation from "@/components/Board/BoardNavigation";
 import ARTICLE_DATA from "@/components/Board/article";
+import { Article } from "@/components/Board/article";
 
 function Page({ params }: { params: { id: string } }): JSX.Element {
   const article = ARTICLE_DATA.filter(
-    (article: any) => article.id === params.id
+    (article: Article) => article.id === params.id
   )[0];
   return (
     <>
