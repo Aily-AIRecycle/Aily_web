@@ -1,0 +1,23 @@
+.history {
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.date {
+  color: #67616a;
+  padding-left: 12px;
+}
+.datetime {
+  color: #67616a;
+}
+.point {
+  color: #ff895a;
+}
