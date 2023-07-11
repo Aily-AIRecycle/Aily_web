@@ -1,9 +1,6 @@
 "use client";
 import Link from "next/link";
 import classes from "@/app/board/[category]/[id]/BoardContent.module.scss";
-import Header from "@/components/UI/Header";
-import Footer from "@/components/UI/Footer";
-import BoardNavigation from "@/components/Board/BoardNavigation";
 import ARTICLE_DATA from "@/components/Board/article";
 import { Article } from "@/components/Board/article";
 
@@ -13,8 +10,6 @@ function Page({ params }: { params: { id: string } }): JSX.Element {
   )[0];
   return (
     <>
-      <Header />
-      <BoardNavigation />
       <div className={classes.board}>
         <div className={classes.title}>
           {article.title}
@@ -32,7 +27,6 @@ function Page({ params }: { params: { id: string } }): JSX.Element {
           목록보기
         </Link>
       </div>
-      <Footer />
     </>
   );
 }

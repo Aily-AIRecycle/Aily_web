@@ -1,18 +1,13 @@
 "use client";
 import BoardFilter from "@/components/Board/BoardFilter";
 import classes from "@/app/board/[category]/Board.module.scss";
-import BoardNavigation from "@/components/Board/BoardNavigation";
-import Header from "@/components/UI/Header";
-import Footer from "@/components/UI/Footer";
 import { Provider } from "react-redux";
 import store from "@/store";
 
 function Page({ params }: { params: { category: string } }) {
   return (
     <>
-      <Header />
       <Provider store={store}>
-        <BoardNavigation />
         <div className={classes.board}>
           <div className={classes.boardHead}>
             <div className={classes.id}>No</div>
@@ -26,7 +21,6 @@ function Page({ params }: { params: { category: string } }) {
           </ul>
         </div>
       </Provider>
-      <Footer />
     </>
   );
 }
