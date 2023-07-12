@@ -1,0 +1,19 @@
+.box {
+  box-shadow: 0px 4px 12px 0px rgba(28, 64, 97, 0.06),
+    0px 12px 36px 0px rgba(51, 82, 100, 0.1);
+  border-radius: 20px;
+}
+.date {
+  display: flex;
+  padding-top: 20px;
+  padding-left: 20px;
+  p {
+    font-size: 20px;
+    padding-left: 10px;
+  }
+}
+.chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

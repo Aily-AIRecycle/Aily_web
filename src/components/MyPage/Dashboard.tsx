@@ -1,5 +1,6 @@
 "use client";
 
+import Chart from "./Chart";
 import Point from "./Point";
 import PointHistory from "./PointHistory";
 import classes from "@/components/MyPage/styles/Dashboard.module.scss";
@@ -13,6 +14,7 @@ export default function Dashboard() {
           <Point />
           <PointHistory />
         </div>
+        <Chart />
       </div>
     </>
   );
