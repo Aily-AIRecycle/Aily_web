@@ -1,6 +1,10 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
+
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 interface TotalDonutChartProps {}
 
@@ -65,6 +69,7 @@ const TotalDonutChart: React.FC<TotalDonutChartProps> = () => {
         return number.toFixed() + "% " + val;
       },
       fontFamily: "Pretendard",
+      customLegendItems: [],
     },
     responsive: [
       {
@@ -81,26 +86,23 @@ const TotalDonutChart: React.FC<TotalDonutChartProps> = () => {
     ],
   };
 
+  const [isBrowser, setIsBrowser] = useState(false);
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+
+  if (!isBrowser) {
+    return null;
+  }
+
   return (
     <div id="chart">
-      <style>{`
-    .donut-value {
-      font-size: 16px;
-      font-family: Pretendard;
-      font-weight: 600;
-    }
-
-    .donut-total {
-      font-size: 40px;
-      font-family: Pretendard;
-      font-weight: 600;
-    }
-  `}</style>
       <ReactApexChart
         options={options}
         series={series}
         type="donut"
         width={400}
+        height={350}
       />
     </div>
   );
