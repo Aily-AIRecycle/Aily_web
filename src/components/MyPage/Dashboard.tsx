@@ -1,8 +1,8 @@
 "use client";
 
-import Chart from "./Chart";
-import Point from "./Point";
-import PointHistory from "./PointHistory";
+import Chart from "@/components/MyPage/Chart";
+import Point from "@/components/MyPage/Point";
+import PointHistory from "@/components/MyPage/PointHistory";
 import classes from "@/components/MyPage/styles/Dashboard.module.scss";
 
 export default function Dashboard() {
