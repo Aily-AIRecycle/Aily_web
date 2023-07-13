@@ -26,8 +26,9 @@ export default function MyPageNavigation() {
           <p>홍길동 님</p>
         </div>
         <ul className={classes.my_page}>
-          {menuData.map((menu) => (
+          {menuData.map((menu, index: number) => (
             <li
+              key={index}
               className={`${classes.menu} ${
                 pathname === `/my-page/${menu.path}` ? classes.menu_active : ""
               }`}

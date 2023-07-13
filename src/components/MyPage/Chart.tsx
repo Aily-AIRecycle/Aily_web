@@ -1,7 +1,7 @@
 "use client";
 
-import ColumnChart from "./ColumnChart";
-import TotalDonutChart from "./TotalDonutChart";
+import ColumnChart from "@/components/MyPage/ColumnChart";
+import TotalDonutChart from "@/components/MyPage/TotalDonutChart";
 import classes from "@/components/MyPage/styles/Chart.module.scss";
 
 export default function Chart() {

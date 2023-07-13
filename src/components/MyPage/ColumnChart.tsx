@@ -1,6 +1,10 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
+
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 const ColumnChart: React.FC = () => {
   const series = [
@@ -95,6 +99,15 @@ const ColumnChart: React.FC = () => {
       },
     },
   };
+
+  const [isBrowser, setIsBrowser] = useState(false);
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+
+  if (!isBrowser) {
+    return null;
+  }
 
   return (
     <div id="chart">

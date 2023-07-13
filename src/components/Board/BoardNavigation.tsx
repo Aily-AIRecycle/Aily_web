@@ -31,8 +31,9 @@ function BoardNavigation() {
     header = (
       <div className={classes.board_wrap}>
         <ul className={classes.board}>
-          {menuData.map((menu) => (
+          {menuData.map((menu, index) => (
             <li
+              key={index}
               className={`${classes.menu} ${
                 pathname === `/board/${menu.path}` ? classes.active : ""
               }`}
@@ -50,8 +51,10 @@ function BoardNavigation() {
         onChange={optionChangeHandler}
         className={classes.select}
       >
-        {menuData.map((menu) => (
-          <option value={`/board/${menu.path}`}>{menu.name}</option>
+        {menuData.map((menu, index) => (
+          <option key={index} value={`/board/${menu.path}`}>
+            {menu.name}
+          </option>
         ))}
       </select>
     );
