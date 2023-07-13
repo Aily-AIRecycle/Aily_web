@@ -49,7 +49,7 @@ function Section3()
     <div className="bg-[#FFE8DF] w-screen text-center aspect-[16/10]">
       <div className=" mt-[13.8vh] mq:mt-[8vh] mq:mb-[8vh]">
         <h1 className="text-5xl mb-[2.8vh] font-semibold mq:text-3xl">포인트 제도</h1>
-        <h2 className="text-2xl mq:text-sm font-light text-[#726969] mb-[6.5vh] mq:text-lg">분리수거할 때 적립되는 포인트는 현금처럼 사용이 가능합니다.</h2>
+        <h2 className="text-2xl mq:text-sm font-light text-[#726969] mb-[6.5vh]">분리수거할 때 적립되는 포인트는 현금처럼 사용이 가능합니다.</h2>
         <div ref={ref} className="relative grid place-items-center">
           <animated.img style={bill} src="img/main/money_bill.svg" alt="bill" className="absolute start-px top-0 w-[12.5vw] ml-[13vw] mt-[-5.5vh] mq:mt-[-2.75vh]" />
           <animated.img style={coin} src="img/main/coin.svg" alt="coin" className="absolute w-[8.8vw] start-px mt-[36vh] mq:mt-[18vh] ml-[21vw]" />
