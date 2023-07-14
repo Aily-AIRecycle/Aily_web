@@ -23,7 +23,8 @@ export default function MyPageNavigation() {
   }, []);
 
   return (
-    <div>
+
+    <div className={classes.box}>
       <div className={classes.profile}>
         <div>
           <Image src={aily} width={100} alt="profile_img" />
