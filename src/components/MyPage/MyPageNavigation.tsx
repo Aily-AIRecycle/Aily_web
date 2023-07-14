@@ -17,27 +17,25 @@ export default function MyPageNavigation() {
   const pathname = usePathname();
   console.log(pathname);
   return (
-    <>
-      <div>
-        <div className={classes.profile}>
-          <div>
-            <Image src={aily} width={100} alt="profile_img" />
-          </div>
-          <p>홍길동 님</p>
+    <div className={classes.box}>
+      <div className={classes.profile}>
+        <div>
+          <Image src={aily} width={100} alt="profile_img" />
         </div>
-        <ul className={classes.my_page}>
-          {menuData.map((menu, index: number) => (
-            <li
-              key={index}
-              className={`${classes.menu} ${
-                pathname === `/my-page/${menu.path}` ? classes.menu_active : ""
-              }`}
-            >
-              <Link href={`/my-page/${menu.path}`}>{menu.name}</Link>
-            </li>
-          ))}
-        </ul>
+        <p>홍길동 님</p>
       </div>
-    </>
+      <ul className={classes.my_page}>
+        {menuData.map((menu, index: number) => (
+          <li
+            key={index}
+            className={`${classes.menu} ${
+              pathname === `/my-page/${menu.path}` ? classes.menu_active : ""
+            }`}
+          >
+            <Link href={`/my-page/${menu.path}`}>{menu.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
