@@ -8,15 +8,13 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 });
 
 const ColumnChart: React.FC = () => {
-  
   const [series, setSeries] = useState<{ name: string; data: number[] }[]>([
     {
       name: "적립내역",
       data: [],
     },
   ]);
-  
-  
+
   useEffect(() => {
     axios
       .post("/member/member/historypax", {
@@ -40,7 +38,7 @@ const ColumnChart: React.FC = () => {
         console.error(error);
       });
   }, []);
-  
+
   const options: ApexOptions = {
     chart: {
       height: 350,

@@ -15,7 +15,9 @@ const TotalDonutChart: React.FC<TotalDonutChartProps> = () => {
   useEffect(() => {
     axios
       .post("/member/member/usertotalDonut", {
-        phonenumber: sessionStorage.getItem("phone_number"),
+        phonenumber:
+          sessionStorage.getItem("phone_number") ||
+          localStorage.getItem("phone_number"),
       })
       .then((response) => {
         const data = response.data[0];
@@ -25,15 +27,13 @@ const TotalDonutChart: React.FC<TotalDonutChartProps> = () => {
             newSeries.push(data[key]);
           }
         }
-        console.log(newSeries)
+        console.log(newSeries);
         setSeries(newSeries);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
-  
-
 
   const options: ApexOptions = {
     chart: {

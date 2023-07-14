@@ -6,52 +6,47 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Point() {
-
   interface Data {
     GEN: number;
     CAN: number;
     profile: string;
     phonenumber: string;
-    nickname : string;
+    nickname: string;
     point: number;
     PET: number;
   }
-  
-  const [name2, setName2] = useState<string | null>(null);
+
+  const [userName, setUserName] = useState<string | null>(null);
   const [data, setData] = useState<Data | null>(null);
 
   useEffect(() => {
-    const name = sessionStorage.getItem('name');
-    setName2(name);
+    const name = sessionStorage.getItem("name") || localStorage.getItem("name");
+    setUserName(name);
   }, []);
 
   useEffect(() => {
-    axios.post("/member/member/mypage", {
-      nickname: sessionStorage.getItem('name')
-    })
-      .then(response => {
+    axios
+      .post("/member/member/mypage", {
+        nickname:
+          sessionStorage.getItem("name") || localStorage.getItem("name"),
+      })
+      .then((response) => {
         // Handle the POST request response
         setData(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle the POST request error
         console.error(error);
       });
   }, []);
-  
+
   return (
-    <>
-    {data && (
-      <>
-      <div className={classes.box}>
-        <div>
-          <Image src={wallet} alt="wallet" width={36} />
-          <p>{name2}님의 포인트</p>
-        </div>
-        <p className={classes.point}>{data.point}P</p>
+    <div className={classes.box}>
+      <div>
+        <Image src={wallet} alt="wallet" width={36} />
+        <p>{userName}님의 포인트</p>
       </div>
-      </>
-    )}
-    </>
+      {data && <p className={classes.point}>{data.point}P</p>}
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import classes from "@/components/MyPage/styles/AccumulationHistory.module.scss"
 
 export default function AccumulationHistory(props: any) {
   const { history } = props;
-  const {time,day, gen, pet, can, point } = history;
+  const { time, day, gen, pet, can, point } = history;
 
   return (
     <div>

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import classes from "@/components/MyPage/styles/MyPageNavigation.module.scss";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import aily from "img/aily_logo.svg";
 
@@ -14,36 +14,34 @@ const menuData = [
 ];
 
 export default function MyPageNavigation() {
-  const [name2, setName2] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+  const pathname = usePathname();
+
   useEffect(() => {
-    const name = sessionStorage.getItem('name');
-    setName2(name);
+    const name = sessionStorage.getItem("name") || localStorage.getItem("name");
+    setUserName(name);
   }, []);
 
-  const pathname = usePathname();
-  console.log(pathname);
   return (
-    <>
-      <div>
-        <div className={classes.profile}>
-          <div>
-            <Image src={aily} width={100} alt="profile_img" />
-          </div>
-          <p>{name2}</p>
+    <div>
+      <div className={classes.profile}>
+        <div>
+          <Image src={aily} width={100} alt="profile_img" />
         </div>
-        <ul className={classes.my_page}>
-          {menuData.map((menu, index: number) => (
-            <li
-              key={index}
-              className={`${classes.menu} ${
-                pathname === `/my-page/${menu.path}` ? classes.menu_active : ""
-              }`}
-            >
-              <Link href={`/my-page/${menu.path}`}>{menu.name}</Link>
-            </li>
-          ))}
-        </ul>
+        <p>{userName}</p>
       </div>
-    </>
+      <ul className={classes.my_page}>
+        {menuData.map((menu, index: number) => (
+          <li
+            key={index}
+            className={`${classes.menu} ${
+              pathname === `/my-page/${menu.path}` ? classes.menu_active : ""
+            }`}
+          >
+            <Link href={`/my-page/${menu.path}`}>{menu.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
