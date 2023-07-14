@@ -1,18 +1,43 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
+import axios from "axios";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
 const ColumnChart: React.FC = () => {
-  const series = [
+  const [series, setSeries] = useState<{ name: string; data: number[] }[]>([
     {
       name: "적립내역",
-      data: [19, 32, 24, 5, 13, 21, 7, 10, 25, 21, 13, 8],
+      data: [],
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    axios
+      .post("/member/member/historypax", {
+        nickname: sessionStorage.getItem("name"),
+      })
+      .then((response) => {
+        const data = response.data;
+        const monthlyData: number[] = new Array(12).fill(0);
+        data.forEach((item: any) => {
+          const month = parseInt(item.day.split(" ")[1].split("월")[0]) - 1;
+          monthlyData[month] += item.can + item.gen + item.pet;
+        });
+        setSeries([
+          {
+            name: "적립내역",
+            data: monthlyData,
+          },
+        ]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const options: ApexOptions = {
     chart: {

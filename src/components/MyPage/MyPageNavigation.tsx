@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "@/components/MyPage/styles/MyPageNavigation.module.scss";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import aily from "img/aily_logo.svg";
 
@@ -14,15 +14,22 @@ const menuData = [
 ];
 
 export default function MyPageNavigation() {
+  const [userName, setUserName] = useState<string | null>(null);
   const pathname = usePathname();
-  console.log(pathname);
+
+  useEffect(() => {
+    const name = sessionStorage.getItem("name") || localStorage.getItem("name");
+    setUserName(name);
+  }, []);
+
   return (
+
     <div className={classes.box}>
       <div className={classes.profile}>
         <div>
           <Image src={aily} width={100} alt="profile_img" />
         </div>
-        <p>홍길동 님</p>
+        <p>{userName}</p>
       </div>
       <ul className={classes.my_page}>
         {menuData.map((menu, index: number) => (

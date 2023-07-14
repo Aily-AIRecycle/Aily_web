@@ -36,10 +36,12 @@ function Login() {
               localStorage.setItem("user_email", email.value);
               localStorage.setItem("name", res.data.nickname);
               localStorage.setItem("phone_number", res.data.phonenumber);
+              sessionStorage.setItem("loginok", "ok");
             } else {
               sessionStorage.setItem("user_email", email.value);
               sessionStorage.setItem("name", res.data.nickname);
-              localStorage.setItem("phone_number", res.data.phonenumber);
+              sessionStorage.setItem("phone_number", res.data.phonenumber);
+              sessionStorage.setItem("loginok", "ok");
             }
             document.location.href = "/";
           } else {
