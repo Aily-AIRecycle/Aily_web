@@ -1,16 +1,54 @@
 import classes from "@/components/MyPage/styles/PointHistory.module.scss";
 import AccumulationHistory from "@/components/MyPage/AccumulationHistory";
-import DATA from "@/components/MyPage/data";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function PointHistory() {
+
+    interface Data {
+      can: number;
+      day: String;
+      time: String;
+      gen: number;
+      pet: number;
+      point: number;
+      date2 : String;
+    }
+    const [data, setData] = useState<Data[]>([]);
+    
+    useEffect(() => {
+      axios.post("/member/member/historypax", {
+        nickname: sessionStorage.getItem('name')
+      })
+      .then(response => {
+        // Handle the POST request response
+        setData(response.data.map((item: { can: any; gen: any; day: any; pet: any; point: any; time: any; }) => ({
+          can: item.can,
+          gen: item.gen,
+          day: item.day,
+          time: item.time,
+          pet: item.pet,
+          point: item.point,
+        })));
+        console.log(response.data)
+        console.log(data)
+      })
+      .catch(error => {
+        // Handle the POST request error
+        console.error(error);
+      });
+    }, []);
+    
+  
   return (
     <>
+
       <div className={classes.box_wrap}>
         <div className={classes.box}>
           <p className={classes.title}>적립내역</p>
           <div className={classes.history}>
-            {DATA.map((data, index) => (
-              <AccumulationHistory key={index} history={data} />
+            {data && data.map((item, index) =>  (
+              <AccumulationHistory key={index} history={item} />
             ))}
           </div>
         </div>
