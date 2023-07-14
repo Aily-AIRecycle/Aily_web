@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
+import axios from "axios";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -9,7 +10,30 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 interface TotalDonutChartProps {}
 
 const TotalDonutChart: React.FC<TotalDonutChartProps> = () => {
-  const series = [107, 145, 107];
+  const [series, setSeries] = useState<number[]>([]);
+
+  useEffect(() => {
+    axios
+      .post("/member/member/usertotalDonut", {
+        phonenumber: sessionStorage.getItem("phone_number"),
+      })
+      .then((response) => {
+        const data = response.data[0];
+        const newSeries: number[] = [];
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            newSeries.push(data[key]);
+          }
+        }
+        console.log(newSeries)
+        setSeries(newSeries);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  
+
 
   const options: ApexOptions = {
     chart: {
@@ -53,7 +77,7 @@ const TotalDonutChart: React.FC<TotalDonutChartProps> = () => {
         },
       },
     },
-    labels: ["일반", "플라스틱", "캔"],
+    labels: ["캔", "일반", "플라스틱"],
     dataLabels: {
       enabled: false,
     },
