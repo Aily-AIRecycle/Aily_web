@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import classes from "@/components/MyPage/styles/MyPageNavigation.module.scss";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
-import aily from "img/aily_logo.svg";
+import Profile from "@/components/MyPage/Profile";
 
 const menuData = [
   { name: "대시보드", path: "dashboard" },
@@ -23,12 +22,9 @@ export default function MyPageNavigation() {
   }, []);
 
   return (
-
     <div className={classes.box}>
       <div className={classes.profile}>
-        <div>
-          <Image src={aily} width={100} alt="profile_img" />
-        </div>
+        <Profile />
         <p>{userName}</p>
       </div>
       <ul className={classes.my_page}>
