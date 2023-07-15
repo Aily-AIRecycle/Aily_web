@@ -1,5 +1,5 @@
 "use client";
-import classes from "./Login.module.scss";
+import classes from "@/app/login/Login.module.scss";
 import emailImg from "img/join/email.svg";
 import lock from "img/join/lock.svg";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import axios from "axios";
 import useInput from "@/hooks/use-input";
 import logo from "img/join/aily_logo.svg";
 import { useState } from "react";
+import SubmitButton from "@/components/UI/SubmitButton";
 
 function Login() {
   const email = useInput("");
@@ -71,8 +72,8 @@ function Login() {
         <Link href="/">
           <Image
             src={logo}
-            // width={100}
-            // height={100}
+            width={100}
+            height={100}
             alt="logo"
             className={classes.logo}
           />
@@ -111,12 +112,7 @@ function Login() {
                 <span>로그인 상태 유지</span>
               </label>
             </div>
-            <input
-              type="submit"
-              value="로그인"
-              id={classes.submit}
-              onClick={loginHandler}
-            />
+            <SubmitButton value="로그인" onClick={loginHandler} />
           </form>
           <div className={classes.move}>
             <div className={classes.find}>

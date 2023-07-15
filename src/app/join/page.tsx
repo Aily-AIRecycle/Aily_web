@@ -1,6 +1,6 @@
 "use client";
-import classes from "./Join.module.scss";
-import CopyRight from "../../components/UI/Copyright";
+import classes from "@/app/join/Join.module.scss";
+import CopyRight from "@/components/UI/Copyright";
 import Link from "next/link";
 import lock from "img/join/lock.svg";
 import user from "img/join/user.svg";
@@ -9,7 +9,7 @@ import emailImg from "img/join/email.svg";
 import auth from "img/join/auth.svg";
 import genderImg from "img/join/gender.svg";
 import phone from "img/join/phone-solid.svg";
-import Button from "../../components/UI/Button";
+import Button from "@/components/UI/Button";
 import eyeOn from "img/join/eye-on.svg";
 import eyeOff from "img/join/eye-off.svg";
 import { useEffect, useState } from "react";
@@ -18,6 +18,7 @@ import ErrorText from "@/components/UI/ErrorText";
 import useFormValidation from "@/hooks/use-formValidation";
 import axios from "axios";
 import Image from "next/image";
+import SubmitButton from "@/components/UI/SubmitButton";
 
 function Join(): JSX.Element {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -237,12 +238,7 @@ function Join(): JSX.Element {
               <ErrorText text="· 생년월일: 생년월일을 다시 확인해주세요." />
             )}
           </div>
-          <input
-            type="submit"
-            value="회원가입"
-            id={classes.submit}
-            onClick={joinHander}
-          />
+          <SubmitButton value="회원가입" onClick={joinHander} />
         </form>
         <CopyRight />
       </main>
