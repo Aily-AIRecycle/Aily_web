@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 
-interface FormData {
+export interface FormData {
   email: string;
   password: string;
   nickname: string;
@@ -9,7 +9,7 @@ interface FormData {
   gender: string;
 }
 
-interface Errors {
+export interface Errors {
   email: boolean;
   password: boolean;
   nickname: boolean;
@@ -22,7 +22,9 @@ type ValidationRules = {
   [key: string]: (value: string) => boolean;
 };
 
-type ChangeHandler = (event: ChangeEvent<HTMLInputElement>) => void;
+export type ChangeHandler = (
+  event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+) => void;
 
 const useFormValidation = (
   validationRules: ValidationRules

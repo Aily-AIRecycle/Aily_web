@@ -12,13 +12,14 @@ import phone from "img/join/phone-solid.svg";
 import Button from "@/components/UI/Button";
 import eyeOn from "img/join/eye-on.svg";
 import eyeOff from "img/join/eye-off.svg";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import logo from "img/join/aily_logo.svg";
 import ErrorText from "@/components/UI/ErrorText";
 import useFormValidation from "@/hooks/use-formValidation";
 import axios from "axios";
 import Image from "next/image";
 import SubmitButton from "@/components/UI/SubmitButton";
+import { FormData, Errors, ChangeHandler } from "@/hooks/use-formValidation";
 
 function Join(): JSX.Element {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -26,7 +27,8 @@ function Join(): JSX.Element {
   const [authNumber, setAuthNumber] = useState("");
   const [resAuthNumber, setResAuthNumber] = useState("");
   const [authError, setAuthError] = useState(false);
-
+  const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
+  const [isAuthNumberBtnDisabled, setAuthNumberBtnDisabled] = useState(false);
   function passwordEyeHandler() {
     setPasswordShown((prev) => !prev);
   }
@@ -48,21 +50,29 @@ function Join(): JSX.Element {
     gender: (value: string) => !value,
   };
 
-  const [formData, errors, onChangeHandler]: any =
+  const [formData, errors, onChangeHandler]: [FormData, Errors, ChangeHandler] =
     useFormValidation(validationRules);
-
-  useEffect(() => {
-    if (resAuthNumber === "") {
-      setAuthError(false);
-    } else if (resAuthNumber === authNumber) {
-      setAuthError(false);
-    } else {
-      setAuthError(true);
-    }
-  }, [resAuthNumber, authNumber]);
 
   const authChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(event.target.value);
+    setAuthError(false);
+  };
+
+  const authCheckHandler = () => {
+    if (resAuthNumber === "") {
+      alert("인증메일을 전송해주세요.");
+    } else if (authNumber === "") {
+      setAuthError(true);
+      alert("인증번호를 입력해주세요.");
+    } else if (resAuthNumber !== authNumber) {
+      setAuthError(true);
+      alert("인증번호가 일치하지 않습니다.");
+    } else if (resAuthNumber === authNumber) {
+      setAuthError(false);
+      alert("인증이 완료되었습니다.");
+      setAuthMailBtnDisabled(true);
+      setAuthNumberBtnDisabled(true);
+    }
   };
 
   const joinHandler = (event: FormEvent<HTMLFormElement>) => {
@@ -119,13 +129,19 @@ function Join(): JSX.Element {
             })
             .catch();
           alert("인증메일을 보냈습니다.");
+          setAuthMailBtnDisabled(true);
         } else {
           alert(
             "이미 Aily에 가입한 이메일입니다.\n다른 이메일로 다시 시도해주세요."
           );
         }
       })
-      .catch();
+      .catch()
+      .finally(() => {
+        setTimeout(() => {
+          setAuthMailBtnDisabled(false);
+        }, 10000);
+      });
   }
 
   return (
@@ -144,8 +160,14 @@ function Join(): JSX.Element {
                 name="email"
                 value={formData.email}
                 onChange={onChangeHandler}
+                disabled={isAuthMailBtnDisabled}
               />
-              <Button value="인증메일 전송" onClick={authEmailHandler} />
+              <Button
+                value="인증메일 전송"
+                color={"#f8b195"}
+                onClick={authEmailHandler}
+                disabled={isAuthMailBtnDisabled}
+              />
             </div>
             <div className={classes.form_control}>
               <Image src={auth} width={25} alt="auth" />
@@ -155,6 +177,13 @@ function Join(): JSX.Element {
                 className={classes.input}
                 value={authNumber}
                 onChange={authChangeHandler}
+                disabled={isAuthNumberBtnDisabled}
+              />
+              <Button
+                value="확인"
+                color={"#D9D9D9"}
+                onClick={authCheckHandler}
+                disabled={isAuthNumberBtnDisabled}
               />
             </div>
             <div className={classes.form_control}>
