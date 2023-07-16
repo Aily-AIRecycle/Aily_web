@@ -1,44 +1,70 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
-const useFormValidation = (validationRules: { [x: string]: any; }) =>
-{
-  const [formData, setFormData] = useState({
+interface FormData {
+  email: string;
+  password: string;
+  nickname: string;
+  phonenumber: string;
+  birth: string;
+  gender: string;
+}
+
+interface Errors {
+  email: boolean;
+  password: boolean;
+  nickname: boolean;
+  phonenumber: boolean;
+  birth: boolean;
+  gender: boolean;
+}
+
+type ValidationRules = {
+  [key: string]: (value: string) => boolean;
+};
+
+type ChangeHandler = (event: ChangeEvent<HTMLInputElement>) => void;
+
+const useFormValidation = (
+  validationRules: ValidationRules
+): [FormData, Errors, ChangeHandler] => {
+  const initialFormData: FormData = {
     email: "",
     password: "",
     nickname: "",
     phonenumber: "",
     birth: "",
     gender: "",
-  });
+  };
 
-  const [errors, setErrors] = useState({
+  const initialErrors: Errors = {
     email: false,
     password: false,
     nickname: false,
     phonenumber: false,
     birth: false,
     gender: false,
-  });
+  };
 
-  const onChangeHandler = (e: { target: { name: any; value: any; }; }) =>
-  {
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [errors, setErrors] = useState<Errors>(initialErrors);
+
+  const onChangeHandler: ChangeHandler = (e) => {
     const { name, value } = e.target;
     const validationFunction = validationRules[name];
     const isValid = validationFunction(value);
-
 
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
 
-    setErrors(prev => ({
+    setErrors((prev) => ({
       ...prev,
       [name]: !isValid,
-    }))
-  }
+    }));
+  };
 
   return [formData, errors, onChangeHandler];
-}
+};
 
 export default useFormValidation;

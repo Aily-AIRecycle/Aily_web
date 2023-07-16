@@ -12,7 +12,7 @@ import phone from "img/join/phone-solid.svg";
 import Button from "@/components/UI/Button";
 import eyeOn from "img/join/eye-on.svg";
 import eyeOff from "img/join/eye-off.svg";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import logo from "img/join/aily_logo.svg";
 import ErrorText from "@/components/UI/ErrorText";
 import useFormValidation from "@/hooks/use-formValidation";
@@ -40,12 +40,12 @@ function Join(): JSX.Element {
     /^(?:(?:19|20)\d{2})(?:(?:(?:0[1-9]|1[0-2])(?:0[1-9]|1\d|2[0-8]))|(?:02(?:29))|(?:(?:0[13-9]|1[0-2])(?:29|30))|(?:0[13578]|1[02])31)$/;
 
   const validationRules = {
-    email: (value: any) => emailRegex.test(value),
-    password: (value: any) => passwordRegex.test(value),
-    nickname: (value: any) => nameRegex.test(value),
-    phonenumber: (value: any) => phoneRegex.test(value),
-    birth: (value: any) => birthRegex.test(value),
-    gender: (value: any) => value,
+    email: (value: string) => emailRegex.test(value),
+    password: (value: string) => passwordRegex.test(value),
+    nickname: (value: string) => nameRegex.test(value),
+    phonenumber: (value: string) => phoneRegex.test(value),
+    birth: (value: string) => birthRegex.test(value),
+    gender: (value: string) => !value,
   };
 
   const [formData, errors, onChangeHandler]: any =
@@ -61,11 +61,11 @@ function Join(): JSX.Element {
     }
   }, [resAuthNumber, authNumber]);
 
-  const authChangeHandler = (e: any) => {
-    setAuthNumber(e.target.value);
+  const authChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setAuthNumber(event.target.value);
   };
 
-  function joinHander(event: any) {
+  const joinHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (
       !errors.email &&
@@ -95,11 +95,14 @@ function Join(): JSX.Element {
           alert("회원가입이 완료되었습니다.");
           document.location.href = "/";
         })
-        .catch();
+        .catch((error) => {
+          console.log(error);
+          alert("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+        });
     } else {
       alert("입력 정보를 다시 확인해주세요.");
     }
-  }
+  };
 
   function authEmailHandler() {
     axios
@@ -115,8 +118,11 @@ function Join(): JSX.Element {
               setResAuthNumber(res.data.toString());
             })
             .catch();
+          alert("인증메일을 보냈습니다.");
         } else {
-          alert("이미 존재하는 이메일입니다.");
+          alert(
+            "이미 Aily에 가입한 이메일입니다.\n다른 이메일로 다시 시도해주세요."
+          );
         }
       })
       .catch();
@@ -128,7 +134,7 @@ function Join(): JSX.Element {
         <Link href="/" className={classes.title}>
           <Image src={logo} alt="aily" />
         </Link>
-        <form>
+        <form onSubmit={joinHandler}>
           <div className={classes.section1}>
             <div className={classes.form_control}>
               <Image src={emailImg} width={25} alt="@" />
@@ -238,7 +244,7 @@ function Join(): JSX.Element {
               <ErrorText text="· 생년월일: 생년월일을 다시 확인해주세요." />
             )}
           </div>
-          <SubmitButton value="회원가입" onClick={joinHander} />
+          <SubmitButton value="회원가입" />
         </form>
         <CopyRight />
       </main>
