@@ -2,7 +2,14 @@
   "name": "aily",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://aliy.store:8072/member",
+  "proxy": {
+    "/member": {
+      "target": "http://ailymit.store/member"
+    },
+    "/data": {
+      "target": "http://ailymit.store/data"
+    }
+  },
   "dependencies": {
     "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^1.9.5",
@@ -16,12 +23,17 @@
     "apexcharts": "^3.27.0",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-adapter-moment": "^1.0.1",
     "eslint": "^8.44.0",
     "eslint-config-next": "^13.4.7",
     "http-proxy-middleware": "^2.0.6",
+    "moment": "^2.29.4",
     "next": "^13.4.7",
     "react": "^18.2.0",
-    "react-apexcharts": "^1.4.0",
+    "react-apexcharts": "^1.4.1",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "redux": "^4.2.1",
