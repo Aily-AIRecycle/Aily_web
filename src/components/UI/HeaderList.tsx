@@ -11,6 +11,7 @@ function HeaderList(props: any) {
   };
 
   const sessionName = sessionStorage.getItem("loginok");
+  const sessionID = sessionStorage.getItem("name");
 
   return (
     <ul className={props.ul}>
@@ -30,7 +31,7 @@ function HeaderList(props: any) {
         </Link>
       </li>
       <li className={props.li}>
-        <Link href="/stats">
+        <Link href="/statistics">
           통계
         </Link>
       </li>
@@ -46,6 +47,11 @@ function HeaderList(props: any) {
             로그아웃
             </Link>
           </li>
+          {sessionID === "테스트" && (
+            <Link href="/hidden">
+            관리자 대쉬보드
+            </Link>
+          )}
         </>
       )}
       {sessionName !== "ok" && (
