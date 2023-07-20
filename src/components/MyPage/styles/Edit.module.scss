@@ -39,3 +39,40 @@
   position: relative;
   bottom: 50px;
 }
+
+.edit_box {
+  position: relative;
+  top: -30px;
+  border: 1px solid #d9d9d9;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  label {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    cursor: pointer;
+    &:hover {
+      background-color: #e7e7e7;
+    }
+  }
+
+  button {
+    width: 100%;
+    &:hover {
+      background-color: #e7e7e7;
+    }
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    &:hover {
+      background-color: #e7e7e7;
+    }
+  }
+}
