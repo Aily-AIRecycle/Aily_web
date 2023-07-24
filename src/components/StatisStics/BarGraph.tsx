@@ -25,16 +25,16 @@ interface Data {
 }
 
 // Utility function to generate dates for a given month and year
-function generateDatesForMonth(month: number, year: number) {
-  const numDaysInMonth = new Date(year, month, 0).getDate();
-  const dates: string[] = [];
-  for (let day = 1; day <= numDaysInMonth; day++) {
-    const formattedDay = day < 10 ? `0${day}` : `${day}`;
-    const formattedMonth = month < 10 ? `0${month}` : `${month}`;
-    dates.push(`2023-${formattedMonth}-${formattedDay}`);
-  }
-  return dates;
-}
+// function generateDatesForMonth(month: number, year: number) {
+//   const numDaysInMonth = new Date(year, month, 0).getDate();
+//   const dates: string[] = [];
+//   for (let day = 1; day <= numDaysInMonth; day++) {
+//     const formattedDay = day < 10 ? `0${day}` : `${day}`;
+//     const formattedMonth = month < 10 ? `0${month}` : `${month}`;
+//     dates.push(`2023-${formattedMonth}-${formattedDay}`);
+//   }
+//   return dates;
+// }
 
 // Main component
 function Statistics() {
@@ -116,9 +116,9 @@ function Statistics() {
         {data ? (
           <>
             {weekData && (
-              <div style={{ display: "flex", flexWrap: "wrap", width: "100%" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", width: "100%", justifyContent: "center" }}>
                 {units.map((unit) => (
-                  <div key={unit} style={{ width: "30%", margin: "10px" }}>
+                  <div key={unit} style={{ width: "30%", margin: "10px", textAlign: "center" }}>
                     <h3>기계번호 {unit}</h3>
                     <div style={{ width: "100%" }}>
                       <Bar
@@ -161,7 +161,7 @@ function Statistics() {
                             y: {
                               title: {
                                 display: true,
-                                text: 'Kg',
+                                text: 'Kg(can,pet,gen)',
                               },
                             },
                           },
