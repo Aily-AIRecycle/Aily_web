@@ -1,0 +1,30 @@
+.box {
+  width: 994px;
+  height: 875px;
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 50px;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  label {
+    font-size: 20px;
+  }
+  input {
+    border: 1px solid #a0a0a0;
+    border-radius: 8px;
+    padding-left: 12px;
+    width: 500px;
+    height: 40px;
+  }
+}
+
+.agree {
+  margin-bottom: 100px;
+}
