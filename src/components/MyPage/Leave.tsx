@@ -3,7 +3,7 @@ import classes from "@/components/MyPage/styles/Leave.module.scss";
 import axios from "axios";
 import useInput from "@/hooks/use-input";
 import { useState, MouseEvent } from "react";
-import SubmitButton from "../UI/SubmitButton";
+import SubmitButton from "@/components/UI/SubmitButton";
 
 export default function Leave() {
   const password = useInput("");
