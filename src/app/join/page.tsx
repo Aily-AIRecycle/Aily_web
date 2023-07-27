@@ -29,6 +29,7 @@ function Join(): JSX.Element {
   const [authError, setAuthError] = useState(false);
   const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
   const [isAuthNumberBtnDisabled, setAuthNumberBtnDisabled] = useState(false);
+ 
   function passwordEyeHandler() {
     setPasswordShown((prev) => !prev);
   }
@@ -47,7 +48,7 @@ function Join(): JSX.Element {
     nickname: (value: string) => nameRegex.test(value),
     phonenumber: (value: string) => phoneRegex.test(value),
     birth: (value: string) => birthRegex.test(value),
-    gender: (value: string) => !value,
+    gender: (value: string) => value !== "",
   };
 
   const [formData, errors, onChangeHandler]: [FormData, Errors, ChangeHandler] =
