@@ -2,20 +2,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
-import { registerables, Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale } from 'chart.js';
+import { registerables, Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, ChartConfiguration } from 'chart.js';
 import 'chartjs-adapter-moment';
 import moment from "moment";
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, ...registerables);
+
 interface Data {
-    [date: string]: {
-      [info: string]: {
-        can: string;
-        gen: string;
-        pet: string;
-      };
+  [date: string]: {
+    [info: string]: {
+      can: string;
+      gen: string;
+      pet: string;
     };
-  }
+  };
+}
+
 function Statistics() {
   const [data, setData] = useState<Data>({});
 
@@ -113,27 +115,29 @@ function Statistics() {
     ],
   };
 
-  const options = {
+  const options: ChartConfiguration<"line">["options"] = {
     scales: {
-        x: {
-            type: 'time', // Use time type for x-axis
-            time: {
-              unit: 'day', // Display one label per day
-              tooltipFormat: 'YYYY-MM-DD', // Format for tooltip display
-              displayFormats: {
-                day: 'YYYY-MM-DD', // Format for x-axis labels
-              },
-            },
-            title: {
-              display: true,
-              text: '날짜',
-            },
+      x: {
+        type: "time",
+        time: {
+          unit: "day",
+          tooltipFormat: "YYYY-MM-DD",
+          displayFormats: {
+            day: "YYYY-MM-DD",
+          },
+        },
+        ticks: {
+          display: true,
+        },
+        title: {
+          display: true,
+          text: '날짜',
+        },
       },
       y: {
         beginAtZero: true,
-        title: {
+        ticks: {
           display: true,
-          text: 'All_Sum(can,pet,gen)kg',
         },
       },
     },
