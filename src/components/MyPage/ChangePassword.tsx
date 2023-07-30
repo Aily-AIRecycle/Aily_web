@@ -17,7 +17,7 @@ export default function ChangePassword() {
   const validationRules = {
     password: (value: string) => passwordRegex.test(value),
   };
-  
+
   const [formData, errors, onChangeHandler]: [FormData, Errors, ChangeHandler] =
     useFormValidation(validationRules);
 
@@ -25,13 +25,25 @@ export default function ChangePassword() {
     event.preventDefault();
 
     // 서버에서 가져온 비밀번호와 같으면 비밀번호 바꿈
-    if(errors.password){
-        alert("비밀번호 형식이 맞지 않습니다.");
+    if (errors.password) {
+      alert("비밀번호 형식이 맞지 않습니다.");
     } else if (formData.password !== checkNewPassword.value) {
       alert("바꾸려는 비밀번호가 일치하지 않습니다.");
-    }  else{
-        axios.post("", {}).then(() => {
-          
+    } else {
+      axios
+        .post("/member/member/ChPwd/ch", {
+          email:
+            sessionStorage.getItem("user_email") ||
+            localStorage.getItem("user_email"),
+          password: formData.password,
+        })
+        .then((response) => {
+          if (response.data.result === "Clear") {
+            alert("비밀번호가 변경되었습니다.");
+            document.location.href = "/my-page/dashboard";
+          } else {
+            alert("비밀번호 변경에 실패하였습니다.");
+          }
         });
     }
   };
@@ -50,6 +62,7 @@ export default function ChangePassword() {
                 placeholder="비밀번호를 변경하려면 현재 비밀번호를 입력해주세요."
                 value={password.value}
                 onChange={password.onChange}
+                autoFocus
               />
             </li>
             <li className={classes.data}>
