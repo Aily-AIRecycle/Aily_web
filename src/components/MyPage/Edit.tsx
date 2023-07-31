@@ -3,39 +3,43 @@ import classes from "@/components/MyPage/styles/Edit.module.scss";
 import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import Profile from "@/components/MyPage/Profile";
-import SubmitButton from "../UI/SubmitButton";
+import SubmitButton from "@/components/UI/SubmitButton";
+import CropImageModal from "@/components/MyPage/CropImageModal";
 import Image from "next/image";
 import edit from "img/edit.svg";
+import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { cropModalActions } from "@/store/cropModal";
+import { setImageUrl } from "@/store/image";
 
 export default function Edit() {
   // useEffect(() => {
-  //   axios
-  //     .post("/member/member/01018181818", {
-  //       phonenumber:
-  //         sessionStorage.getItem("phone_number") ||
-  //         localStorage.getItem("phone_number"),
-  //     })
-  //     .then((response) => {});
+  //   const phone_number =
+  //     sessionStorage.getItem("phone_number") ||
+  //     localStorage.getItem("phone_number");
+  //   axios.get(`/member/member/${phone_number}`, {}).then((response) => {});
   // }, []);
 
-  const [imgUrl, setImgUrl] = useState<string | null>(null);
+  // 사용자가 설정한 사진 또는 서버에서 가저온 사진 url
+  const imgUrl = useSelector((state: any) => state.image.imageUrl);
+  // const [imgUrl, setImgUrl] = useState(null);
+  const [loadImgUrl, setLoadImgUrl] = useState<string | null>(null);
   const [showBox, setShowBox] = useState(false);
+  const dispatch = useDispatch();
+  const showModal = useSelector((state: any) => state.cropModal.showModal);
+
 
   useEffect(() => {
-    console.log(showBox);
-  });
+    console.log(showModal);
+  }, [showModal]);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     if (file) {
-      // console.log(file);
       const reader = new FileReader();
-
       reader.onload = (e) => {
-        // console.log(e);
-        // console.log(e.target?.result);
         const imageUrl = e.target?.result as string;
-        setImgUrl(imageUrl);
+        setLoadImgUrl(imageUrl);
       };
 
       reader.readAsDataURL(file);
@@ -44,6 +48,21 @@ export default function Edit() {
 
   return (
     <>
+      {showModal &&
+        createPortal(
+          <div
+            className={classes.modal}
+            onClick={() => {
+              dispatch(cropModalActions.click());
+            }}
+          ></div>,
+          document.body
+        )}
+      {showModal &&
+        createPortal(
+          <CropImageModal imgUrl={loadImgUrl} showModal={showModal} />,
+          document.body
+        )}
       <div
         style={{
           display: "flex",
@@ -57,7 +76,7 @@ export default function Edit() {
             <ul className={classes.edit}>
               <li className={classes.data}>
                 <label htmlFor="email">이메일</label>
-                <input name="email"></input>
+                <input name="email" autoFocus></input>
               </li>
               <li className={classes.data}>
                 <label htmlFor="name">이름</label>
@@ -86,7 +105,6 @@ export default function Edit() {
             onClick={() => {
               setShowBox(!showBox);
             }}
-            // onBlur={() => setShowBox(false)}
           >
             <Image src={edit} alt="edit" width={30} height={30} />
           </button>
@@ -94,9 +112,9 @@ export default function Edit() {
             <div className={classes.edit_box}>
               <label
                 htmlFor="file"
-                // onClick={() => {
-                //   setTimeout(() => setShowBox(false), 500);
-                // }}
+                onClick={() => {
+                  dispatch(cropModalActions.crop());
+                }}
               >
                 사진 업로드
               </label>
@@ -109,7 +127,9 @@ export default function Edit() {
               />
 
               {imgUrl !== null && (
-                <button onClick={() => setImgUrl(null)}>사진 제거</button>
+                <button onClick={() => dispatch(setImageUrl(null))}>
+                  사진 제거
+                </button>
               )}
             </div>
           )}

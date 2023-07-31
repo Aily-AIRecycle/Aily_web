@@ -13,14 +13,12 @@ export default function MyPageLayout({
 }) {
   return (
     <>
-      <>
-        <Header />
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <MyPageNavigation />
-          {children}
-        </div>
-        <Footer />
-      </>
+      <Header />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <MyPageNavigation />
+        {children}
+      </div>
+      <Footer />
     </>
   );
 }

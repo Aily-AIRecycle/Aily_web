@@ -1,0 +1,48 @@
+.box {
+  background-color: white;
+  width: 40rem;
+  height: 50rem;
+  z-index: 10;
+  position: absolute;
+  left: calc(50% - 20rem);
+  top: calc(50% - 30rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.cropper_wrap {
+  width: 100%;
+  height: 42rem;
+  display: flex;
+  justify-content: center;
+  //   margin-top: 12px;/
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+}
+.cropper {
+  width: 32rem;
+  height: 40rem;
+  position: absolute;
+  //   display: flex;
+}
+
+.button {
+  background-color: #f8b195;
+  width: 180px;
+  height: 40px;
+  font-size: 16px;
+  color: white;
+}
