@@ -19,16 +19,18 @@ export interface Errors {
 }
 
 type ValidationRules = {
-  [key: string]: (value: string) => boolean;
+  [key in keyof FormData]: (value: string) => boolean;
 };
 
 export type ChangeHandler = (
-  event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+  event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
 ) => void;
+
+export type UpdateFormData = (newFormData: Partial<FormData>) => void;
 
 const useFormValidation = (
   validationRules: ValidationRules
-): [FormData, Errors, ChangeHandler] => {
+): [FormData, Errors, ChangeHandler, UpdateFormData] => {
   const initialFormData: FormData = {
     email: "",
     password: "",
@@ -52,7 +54,7 @@ const useFormValidation = (
 
   const onChangeHandler: ChangeHandler = (e) => {
     const { name, value } = e.target;
-    const validationFunction = validationRules[name];
+    const validationFunction = validationRules[name as keyof FormData];
     const isValid = validationFunction(value);
 
     setFormData((prev) => ({
@@ -66,7 +68,14 @@ const useFormValidation = (
     }));
   };
 
-  return [formData, errors, onChangeHandler];
+  const updateFormData: UpdateFormData = (newFormData) => {
+    setFormData((prev) => ({
+      ...prev,
+      ...newFormData,
+    }));
+  };
+
+  return [formData, errors, onChangeHandler, updateFormData];
 };
 
 export default useFormValidation;

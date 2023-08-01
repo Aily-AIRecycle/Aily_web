@@ -15,7 +15,7 @@ import eyeOff from "img/join/eye-off.svg";
 import { ChangeEvent, FormEvent, useState } from "react";
 import logo from "img/join/aily_logo.svg";
 import ErrorText from "@/components/UI/ErrorText";
-import useFormValidation from "@/hooks/use-formValidation";
+import useFormValidation, { UpdateFormData } from "@/hooks/use-formValidation";
 import axios from "axios";
 import Image from "next/image";
 import SubmitButton from "@/components/UI/SubmitButton";
@@ -29,7 +29,7 @@ function Join(): JSX.Element {
   const [authError, setAuthError] = useState(false);
   const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
   const [isAuthNumberBtnDisabled, setAuthNumberBtnDisabled] = useState(false);
- 
+
   function passwordEyeHandler() {
     setPasswordShown((prev) => !prev);
   }
@@ -51,8 +51,12 @@ function Join(): JSX.Element {
     gender: (value: string) => value !== "",
   };
 
-  const [formData, errors, onChangeHandler]: [FormData, Errors, ChangeHandler] =
-    useFormValidation(validationRules);
+  const [formData, errors, onChangeHandler]: [
+    FormData,
+    Errors,
+    ChangeHandler,
+    UpdateFormData
+  ] = useFormValidation(validationRules);
 
   const authChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAuthNumber(event.target.value);

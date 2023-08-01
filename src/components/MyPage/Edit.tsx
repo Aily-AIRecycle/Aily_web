@@ -3,70 +3,53 @@ import classes from "@/components/MyPage/styles/Edit.module.scss";
 import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import Profile from "@/components/MyPage/Profile";
-import SubmitButton from "../UI/SubmitButton";
+import SubmitButton from "@/components/UI/SubmitButton";
+import CropImageModal from "@/components/MyPage/CropImageModal";
 import Image from "next/image";
 import edit from "img/edit.svg";
-import { data } from "autoprefixer";
-import emailImg from "img/join/email.svg";
-import Button from "@/components/UI/Button";
-import auth from "img/join/auth.svg";
-import { FormData, Errors, ChangeHandler } from "@/hooks/use-formValidation";
-import useFormValidation from "@/hooks/use-formValidation";
-import React from "react";
+import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { cropModalActions } from "@/store/cropModal";
+import { setImageUrl } from "@/store/image";
+import useFormValidation, {
+  FormData,
+  Errors,
+  ChangeHandler,
+  UpdateFormData,
+} from "@/hooks/use-formValidation";
 
 export default function Edit() {
-  interface Data {
-    birth: string;
-    email: string;
-    gender: string;
-    password: string;
-    phonenumber: string;
-    myPage: {
-      nickname: string;
-    };
-  }
+  // 사용자가 설정한 사진 또는 서버에서 가저온 사진 url
+  const imgUrl = useSelector((state: any) => state.image.imageUrl);
+  // const [imgUrl, setImgUrl] = useState(null);
+  const [loadImgUrl, setLoadImgUrl] = useState<string | null>(null);
+  const [showBox, setShowBox] = useState(false);
+  const dispatch = useDispatch();
+  const showModal = useSelector((state: any) => state.cropModal.showModal);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex =
+    /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+  const nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
+  const phoneRegex = /^01(?:0|1|[6-9])\d{4}\d{4}$/;
+  const birthRegex =
+    /^(?:(?:19|20)\d{2})(?:(?:(?:0[1-9]|1[0-2])(?:0[1-9]|1\d|2[0-8]))|(?:02(?:29))|(?:(?:0[13-9]|1[0-2])(?:29|30))|(?:0[13578]|1[02])31)$/;
 
-  const [userData, setUserData] = useState<Data | null>(null);
-  const [editedName, setEditedName] = useState(
-    userData?.myPage?.nickname || ""
-  );
-  const [editedEmail, setEditedEmail] = useState(userData?.email || "");
-  const [editedPw, setEditedPw] = useState(userData?.password || "");
-  const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
-  const [authNumber, setAuthNumber] = useState("");
-  const [authError, setAuthError] = useState(false);
-  const [resAuthNumber, setResAuthNumber] = useState("");
-  const [isAuthNumberBtnDisabled, setAuthNumberBtnDisabled] = useState(false);
   const validationRules = {
     email: (value: string) => emailRegex.test(value),
+    password: (value: string) => passwordRegex.test(value),
+    nickname: (value: string) => nameRegex.test(value),
+    phonenumber: (value: string) => phoneRegex.test(value),
+    birth: (value: string) => birthRegex.test(value),
+    gender: (value: string) => value !== "",
   };
 
-  const [formData, errors, onChangeHandler]: [FormData, Errors, ChangeHandler] =
-    useFormValidation(validationRules);
-
-  const authChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAuthNumber(event.target.value);
-    setAuthError(false);
-  };
-
-  const authCheckHandler = () => {
-    if (resAuthNumber === "") {
-      alert("인증메일을 전송해주세요.");
-    } else if (authNumber === "") {
-      setAuthError(true);
-      alert("인증번호를 입력해주세요.");
-    } else if (resAuthNumber !== authNumber) {
-      setAuthError(true);
-      alert("인증번호가 일치하지 않습니다.");
-    } else if (resAuthNumber === authNumber) {
-      setAuthError(false);
-      alert("인증이 완료되었습니다.");
-      setAuthMailBtnDisabled(true);
-      setAuthNumberBtnDisabled(true);
-    }
-  };
+  const [formData, errors, onChangeHandler, onUpdateFormData]: [
+    FormData,
+    Errors,
+    ChangeHandler,
+    UpdateFormData
+  ] = useFormValidation(validationRules);
 
   useEffect(() => {
     axios
@@ -77,58 +60,42 @@ export default function Edit() {
       })
       .then((response) => {
         const dataFromServer = response.data;
-        setUserData(dataFromServer);
-
-        // Set initial values for editedName and editedBirth based on data from the server
-        setEditedName(dataFromServer?.myPage?.nickname || "");
-        setEditedEmail(dataFromServer?.email || "");
-        setEditedPw(sessionStorage.getItem("pw") || "");
+        onUpdateFormData({
+          email: dataFromServer.email || "",
+          nickname: dataFromServer.myPage.nickname || "",
+          phonenumber: dataFromServer.phonenumber || "",
+          birth: dataFromServer.birth || "",
+          gender: dataFromServer.gender || "",
+        });
       });
   }, []);
 
-  const [imgUrl, setImgUrl] = useState<string | null>(null);
-  const [showBox, setShowBox] = useState(false);
-
   useEffect(() => {
-    console.log(showBox);
-  });
+    console.log(showModal);
+  }, [showModal]);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     if (file) {
-      // console.log(file);
       const reader = new FileReader();
-
       reader.onload = (e) => {
-        // console.log(e);
-        // console.log(e.target?.result);
         const imageUrl = e.target?.result as string;
-        setImgUrl(imageUrl);
+        setLoadImgUrl(imageUrl);
       };
 
       reader.readAsDataURL(file);
     }
   };
 
-  const handleNicknameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEditedName(event.target.value);
-  };
-
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEditedEmail(event.target.value);
-  };
-  console.log("바뀐 이름 :: " + editedName);
-  const handleEditSubmit = () => {
+  const submitHandler = () => {
     axios
       .post("/member/member/UIC", {
-        phonenumber:
-          sessionStorage.getItem("phone_number") ||
-          localStorage.getItem("phone_number"),
-        email: editedEmail, // Include the unchanged email field
-        nickname: editedName,
-        password: editedPw,
-        birth: userData?.birth || "",
-        gender: userData?.birth || "",
+        phonenumber: formData.phonenumber,
+        email: formData.email, // Include the unchanged email field
+        nickname: formData.nickname,
+        password: formData.password,
+        birth: formData.birth,
+        gender: formData.gender,
       })
       .then((response) => {
         // Handle the response if needed
@@ -136,48 +103,32 @@ export default function Edit() {
       .catch((error) => {
         // Handle errors if needed
       });
-    sessionStorage.setItem("name", editedName),
-      localStorage.setItem("name", editedName);
+    sessionStorage.setItem("name", formData.nickname);
+    localStorage.setItem("name", formData.nickname);
     console.log(sessionStorage.getItem("name"));
   };
 
-  function authEmailHandler() {
-    console.log("눌림");
-    axios
-      .post("member/member/EmailCheck", { email: formData.email })
-      .then((res) => {
-        // 중복 아니면 res = 'yes'
-        if (res.data === "yes") {
-          axios
-            .post("member/member/auth-email", {
-              email: formData.email,
-            })
-            .then((res) => {
-              setResAuthNumber(res.data.toString());
-            })
-            .catch();
-          alert("인증메일을 보냈습니다.");
-          setAuthMailBtnDisabled(true);
-        } else {
-          alert(
-            "이미 Aily에 가입한 이메일입니다.\n다른 이메일로 다시 시도해주세요."
-          );
-        }
-      })
-      .catch()
-      .finally(() => {
-        setTimeout(() => {
-          setAuthMailBtnDisabled(false);
-        }, 10000);
-      });
-  }
-
   return (
     <>
+      {showModal &&
+        createPortal(
+          <div
+            className={classes.modal}
+            onClick={() => {
+              dispatch(cropModalActions.click());
+            }}
+          ></div>,
+          document.body
+        )}
+      {showModal &&
+        createPortal(
+          <CropImageModal imgUrl={loadImgUrl} showModal={showModal} />,
+          document.body
+        )}
       <div
         style={{
           display: "flex",
-          width: "1100px",
+          width: "994px",
           height: "875px",
         }}
       >
@@ -186,71 +137,78 @@ export default function Edit() {
           <form>
             <ul className={classes.edit}>
               <li className={classes.data}>
-                <label htmlFor="phonenumber">전화번호</label>
+                <label htmlFor="email">이메일</label>
                 <input
-                  name="phonenumber"
-                  value={userData?.phonenumber || ""}
-                  readOnly
-                />
-              </li>
-
-              {/* <li className={classes.data}> */}
-              <div className={classes.data}>
-                <li>
-                  <label htmlFor="email">기존 이메일</label>
-                  <input
-                    name="email"
-                    value={formData.email}
-                    onChange={onChangeHandler}
-                  />
-                  <SubmitButton
-                    value="인증메일 전송"
-                    color={"#f8b195"}
-                    onClick={authEmailHandler}
-                  />
-                </li>
-              </div>
-              {/* </li> */}
-              <li>
-                <div className={classes.form_control}>
-                  <input
-                    type="text"
-                    placeholder="인증번호 입력"
-                    className={classes.input}
-                    value={authNumber}
-                    onChange={authChangeHandler}
-                    disabled={isAuthNumberBtnDisabled}
-                  />
-                  <Button
-                    value="확인"
-                    color={"#D9D9D9"}
-                    onClick={authCheckHandler}
-                    disabled={isAuthNumberBtnDisabled}
-                  />
-                </div>
+                  name="email"
+                  value={formData.email}
+                  onChange={onChangeHandler}
+                  autoFocus
+                ></input>
               </li>
               <li className={classes.data}>
                 <label htmlFor="name">이름</label>
-                {/* Make the name field editable */}
                 <input
                   name="name"
-                  value={editedName}
-                  onChange={handleNicknameChange}
-                />
+                  value={formData.nickname}
+                  onChange={onChangeHandler}
+                ></input>
+              </li>
+              <li className={classes.data}>
+                <label htmlFor="phonenumber">전화번호</label>
+                <input
+                  name="phonenumber"
+                  value={formData.password}
+                  readOnly
+                ></input>
               </li>
               <li className={classes.data}>
                 <label htmlFor="birth">생년월일</label>
-                <input name="birth" value={userData?.birth || ""} readOnly />
+                <input name="gender" value={formData.birth} readOnly></input>
               </li>
               <li className={classes.data}>
                 <label htmlFor="gender">성별</label>
-                <input name="gender" value={userData?.gender || ""} readOnly />
+                <input name="gender" value={formData.gender} readOnly></input>
               </li>
             </ul>
-            <SubmitButton value="수정" onClick={handleEditSubmit} />
+            <SubmitButton value="수정" onClick={submitHandler} />
           </form>
         </div>
-        <div style={{ marginTop: "88px" }}>{/* ... (Previous code) */}</div>
+        <div style={{ marginTop: "88px" }}>
+          <Profile src={imgUrl} />
+          <button
+            className={classes.edit_btn}
+            onClick={() => {
+              setShowBox(!showBox);
+            }}
+          >
+            <Image src={edit} alt="edit" width={30} height={30} />
+          </button>
+          {showBox && (
+            <div className={classes.edit_box}>
+              <label
+                htmlFor="file"
+                onClick={() => {
+                  dispatch(cropModalActions.crop());
+                }}
+              >
+                사진 업로드
+              </label>
+              <input
+                type="file"
+                id="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
+
+              {imgUrl !== null && (
+                <button onClick={() => dispatch(setImageUrl(null))}>
+                  사진 제거
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
