@@ -2,11 +2,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
-import { registerables, Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, ChartConfiguration } from 'chart.js';
-import 'chartjs-adapter-moment';
+import {
+  registerables,
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  ChartConfiguration,
+} from "chart.js";
+import "chartjs-adapter-moment";
 import moment from "moment";
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, ...registerables);
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  ...registerables
+);
 
 interface Data {
   [date: string]: {
@@ -35,7 +51,7 @@ function Statistics() {
 
   // Process the data and calculate sums for each date
   const processedData = {
-    labels: Object.keys(data).map((date) => moment(date).format('YYYY-MM-DD')),
+    labels: Object.keys(data).map((date) => moment(date).format("YYYY-MM-DD")),
     datasets: [
       {
         label: "All_Sum",
@@ -131,7 +147,7 @@ function Statistics() {
         },
         title: {
           display: true,
-          text: '날짜',
+          text: "날짜",
         },
       },
       y: {
@@ -142,7 +158,6 @@ function Statistics() {
       },
     },
   };
-
 
   const containerStyle = {
     width: "50%", // Reduce the width of the chart to 50%
