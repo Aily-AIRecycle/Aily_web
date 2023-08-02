@@ -21,7 +21,7 @@ function HeaderList(props: any) {
         <Link href="/location">위치</Link>
       </li>
       <li className={props.li}>
-        <Link href="/isRecycle">재활용 여부 검색</Link>
+        <Link href="/dictionary/all">재활용 사전</Link>
       </li>
       <li className={props.li}>
         <Link href="/statistics">통계</Link>
