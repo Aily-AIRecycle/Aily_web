@@ -23,6 +23,7 @@ export default function Edit() {
   const imgUrl = useSelector((state: any) => state.image.imageUrl);
   // const [imgUrl, setImgUrl] = useState(null);
   const [loadImgUrl, setLoadImgUrl] = useState<string | null>(null);
+  const [serverLoadImgUrl, setServerLoadImgUrl] = useState<string | null>(null);
   const [showBox, setShowBox] = useState(false);
   const dispatch = useDispatch();
   const showModal = useSelector((state: any) => state.cropModal.showModal);
@@ -61,11 +62,11 @@ export default function Edit() {
       .then((response) => {
         const dataFromServer = response.data;
         onUpdateFormData({
-          email: dataFromServer.email || "",
-          nickname: dataFromServer.myPage.nickname || "",
-          phonenumber: dataFromServer.phonenumber || "",
-          birth: dataFromServer.birth || "",
-          gender: dataFromServer.gender || "",
+          email: dataFromServer.email,
+          nickname: dataFromServer.myPage.nickname,
+          phonenumber: dataFromServer.phonenumber,
+          birth: dataFromServer.birth,
+          gender: dataFromServer.gender,
         });
       });
   }, []);
@@ -93,7 +94,6 @@ export default function Edit() {
         phonenumber: formData.phonenumber,
         email: formData.email, // Include the unchanged email field
         nickname: formData.nickname,
-        password: formData.password,
         birth: formData.birth,
         gender: formData.gender,
       })
@@ -146,9 +146,9 @@ export default function Edit() {
                 ></input>
               </li>
               <li className={classes.data}>
-                <label htmlFor="name">이름</label>
+                <label htmlFor="nickname">이름</label>
                 <input
-                  name="name"
+                  name="nickname"
                   value={formData.nickname}
                   onChange={onChangeHandler}
                 ></input>
@@ -157,7 +157,7 @@ export default function Edit() {
                 <label htmlFor="phonenumber">전화번호</label>
                 <input
                   name="phonenumber"
-                  value={formData.password}
+                  value={formData.phonenumber}
                   readOnly
                 ></input>
               </li>
