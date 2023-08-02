@@ -4,6 +4,7 @@ function HeaderList(props: any) {
   const handleLogout = () => {
     // Perform logout logic, such as clearing session data
     sessionStorage.clear();
+    localStorage.clear();
     // Alternatively, you can use localStorage.removeItem("loginok");
 
     // Redirect to the login page after logout
