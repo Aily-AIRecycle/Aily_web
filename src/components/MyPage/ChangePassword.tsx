@@ -50,7 +50,7 @@ export default function ChangePassword() {
       alert("바꾸려는 비밀번호가 일치하지 않습니다.");
     } else {
       axios
-        .post("https://ailymit.store/member/member/ChPwd/ch", {
+        .post("/member/member/ChPwd/ch", {
           email:
             sessionStorage.getItem("user_email") ||
             localStorage.getItem("user_email"),
@@ -58,6 +58,7 @@ export default function ChangePassword() {
         })
         .then((response) => {
           if (response.data.result === "Clear") {
+            console.log(response.data)
             alert("비밀번호가 변경되었습니다.");
             document.location.href = "/my-page/dashboard";
           } else {

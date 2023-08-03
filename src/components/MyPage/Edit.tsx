@@ -11,6 +11,7 @@ import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cropModalActions } from "@/store/cropModal";
 import { setImageUrl } from "@/store/image";
+import Button from "@/components/UI/Button";
 import useFormValidation, {
   FormData,
   Errors,
@@ -27,7 +28,7 @@ export default function Edit() {
   const [showBox, setShowBox] = useState(false);
   const dispatch = useDispatch();
   const showModal = useSelector((state: any) => state.cropModal.showModal);
-
+  const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex =
     /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
@@ -44,6 +45,8 @@ export default function Edit() {
     birth: (value: string) => birthRegex.test(value),
     gender: (value: string) => value !== "",
   };
+
+  sessionStorage.setItem("CUN","error")
 
   const [formData, errors, onChangeHandler, onUpdateFormData]: [
     FormData,
@@ -89,25 +92,74 @@ export default function Edit() {
   };
 
   const submitHandler = () => {
-    axios
-      .post("/member/member/UIC", {
-        phonenumber: formData.phonenumber,
-        email: formData.email, // Include the unchanged email field
-        nickname: formData.nickname,
-        birth: formData.birth,
-        gender: formData.gender,
-      })
-      .then((response) => {
-        // Handle the response if needed
-      })
-      .catch((error) => {
-        // Handle errors if needed
-      });
-    sessionStorage.setItem("name", formData.nickname);
-    localStorage.setItem("name", formData.nickname);
-    console.log(sessionStorage.getItem("name"));
-  };
 
+    if(sessionStorage.getItem("CUN") == "yes"){
+      axios
+        .post("/member/member/UIC", {
+          phonenumber: formData.phonenumber,
+          email: formData.email, // Include the unchanged email field
+          nickname: formData.nickname,
+          birth: formData.birth,
+          gender: formData.gender,
+        })
+        .then((response) => {
+          
+        })
+        .catch((error) => {
+          // Handle errors if needed
+        });
+
+      axios
+        .post("/member/member/upload/"+ formData.nickname,imgUrl, {
+          
+        })
+        .then((response) => {
+          // Handle the response if needed
+        })
+        .catch((error) => {
+          // Handle errors if needed
+        });
+        // Handle the response if needed
+              
+        sessionStorage.setItem("name", formData.nickname);
+        localStorage.setItem("name", formData.nickname);
+        console.log(sessionStorage.getItem("name"));
+        alert("내 정보 수정이 완료 되었습니다.");
+    }else if(sessionStorage.getItem("CUN") == "no"){
+        alert("아이디가 중복됩니다. 다시 시도 해주세요");
+    }else if(sessionStorage.getItem("CUN") =="error"){
+      alert("아이디 중복체크를 해주세요.");
+    }
+  };
+  console.log("imaUrl :::::"+imgUrl);
+  console.log("/member/member/upload/" + formData.nickname);
+ 
+  function checknickname() {
+    axios
+      .get("/member/member/ChNick/" + formData.nickname)
+      .then((res) => {
+        // 중복 아니면 res = 'yes'
+        if (res.data === "yes") {
+          sessionStorage.setItem("CUN","yes")
+          alert("사용이 가능합니다!");
+        } else if(res.data === "no"){
+          sessionStorage.setItem("CUN","no")
+          alert(
+            "이름이 중복됩니다. 다른 이름을 사용해 주세요."
+          );
+        }
+      })
+      .catch()
+      .finally(() => {
+        setTimeout(() => {
+          setAuthMailBtnDisabled(false);
+        }, 10000);
+      });
+    console.log("dddddd"+"member/member/ChNick/" + formData.nickname)
+  }
+ 
+ 
+ 
   return (
     <>
       {showModal &&
@@ -152,6 +204,11 @@ export default function Edit() {
                   value={formData.nickname}
                   onChange={onChangeHandler}
                 ></input>
+                <Button
+                value="이름 중복 확인"
+                color={"#f8b195"}
+                onClick={checknickname}
+              />
               </li>
               <li className={classes.data}>
                 <label htmlFor="phonenumber">전화번호</label>

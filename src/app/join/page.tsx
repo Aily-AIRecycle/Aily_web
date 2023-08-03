@@ -149,6 +149,28 @@ function Join(): JSX.Element {
       });
   }
 
+  function checknickname() {
+    axios
+      .get("member/member/ChNick/"+formData.nickname)
+      .then((res) => {
+        // 중복 아니면 res = 'yes'
+        if (res.data === "yes") {
+          alert("사용이 가능합니다!");
+        } else {
+          alert(
+            "이름이 중복됩니다. 다른 이름을 사용해 주세요."
+          );
+        }
+      })
+      .catch()
+      .finally(() => {
+        setTimeout(() => {
+          setAuthMailBtnDisabled(false);
+        }, 10000);
+      });
+    console.log("dddddd"+"member/member/ChNick/" + formData.nickname)
+  }
+
   return (
     <>
       <main className={classes.main}>
@@ -229,6 +251,11 @@ function Join(): JSX.Element {
                 name="nickname"
                 value={formData.nickname}
                 onChange={onChangeHandler}
+              />
+              <Button
+                value="이름 중복 확인"
+                color={"#f8b195"}
+                onClick={checknickname}
               />
             </div>
             <div className={classes.form_control}>
