@@ -13,3 +13,11 @@
   background-color: #f58e65;
   cursor: pointer;
 }
+
+@media (max-width: 800px) {
+  .submit {
+    width: 90vw;
+    height: 54px;
+    font-size: 18px;
+  }
+}
