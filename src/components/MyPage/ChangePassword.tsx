@@ -58,7 +58,7 @@ export default function ChangePassword() {
         })
         .then((response) => {
           if (response.data === "Clear") {
-            console.log(response.data)
+            console.log(response.data);
             alert("비밀번호가 변경되었습니다.");
             document.location.href = "/my-page/dashboard";
           } else {
@@ -115,7 +115,7 @@ export default function ChangePassword() {
                 <ErrorText text="비밀번호가 일치하지 않습니다." />
               )}
           </div>
-          <SubmitButton value="회원 탈퇴" />
+          <SubmitButton value="변경" />
         </form>
       </div>
     </>
