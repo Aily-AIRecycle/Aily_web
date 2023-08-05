@@ -1,6 +1,6 @@
 "use client";
 import BoardFilter from "@/components/Board/BoardFilter";
-import classes from "@/app/board/[category]/Board.module.scss";
+import classes from "@/app/boards/[category]/Board.module.scss";
 import { Provider } from "react-redux";
 import store from "@/store";
 

@@ -16,7 +16,7 @@ function HeaderList(props: any) {
   return (
     <ul className={props.ul}>
       <li className={props.li}>
-        <Link href="/board/all">게시판</Link>
+        <Link href="/boards/all">게시판</Link>
       </li>
       <li className={props.li}>
         <Link href="/location">위치</Link>

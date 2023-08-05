@@ -35,10 +35,10 @@ function BoardNavigation() {
             <li
               key={index}
               className={`${classes.menu} ${
-                pathname === `/board/${menu.path}` ? classes.active : ""
+                pathname === `/boards/${menu.path}` ? classes.active : ""
               }`}
             >
-              <Link href={`/board/${menu.path}`}>{menu.name}</Link>
+              <Link href={`/boards/${menu.path}`}>{menu.name}</Link>
             </li>
           ))}
         </ul>
@@ -52,7 +52,7 @@ function BoardNavigation() {
         className={classes.select}
       >
         {menuData.map((menu, index) => (
-          <option key={index} value={`/board/${menu.path}`}>
+          <option key={index} value={`/boards/${menu.path}`}>
             {menu.name}
           </option>
         ))}

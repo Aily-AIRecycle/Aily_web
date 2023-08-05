@@ -10,7 +10,7 @@ function BoardTitle(props: any) {
       <div className={classes.id}>{id}</div>
       <div className={classes.category}>{category}</div>
       <div className={classes.title}>
-        <Link href={`/board/${props.boardName}/${id}`}>{title}</Link>
+        <Link href={`/boards/${props.boardName}/${id}`}>{title}</Link>
       </div>
       <div className={classes.writer}>{writer}</div>
       <div className={classes.date}>{date}</div>
