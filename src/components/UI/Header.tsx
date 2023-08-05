@@ -11,11 +11,15 @@ import logo from "img/aily_logo.svg";
 
 const Header = (): ReactElement | null => {
   const windowWidth = useWindowWidth();
-  const [menuShow, setMenuShow] = useState<boolean>(false);
+  const width = 250;
+  const [xPosition, setX] = useState(-width);
 
   function menuHandler() {
-    setMenuShow(!menuShow);
-    console.log(menuShow);
+    if (xPosition < 0) {
+      setX(0);
+    } else {
+      setX(-width);
+    }
   }
 
   let header;
@@ -46,23 +50,26 @@ const Header = (): ReactElement | null => {
           </Link>
           <Image src={bars} width={30} alt="bars" onClick={menuHandler} />
         </header>
-        {menuShow && (
-          <div className={classes.mobile_box}>
-            <Image
-              src={x}
-              alt="x"
-              width={100}
-              height={100}
-              onClick={menuHandler}
-              className={classes.close}
-            />
-            <HeaderList
-              ul={classes.head_menu_mobile}
-              li={classes.menu_mobile}
-              onClick={menuHandler}
-            />
-          </div>
-        )}
+        <div
+          className={classes.mobile_box}
+          style={{
+            transform: `translatex(${-xPosition}px)`,
+          }}
+        >
+          <Image
+            src={x}
+            alt="x"
+            width={100}
+            height={100}
+            onClick={menuHandler}
+            className={classes.close}
+          />
+          <HeaderList
+            ul={classes.head_menu_mobile}
+            li={classes.menu_mobile}
+            onClick={menuHandler}
+          />
+        </div>
       </div>
     );
   }

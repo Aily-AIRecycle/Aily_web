@@ -28,12 +28,12 @@
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
 }
 
 .form_list {
-  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .div {
@@ -133,98 +133,84 @@
   border: 0;
 }
 
-@media (max-width: 600px) {
-  .main {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    overflow: hidden;
-    margin-top: 100px;
-  }
-
+@media (max-width: 800px) {
   .logo {
-    width: 80px;
-    margin-bottom: 30px;
+    width: 120px;
+    top: 10vh;
   }
 
   .login {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    width: 90%;
-    height: 80vw;
-    border: solid 1px #9a9a9a;
-    border-radius: 20px;
-  }
+    margin-top: 6vh;
+    padding-top: 8vh;
+    padding-bottom: 8vw;
 
-  .form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    flex-wrap: wrap;
+    width: 100vw;
+    border: none;
+    border-radius: 10px;
   }
 
   .div {
-    width: 80%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 90vw;
+    height: 54px;
+    border: 1px solid #d9d9d9;
+    border-bottom: none;
+  }
+
+  .div:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .div:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     border-bottom: 1px solid #d9d9d9;
   }
 
-  .img {
-    width: 20px;
-    margin-left: 10px;
+  .check_wrap {
+    width: 90vw;
+    margin-top: 1vh;
+    margin-bottom: 4vh;
   }
 
   .input {
-    margin-left: 10px;
-    width: 100%;
-    border: 0px;
-    padding: 0px;
-    font-size: 18px;
-  }
-
-  .input:focus {
-    outline: none;
-  }
-
-  #submit {
-    border-radius: 10px;
+    margin-left: 1vw;
     width: 80%;
-    height: 50px;
-    background-color: #f8b195;
-    color: white;
-    border: 0px;
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 40px;
+    border: 0vw;
+    padding: 0vw;
+    font-size: 15px;
   }
 
-  #submit:hover {
-    background-color: #f58e65;
+  #check_btn + label {
+    span {
+      padding-left: 1vw;
+    }
+  }
+
+  #check_btn + label::before {
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(114, 105, 105, 1);
+    border-radius: 50%;
   }
 
   .move {
-    margin-top: 30px;
-    width: 80%;
-    display: flex;
-    justify-content: center;
+    margin-top: 1vh;
+    width: 90vw;
     a {
-      text-decoration: none;
-      color: #000000;
-      font-weight: 400;
-      font-size: 15px;
+      font-size: 14px;
     }
   }
 
   .find a {
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 2vw;
+    padding-left: 2vw;
     border-right: 1px solid #d9d9d9;
+  }
+
+  .find a:first-child {
+    padding-left: 0;
   }
 
   .find a:last-child {
