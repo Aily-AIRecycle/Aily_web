@@ -57,7 +57,7 @@ export default function ChangePassword() {
           password: formData.password,
         })
         .then((response) => {
-          if (response.data.result === "Clear") {
+          if (response.data === "Clear") {
             console.log(response.data)
             alert("비밀번호가 변경되었습니다.");
             document.location.href = "/my-page/dashboard";

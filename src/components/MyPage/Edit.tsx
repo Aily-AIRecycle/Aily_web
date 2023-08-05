@@ -1,4 +1,5 @@
 "use client";
+import Profilecopy from "@/components/MyPage/Profilecopy";
 import classes from "@/components/MyPage/styles/Edit.module.scss";
 import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -13,13 +14,16 @@ import { cropModalActions } from "@/store/cropModal";
 import { setImageUrl } from "@/store/image";
 import Button from "@/components/UI/Button";
 import useFormValidation, {
-  FormData,
   Errors,
   ChangeHandler,
   UpdateFormData,
 } from "@/hooks/use-formValidation";
 
 export default function Edit() {
+  useEffect(() => {
+    // Set "CUN" item in sessionStorage
+    sessionStorage.setItem("CUN", "error");
+  }, []);
   // 사용자가 설정한 사진 또는 서버에서 가저온 사진 url
   const imgUrl = useSelector((state: any) => state.image.imageUrl);
   // const [imgUrl, setImgUrl] = useState(null);
@@ -46,10 +50,10 @@ export default function Edit() {
     gender: (value: string) => value !== "",
   };
 
-  sessionStorage.setItem("CUN","error")
+  
 
   const [formData, errors, onChangeHandler, onUpdateFormData]: [
-    FormData,
+    any,
     Errors,
     ChangeHandler,
     UpdateFormData
@@ -88,52 +92,103 @@ export default function Edit() {
       };
 
       reader.readAsDataURL(file);
+      
     }
   };
 
-  const submitHandler = () => {
 
-    if(sessionStorage.getItem("CUN") == "yes"){
-      axios
-        .post("/member/member/UIC", {
-          phonenumber: formData.phonenumber,
-          email: formData.email, // Include the unchanged email field
-          nickname: formData.nickname,
-          birth: formData.birth,
-          gender: formData.gender,
-        })
-        .then((response) => {
-          
-        })
-        .catch((error) => {
-          // Handle errors if needed
-        });
+  const submitHandler = async () => {
+    
+    const formdata = new FormData();
+    if (!loadImgUrl) {
+      if(sessionStorage.getItem("CUN") == "yes"){
+        axios
+          .post("/member/member/UIC", {
+            phonenumber: formData.phonenumber,
+            email: formData.email, // Include the unchanged email field
+            nickname: formData.nickname,
+            birth: formData.birth,
+            gender: formData.gender,
+          })
+          .then((response) => {
+            
+          })
+          .catch((error) => {
+            // Handle errors if needed
+          });
+          sessionStorage.setItem("name", formData.nickname);
+          localStorage.setItem("name", formData.nickname);
+          alert("이름 변경이 완료 되었습니다.");
+      }
+      return;
+    }else if(sessionStorage.getItem("CUN") == "yes" && loadImgUrl){
+      const blob = await fetch(loadImgUrl).then(res => res.blob());
+      formdata.append("image", blob);
+        axios
+          .post("/member/member/UIC", {
+            phonenumber: formData.phonenumber,
+            email: formData.email, // Include the unchanged email field
+            nickname: formData.nickname,
+            birth: formData.birth,
+            gender: formData.gender,
+          })
+          .then((response) => {
+            
+          })
+          .catch((error) => {
+            // Handle errors if needed
+          });
 
-      axios
-        .post("/member/member/upload/"+ formData.nickname,imgUrl, {
+          axios
+          .post(`/member/member/upload/${formData.nickname}`, formdata,{
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then((response) => {
+            // Handle the response if needed
+          })
+          .catch((error) => {
+            // Handle errors if needed
+          });   
+            sessionStorage.setItem("name", formData.nickname);
+            localStorage.setItem("name", formData.nickname);
+            console.log(sessionStorage.getItem("name"));
           
-        })
-        .then((response) => {
-          // Handle the response if needed
-        })
-        .catch((error) => {
-          // Handle errors if needed
-        });
+          alert("내 정보 수정이 완료 되었습니다.");
+          sessionStorage.setItem("cropimage","no")
+    }else if(loadImgUrl){
+      const blob = await fetch(loadImgUrl).then(res => res.blob());
+      formdata.append("image", blob);
+      axios
+      .post(`/member/member/upload/${formData.nickname}`, formdata,{
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then((response) => {
         // Handle the response if needed
-              
+      })
+      .catch((error) => {
+        // Handle errors if needed
+      });   
         sessionStorage.setItem("name", formData.nickname);
         localStorage.setItem("name", formData.nickname);
         console.log(sessionStorage.getItem("name"));
-        alert("내 정보 수정이 완료 되었습니다.");
+        alert("사진 변경이 되었습니다.");
     }else if(sessionStorage.getItem("CUN") == "no"){
         alert("아이디가 중복됩니다. 다시 시도 해주세요");
-    }else if(sessionStorage.getItem("CUN") =="error"){
-      alert("아이디 중복체크를 해주세요.");
+    }else if(sessionStorage.getItem("CUN") == "error"){
+      alert("아이디가 중복됩니다. 다시 시도 해주세요1");
     }
-  };
-  console.log("imaUrl :::::"+imgUrl);
+}
+  console.log("imaUrl :::::"+ imgUrl);
   console.log("/member/member/upload/" + formData.nickname);
  
+
+
+
+
   function checknickname() {
     axios
       .get("/member/member/ChNick/" + formData.nickname)
@@ -159,7 +214,6 @@ export default function Edit() {
   }
  
  
- 
   return (
     <>
       {showModal &&
@@ -176,6 +230,7 @@ export default function Edit() {
         createPortal(
           <CropImageModal imgUrl={loadImgUrl} showModal={showModal} />,
           document.body
+          
         )}
       <div
         style={{
@@ -231,7 +286,7 @@ export default function Edit() {
           </form>
         </div>
         <div style={{ marginTop: "88px" }}>
-          <Profile src={imgUrl} />
+          <Profilecopy src={imgUrl} />
           <button
             className={classes.edit_btn}
             onClick={() => {
@@ -250,13 +305,16 @@ export default function Edit() {
               >
                 사진 업로드
               </label>
+              <form encType="multipart/form-data">
               <input
                 type="file"
                 id="file"
                 accept="image/*"
+                name="image"
                 onChange={handleFileChange}
                 style={{ display: "none" }}
               />
+              </form>
 
               {imgUrl !== null && (
                 <button onClick={() => dispatch(setImageUrl(null))}>

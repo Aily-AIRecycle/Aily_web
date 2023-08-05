@@ -1,8 +1,21 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+	reactStrictMode: true,
+  	images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+    ],
+  },
+}
+
 
 module.exports = {
-  reactStrictMode: true,
+  images: {
+    domains: ["localhost"],
+  },
   experimental: {
     appDir: true,
   },
@@ -15,3 +28,4 @@ module.exports = {
     ];
   },
 };
+
