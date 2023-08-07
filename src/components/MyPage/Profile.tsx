@@ -14,7 +14,9 @@ export default function Profile(props: any) {
   useEffect(() => {
     axios
       .post("/member/member/userimage", {
-        phonenumber: sessionStorage.getItem("phone_number"),
+        phonenumber:
+          sessionStorage.getItem("phone_number") ||
+          localStorage.getItem("phone_number"),
       })
       .then((response) => {
         const relativePath = response.data.split("/member/image/")[1];
