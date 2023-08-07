@@ -157,9 +157,7 @@ function Join(): JSX.Element {
         if (res.data === "yes") {
           alert("사용이 가능합니다!");
         } else {
-          alert(
-            "이름이 중복됩니다. 다른 이름을 사용해 주세요."
-          );
+          alert("이름이 중복됩니다. 다른 이름을 사용해 주세요.");
         }
       })
       .catch()
@@ -168,7 +166,7 @@ function Join(): JSX.Element {
           setAuthMailBtnDisabled(false);
         }, 10000);
       });
-    console.log("dddddd"+"member/member/ChNick/" + formData.nickname)
+    console.log("dddddd" + "member/member/ChNick/" + formData.nickname);
   }
 
   return (
@@ -177,13 +175,13 @@ function Join(): JSX.Element {
         <Link href="/" className={classes.title}>
           <Image src={logo} alt="aily" />
         </Link>
-        <form onSubmit={joinHandler}>
+        <form onSubmit={joinHandler} className={classes.form}>
           <div className={classes.section1}>
             <div className={classes.form_control}>
               <Image src={emailImg} width={25} alt="@" />
               <input
                 placeholder="이메일"
-                className={classes.input}
+                className={classes.short_input}
                 name="email"
                 value={formData.email}
                 onChange={onChangeHandler}
@@ -201,7 +199,7 @@ function Join(): JSX.Element {
               <input
                 type="text"
                 placeholder="인증번호 입력"
-                className={classes.input}
+                className={classes.short_input}
                 value={authNumber}
                 onChange={authChangeHandler}
                 disabled={isAuthNumberBtnDisabled}
@@ -247,7 +245,7 @@ function Join(): JSX.Element {
               <input
                 type="text"
                 placeholder="이름"
-                className={classes.input}
+                className={classes.short_input}
                 name="nickname"
                 value={formData.nickname}
                 onChange={onChangeHandler}
