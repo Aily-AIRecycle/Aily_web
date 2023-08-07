@@ -2,7 +2,7 @@
 import Profilecopy from "@/components/MyPage/Profilecopy";
 import classes from "@/components/MyPage/styles/Edit.module.scss";
 import axios from "axios";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Profile from "@/components/MyPage/Profile";
 import SubmitButton from "@/components/UI/SubmitButton";
 import CropImageModal from "@/components/MyPage/CropImageModal";
@@ -93,7 +93,9 @@ export default function Edit() {
     }
   };
 
-  const submitHandler = async () => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const formdata = new FormData();
     if (!loadImgUrl) {
       if (sessionStorage.getItem("CUN") == "yes") {
@@ -178,6 +180,7 @@ export default function Edit() {
     } else if (sessionStorage.getItem("CUN") == "error") {
       alert("아이디가 중복됩니다. 다시 시도 해주세요1");
     }
+    document.location.href = "/my-page/dashboard";
   };
   console.log("imaUrl :::::" + imgUrl);
   console.log("/member/member/upload/" + formData.nickname);
