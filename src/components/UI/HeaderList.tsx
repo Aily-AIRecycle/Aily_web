@@ -10,8 +10,9 @@ function HeaderList(props: any) {
     // Redirect to the login page after logout
   };
 
-  const sessionName = sessionStorage.getItem("loginok");
-  const sessionID = sessionStorage.getItem("name");
+  const name =
+    sessionStorage.getItem("loginok") || localStorage.getItem("loginok");
+  const id = sessionStorage.getItem("name") || localStorage.getItem("name");
 
   return (
     <ul className={props.ul}>
@@ -27,7 +28,7 @@ function HeaderList(props: any) {
       <li className={props.li}>
         <Link href="/statistics">통계</Link>
       </li>
-      {sessionName === "ok" && (
+      {name === "ok" && (
         <>
           <li className={props.li}>
             <Link href="/my-page/dashboard">내 정보</Link>
@@ -35,12 +36,10 @@ function HeaderList(props: any) {
           <li className={props.li} onClick={handleLogout}>
             <Link href="/">로그아웃</Link>
           </li>
-          {sessionID === "테스트" && (
-            <Link href="/hidden">관리자 대쉬보드</Link>
-          )}
+          {id === "테스트" && <Link href="/hidden">관리자 대쉬보드</Link>}
         </>
       )}
-      {sessionName !== "ok" && (
+      {name !== "ok" && (
         <li className={props.li}>
           <Link href="/login">로그인</Link>
         </li>
