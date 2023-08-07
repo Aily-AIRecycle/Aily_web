@@ -4,10 +4,10 @@
   "private": true,
   "proxy": {
     "/member": {
-      "target": "http://ailymit.store/member"
+      "target": "https://ailymit.store/member"
     },
     "/data": {
-      "target": "http://ailymit.store/data"
+      "target": "https://ailymit.store/data"
     }
   },
   "dependencies": {
@@ -30,7 +30,7 @@
     "eslint-config-next": "^13.4.7",
     "http-proxy-middleware": "^2.0.6",
     "moment": "^2.29.4",
-    "next": "^13.4.7",
+    "next": "^13.4.12",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
     "react-chartjs-2": "^5.2.0",

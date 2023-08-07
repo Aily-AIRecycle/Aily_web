@@ -50,8 +50,6 @@ export default function Edit() {
     gender: (value: string) => value !== "",
   };
 
-  
-
   const [formData, errors, onChangeHandler, onUpdateFormData]: [
     any,
     Errors,
@@ -92,16 +90,13 @@ export default function Edit() {
       };
 
       reader.readAsDataURL(file);
-      
     }
   };
 
-
   const submitHandler = async () => {
-    
     const formdata = new FormData();
     if (!loadImgUrl) {
-      if(sessionStorage.getItem("CUN") == "yes"){
+      if (sessionStorage.getItem("CUN") == "yes") {
         axios
           .post("/member/member/UIC", {
             phonenumber: formData.phonenumber,
@@ -110,84 +105,82 @@ export default function Edit() {
             birth: formData.birth,
             gender: formData.gender,
           })
-          .then((response) => {
-            
-          })
+          .then((response) => {})
           .catch((error) => {
             // Handle errors if needed
           });
-          sessionStorage.setItem("name", formData.nickname);
-          localStorage.setItem("name", formData.nickname);
-          alert("이름 변경이 완료 되었습니다.");
-      }
-      return;
-    }else if(sessionStorage.getItem("CUN") == "yes" && loadImgUrl){
-      const blob = await fetch(loadImgUrl).then(res => res.blob());
-      formdata.append("image", blob);
-        axios
-          .post("/member/member/UIC", {
-            phonenumber: formData.phonenumber,
-            email: formData.email, // Include the unchanged email field
-            nickname: formData.nickname,
-            birth: formData.birth,
-            gender: formData.gender,
-          })
-          .then((response) => {
-            
-          })
-          .catch((error) => {
-            // Handle errors if needed
-          });
-
-          axios
-          .post(`/member/member/upload/${formData.nickname}`, formdata,{
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          })
-          .then((response) => {
-            // Handle the response if needed
-          })
-          .catch((error) => {
-            // Handle errors if needed
-          });   
-            sessionStorage.setItem("name", formData.nickname);
-            localStorage.setItem("name", formData.nickname);
-            console.log(sessionStorage.getItem("name"));
-          
-          alert("내 정보 수정이 완료 되었습니다.");
-          sessionStorage.setItem("cropimage","no")
-    }else if(loadImgUrl){
-      const blob = await fetch(loadImgUrl).then(res => res.blob());
-      formdata.append("image", blob);
-      axios
-      .post(`/member/member/upload/${formData.nickname}`, formdata,{
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then((response) => {
-        // Handle the response if needed
-      })
-      .catch((error) => {
-        // Handle errors if needed
-      });   
         sessionStorage.setItem("name", formData.nickname);
         localStorage.setItem("name", formData.nickname);
-        console.log(sessionStorage.getItem("name"));
-        alert("사진 변경이 되었습니다.");
-    }else if(sessionStorage.getItem("CUN") == "no"){
-        alert("아이디가 중복됩니다. 다시 시도 해주세요");
-    }else if(sessionStorage.getItem("CUN") == "error"){
+        alert("이름 변경이 완료 되었습니다.");
+      }
+      return;
+    } else if (sessionStorage.getItem("CUN") == "yes" && loadImgUrl) {
+      const blob = await fetch(imgUrl).then((res) => res.blob());
+      formdata.append("image", blob);
+      axios
+        .post("/member/member/UIC", {
+          phonenumber: formData.phonenumber,
+          email: formData.email, // Include the unchanged email field
+          nickname: formData.nickname,
+          birth: formData.birth,
+          gender: formData.gender,
+        })
+        .then((response) => {})
+        .catch((error) => {
+          // Handle errors if needed
+        });
+
+      axios
+        .post(`/member/member/upload/${formData.nickname}`, formdata, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        })
+        .then((response) => {
+          // Handle the response if needed
+        })
+        .catch((error) => {
+          // Handle errors if needed
+        });
+      sessionStorage.setItem("name", formData.nickname);
+      localStorage.setItem("name", formData.nickname);
+      console.log(sessionStorage.getItem("name"));
+
+      alert("내 정보 수정이 완료 되었습니다.");
+      sessionStorage.setItem("cropimage", "no");
+    } else if (loadImgUrl) {
+      const blob = await fetch(imgUrl).then((res) => res.blob());
+      formdata.append("image", blob);
+      axios
+        .post(`/member/member/upload/${formData.nickname}`, formdata, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        })
+        .then((response) => {
+          // Handle the response if needed
+        })
+        .catch((error) => {
+          // Handle errors if needed
+        });
+      sessionStorage.setItem("name", formData.nickname);
+      localStorage.setItem("name", formData.nickname);
+      console.log(sessionStorage.getItem("name"));
+      alert("사진 변경이 되었습니다.");
+    } else if (sessionStorage.getItem("CUN") == "no") {
+      alert("아이디가 중복됩니다. 다시 시도 해주세요");
+    } else if (sessionStorage.getItem("CUN") == "error") {
       alert("아이디가 중복됩니다. 다시 시도 해주세요1");
     }
-}
-  console.log("imaUrl :::::"+ imgUrl);
+  };
+  console.log("imaUrl :::::" + imgUrl);
   console.log("/member/member/upload/" + formData.nickname);
- 
-
-
-
 
   function checknickname() {
     axios
@@ -195,13 +188,11 @@ export default function Edit() {
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {
-          sessionStorage.setItem("CUN","yes")
+          sessionStorage.setItem("CUN", "yes");
           alert("사용이 가능합니다!");
-        } else if(res.data === "no"){
-          sessionStorage.setItem("CUN","no")
-          alert(
-            "이름이 중복됩니다. 다른 이름을 사용해 주세요."
-          );
+        } else if (res.data === "no") {
+          sessionStorage.setItem("CUN", "no");
+          alert("이름이 중복됩니다. 다른 이름을 사용해 주세요.");
         }
       })
       .catch()
@@ -210,10 +201,9 @@ export default function Edit() {
           setAuthMailBtnDisabled(false);
         }, 10000);
       });
-    console.log("dddddd"+"member/member/ChNick/" + formData.nickname)
+    console.log("dddddd" + "member/member/ChNick/" + formData.nickname);
   }
- 
- 
+
   return (
     <>
       {showModal &&
@@ -230,7 +220,6 @@ export default function Edit() {
         createPortal(
           <CropImageModal imgUrl={loadImgUrl} showModal={showModal} />,
           document.body
-          
         )}
       <div
         style={{
@@ -260,10 +249,10 @@ export default function Edit() {
                   onChange={onChangeHandler}
                 ></input>
                 <Button
-                value="이름 중복 확인"
-                color={"#f8b195"}
-                onClick={checknickname}
-              />
+                  value="이름 중복 확인"
+                  color={"#f8b195"}
+                  onClick={checknickname}
+                />
               </li>
               <li className={classes.data}>
                 <label htmlFor="phonenumber">전화번호</label>
@@ -306,14 +295,14 @@ export default function Edit() {
                 사진 업로드
               </label>
               <form encType="multipart/form-data">
-              <input
-                type="file"
-                id="file"
-                accept="image/*"
-                name="image"
-                onChange={handleFileChange}
-                style={{ display: "none" }}
-              />
+                <input
+                  type="file"
+                  id="file"
+                  accept="image/*"
+                  name="image"
+                  onChange={handleFileChange}
+                  style={{ display: "none" }}
+                />
               </form>
 
               {imgUrl !== null && (

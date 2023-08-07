@@ -1,20 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-	reactStrictMode: true,
-  	images: {
+module.exports = {
+  reactStrictMode: true,
+  images: {
+    domains: ["ailymit.store"],
     remotePatterns: [
       {
         protocol: "http",
         hostname: "localhost",
       },
     ],
-  },
-}
-
-
-module.exports = {
-  images: {
-    domains: ["localhost"],
   },
   experimental: {
     appDir: true,
@@ -28,4 +22,3 @@ module.exports = {
     ];
   },
 };
-
