@@ -20,8 +20,11 @@ import axios from "axios";
 import Image from "next/image";
 import SubmitButton from "@/components/UI/SubmitButton";
 import { FormData, Errors, ChangeHandler } from "@/hooks/use-formValidation";
+import { validationRules } from "@/app/join/validation_rules";
 
 function Join(): JSX.Element {
+  // const domain = "https://ailymit.store";
+  const domain = "";
   const [passwordShown, setPasswordShown] = useState(false);
 
   const [authNumber, setAuthNumber] = useState("");
@@ -33,23 +36,6 @@ function Join(): JSX.Element {
   function passwordEyeHandler() {
     setPasswordShown((prev) => !prev);
   }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex =
-    /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
-  const nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
-  const phoneRegex = /^01(?:0|1|[6-9])\d{4}\d{4}$/;
-  const birthRegex =
-    /^(?:(?:19|20)\d{2})(?:(?:(?:0[1-9]|1[0-2])(?:0[1-9]|1\d|2[0-8]))|(?:02(?:29))|(?:(?:0[13-9]|1[0-2])(?:29|30))|(?:0[13578]|1[02])31)$/;
-
-  const validationRules = {
-    email: (value: string) => emailRegex.test(value),
-    password: (value: string) => passwordRegex.test(value),
-    nickname: (value: string) => nameRegex.test(value),
-    phonenumber: (value: string) => phoneRegex.test(value),
-    birth: (value: string) => birthRegex.test(value),
-    gender: (value: string) => value !== "",
-  };
 
   const [formData, errors, onChangeHandler]: [
     FormData,
@@ -98,7 +84,7 @@ function Join(): JSX.Element {
       formData.phonenumber
     ) {
       axios
-        .post("member/member/join", {
+        .post(`${domain}/member/member/join`, {
           email: formData.email,
           password: formData.password,
           nickname: formData.nickname,
@@ -121,12 +107,14 @@ function Join(): JSX.Element {
 
   function authEmailHandler() {
     axios
-      .post("member/member/EmailCheck", { email: formData.email })
+      .post(`${domain}/member/member/EmailCheck`, {
+        email: formData.email,
+      })
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {
           axios
-            .post("member/member/auth-email", {
+            .post(`${domain}/member/member/auth-email`, {
               email: formData.email,
             })
             .then((res) => {
@@ -151,7 +139,7 @@ function Join(): JSX.Element {
 
   function checknickname() {
     axios
-      .get("member/member/ChNick/"+formData.nickname)
+      .get(`${domain}member/member/ChNick/${formData.nickname}`)
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {

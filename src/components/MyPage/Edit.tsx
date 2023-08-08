@@ -18,12 +18,12 @@ import useFormValidation, {
   ChangeHandler,
   UpdateFormData,
 } from "@/hooks/use-formValidation";
+import { validationRules } from "@/app/join/validation_rules";
 
 export default function Edit() {
-  useEffect(() => {
-    // Set "CUN" item in sessionStorage
-    sessionStorage.setItem("CUN", "error");
-  }, []);
+  // const domain = "https://ailymit.store";
+  const domain = "";
+
   // 사용자가 설정한 사진 또는 서버에서 가저온 사진 url
   const imgUrl = useSelector((state: any) => state.image.imageUrl);
   // const [imgUrl, setImgUrl] = useState(null);
@@ -33,22 +33,6 @@ export default function Edit() {
   const dispatch = useDispatch();
   const showModal = useSelector((state: any) => state.cropModal.showModal);
   const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex =
-    /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
-  const nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
-  const phoneRegex = /^01(?:0|1|[6-9])\d{4}\d{4}$/;
-  const birthRegex =
-    /^(?:(?:19|20)\d{2})(?:(?:(?:0[1-9]|1[0-2])(?:0[1-9]|1\d|2[0-8]))|(?:02(?:29))|(?:(?:0[13-9]|1[0-2])(?:29|30))|(?:0[13578]|1[02])31)$/;
-
-  const validationRules = {
-    email: (value: string) => emailRegex.test(value),
-    password: (value: string) => passwordRegex.test(value),
-    nickname: (value: string) => nameRegex.test(value),
-    phonenumber: (value: string) => phoneRegex.test(value),
-    birth: (value: string) => birthRegex.test(value),
-    gender: (value: string) => value !== "",
-  };
 
   const [formData, errors, onChangeHandler, onUpdateFormData]: [
     any,
@@ -58,8 +42,13 @@ export default function Edit() {
   ] = useFormValidation(validationRules);
 
   useEffect(() => {
+    // Set "CUN" item in sessionStorage
+    sessionStorage.setItem("CUN", "error");
+  }, []);
+
+  useEffect(() => {
     axios
-      .post("/member/member/UIS", {
+      .post(`${domain}/member/member/UIS`, {
         phonenumber:
           sessionStorage.getItem("phone_number") ||
           localStorage.getItem("phone_number"),
@@ -100,7 +89,7 @@ export default function Edit() {
     if (!loadImgUrl) {
       if (sessionStorage.getItem("CUN") == "yes") {
         axios
-          .post("/member/member/UIC", {
+          .post(`${domain}/member/member/UIC`, {
             phonenumber: formData.phonenumber,
             email: formData.email, // Include the unchanged email field
             nickname: formData.nickname,
@@ -120,7 +109,7 @@ export default function Edit() {
       const blob = await fetch(imgUrl).then((res) => res.blob());
       formdata.append("image", blob);
       axios
-        .post("/member/member/UIC", {
+        .post(`${domain}/member/member/UIC`, {
           phonenumber: formData.phonenumber,
           email: formData.email, // Include the unchanged email field
           nickname: formData.nickname,
@@ -133,7 +122,7 @@ export default function Edit() {
         });
 
       axios
-        .post(`/member/member/upload/${formData.nickname}`, formdata, {
+        .post(`${domain}/member/member/upload/${formData.nickname}`, formdata, {
           headers: {
             "Content-Type": "multipart/form-data",
             "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -157,7 +146,7 @@ export default function Edit() {
       const blob = await fetch(imgUrl).then((res) => res.blob());
       formdata.append("image", blob);
       axios
-        .post(`/member/member/upload/${formData.nickname}`, formdata, {
+        .post(`${domain}/member/member/upload/${formData.nickname}`, formdata, {
           headers: {
             "Content-Type": "multipart/form-data",
             "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -183,11 +172,11 @@ export default function Edit() {
     document.location.href = "/my-page/dashboard";
   };
   console.log("imaUrl :::::" + imgUrl);
-  console.log("/member/member/upload/" + formData.nickname);
+  console.log(`${domain}/member/member/upload/` + formData.nickname);
 
   function checknickname() {
     axios
-      .get("/member/member/ChNick/" + formData.nickname)
+      .get(`${domain}/member/member/ChNick/` + formData.nickname)
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {
