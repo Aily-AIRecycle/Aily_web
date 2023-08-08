@@ -26,13 +26,14 @@
   label {
     font-size: 20px;
   }
-  input {
-    border: 1px solid #a0a0a0;
-    border-radius: 8px;
-    padding-left: 12px;
-    width: 500px;
-    height: 40px;
-  }
+}
+
+.input {
+  border: 1px solid #a0a0a0;
+  border-radius: 8px;
+  padding: 0px 12px;
+  width: 500px;
+  height: 40px;
 }
 
 .edit_btn {
@@ -83,4 +84,9 @@
       background-color: #e7e7e7;
     }
   }
+}
+
+.name {
+  display: flex;
+  width: 500px;
 }

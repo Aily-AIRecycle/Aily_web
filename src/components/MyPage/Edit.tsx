@@ -239,6 +239,7 @@ export default function Edit() {
                 <label htmlFor="email">이메일</label>
                 <input
                   name="email"
+                  className={classes.input}
                   value={formData.email}
                   onChange={onChangeHandler}
                   autoFocus
@@ -246,32 +247,46 @@ export default function Edit() {
               </li>
               <li className={classes.data}>
                 <label htmlFor="nickname">이름</label>
-                <input
-                  name="nickname"
-                  value={formData.nickname}
-                  onChange={onChangeHandler}
-                ></input>
-                <Button
-                  value="이름 중복 확인"
-                  color={"#f8b195"}
-                  onClick={checknickname}
-                />
+                <div className={classes.name}>
+                  <input
+                    name="nickname"
+                    className={classes.input}
+                    value={formData.nickname}
+                    onChange={onChangeHandler}
+                  ></input>
+                  <Button
+                    value="이름 중복 확인"
+                    color={"#f8b195"}
+                    onClick={checknickname}
+                  />
+                </div>
               </li>
               <li className={classes.data}>
                 <label htmlFor="phonenumber">전화번호</label>
                 <input
                   name="phonenumber"
+                  className={classes.input}
                   value={formData.phonenumber}
                   readOnly
                 ></input>
               </li>
               <li className={classes.data}>
                 <label htmlFor="birth">생년월일</label>
-                <input name="gender" value={formData.birth} readOnly></input>
+                <input
+                  name="gender"
+                  className={classes.input}
+                  value={formData.birth}
+                  readOnly
+                ></input>
               </li>
               <li className={classes.data}>
                 <label htmlFor="gender">성별</label>
-                <input name="gender" value={formData.gender} readOnly></input>
+                <input
+                  name="gender"
+                  className={classes.input}
+                  value={formData.gender}
+                  readOnly
+                ></input>
               </li>
             </ul>
             <SubmitButton value="수정" onClick={submitHandler} />
