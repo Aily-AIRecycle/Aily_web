@@ -21,18 +21,18 @@ import useFormValidation, {
 import { validationRules } from "@/app/join/validation_rules";
 
 export default function Edit() {
-  // const domain = "https://ailymit.store";
-  const domain = "";
+  const domain = "https://ailymit.store";
+  // const domain = "";
 
-  // 사용자가 설정한 사진 또는 서버에서 가저온 사진 url
   const imgUrl = useSelector((state: any) => state.image.imageUrl);
-  // const [imgUrl, setImgUrl] = useState(null);
+  // const originImgUrl = imgUrl;
+  const [isChangedImg, setIsChangedImg] = useState(false);
   const [loadImgUrl, setLoadImgUrl] = useState<string | null>(null);
-  const [serverLoadImgUrl, setServerLoadImgUrl] = useState<string | null>(null);
+  const [isAvailableName, setIsAvailableName] = useState(false);
+  // const [disabled, setDisabled] = useState(true);
   const [showBox, setShowBox] = useState(false);
   const dispatch = useDispatch();
   const showModal = useSelector((state: any) => state.cropModal.showModal);
-  const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
 
   const [formData, errors, onChangeHandler, onUpdateFormData]: [
     any,
@@ -42,10 +42,10 @@ export default function Edit() {
   ] = useFormValidation(validationRules);
 
   useEffect(() => {
-    // Set "CUN" item in sessionStorage
-    sessionStorage.setItem("CUN", "error");
-  }, []);
+    setIsAvailableName(false);
+  }, [formData.nickname]);
 
+  // 정보 가져오기
   useEffect(() => {
     axios
       .post(`${domain}/member/member/UIS`, {
@@ -65,9 +65,21 @@ export default function Edit() {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(showModal);
-  }, [showModal]);
+  // 이름 중복 체크
+  function checknickname() {
+    axios
+      .get(`${domain}/member/member/ChNick/${formData.nickname}`)
+      .then((res) => {
+        // 중복 아니면 res = 'yes'
+        if (res.data === "yes") {
+          setIsAvailableName(true);
+          alert("사용이 가능합니다!");
+        } else if (res.data === "no") {
+          alert("이름이 중복됩니다. 다른 이름을 사용해 주세요.");
+        }
+      })
+      .catch();
+  }
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
@@ -85,116 +97,48 @@ export default function Edit() {
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formdata = new FormData();
-    if (!loadImgUrl) {
-      if (sessionStorage.getItem("CUN") == "yes") {
-        axios
-          .post(`${domain}/member/member/UIC`, {
-            phonenumber: formData.phonenumber,
-            email: formData.email, // Include the unchanged email field
-            nickname: formData.nickname,
-            birth: formData.birth,
-            gender: formData.gender,
-          })
-          .then((response) => {})
-          .catch((error) => {
-            // Handle errors if needed
-          });
+    // 정보 보내기
+    axios
+      .post(`${domain}/member/member/UIC`, {
+        phonenumber: formData.phonenumber,
+        email: formData.email, // Include the unchanged email field
+        nickname: formData.nickname,
+        birth: formData.birth,
+        gender: formData.gender,
+      })
+      .then((response) => {
         sessionStorage.setItem("name", formData.nickname);
         localStorage.setItem("name", formData.nickname);
-        alert("이름 변경이 완료 되었습니다.");
-      }
-      return;
-    } else if (sessionStorage.getItem("CUN") == "yes" && loadImgUrl) {
-      const blob = await fetch(imgUrl).then((res) => res.blob());
-      formdata.append("image", blob);
-      axios
-        .post(`${domain}/member/member/UIC`, {
-          phonenumber: formData.phonenumber,
-          email: formData.email, // Include the unchanged email field
-          nickname: formData.nickname,
-          birth: formData.birth,
-          gender: formData.gender,
-        })
-        .then((response) => {})
-        .catch((error) => {
-          // Handle errors if needed
-        });
+      })
+      .catch((error) => {
+        // Handle errors if needed
+      });
 
-      axios
-        .post(`${domain}/member/member/upload/${formData.nickname}`, formdata, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Cache-Control": "no-cache, no-store, must-revalidate",
-            Pragma: "no-cache",
-            Expires: "0",
-          },
-        })
-        .then((response) => {
-          // Handle the response if needed
-        })
-        .catch((error) => {
-          // Handle errors if needed
-        });
-      sessionStorage.setItem("name", formData.nickname);
-      localStorage.setItem("name", formData.nickname);
-      console.log(sessionStorage.getItem("name"));
+    // 사진 보내기
+    const formdata = new FormData();
+    const blob = await fetch(imgUrl).then((res) => res.blob());
+    formdata.append("image", blob);
+    axios
+      .post(`${domain}/member/member/upload/${formData.nickname}`, formdata, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      })
+      .then((response) => {
+        // Handle the response if needed
+      })
+      .catch((error) => {
+        // Handle errors if needed
+      });
 
-      alert("내 정보 수정이 완료 되었습니다.");
-      sessionStorage.setItem("cropimage", "no");
-    } else if (loadImgUrl) {
-      const blob = await fetch(imgUrl).then((res) => res.blob());
-      formdata.append("image", blob);
-      axios
-        .post(`${domain}/member/member/upload/${formData.nickname}`, formdata, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Cache-Control": "no-cache, no-store, must-revalidate",
-            Pragma: "no-cache",
-            Expires: "0",
-          },
-        })
-        .then((response) => {
-          // Handle the response if needed
-        })
-        .catch((error) => {
-          // Handle errors if needed
-        });
-      sessionStorage.setItem("name", formData.nickname);
-      localStorage.setItem("name", formData.nickname);
-      console.log(sessionStorage.getItem("name"));
-      alert("사진 변경이 되었습니다.");
-    } else if (sessionStorage.getItem("CUN") == "no") {
-      alert("아이디가 중복됩니다. 다시 시도 해주세요");
-    } else if (sessionStorage.getItem("CUN") == "error") {
-      alert("아이디가 중복됩니다. 다시 시도 해주세요1");
-    }
+    alert("정보 수정이 완료되었습니다.");
     document.location.href = "/my-page/dashboard";
   };
   console.log("imaUrl :::::" + imgUrl);
-  console.log(`${domain}/member/member/upload/` + formData.nickname);
-
-  function checknickname() {
-    axios
-      .get(`${domain}/member/member/ChNick/` + formData.nickname)
-      .then((res) => {
-        // 중복 아니면 res = 'yes'
-        if (res.data === "yes") {
-          sessionStorage.setItem("CUN", "yes");
-          alert("사용이 가능합니다!");
-        } else if (res.data === "no") {
-          sessionStorage.setItem("CUN", "no");
-          alert("이름이 중복됩니다. 다른 이름을 사용해 주세요.");
-        }
-      })
-      .catch()
-      .finally(() => {
-        setTimeout(() => {
-          setAuthMailBtnDisabled(false);
-        }, 10000);
-      });
-    console.log("dddddd" + "member/member/ChNick/" + formData.nickname);
-  }
+  console.log(`${domain}/member/member/upload/${formData.nickname}`);
 
   return (
     <>

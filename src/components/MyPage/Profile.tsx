@@ -2,9 +2,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import classes from "@/components/MyPage/styles/Profile.module.scss";
+import { useDispatch } from "react-redux";
+import { setImageUrl } from "@/store/image";
 
 export default function Profile(props: any) {
-  const [imageUrl1, setImageUrl1] = useState<string>("");
+  const [imgUrl, setImgUrl] = useState<string>("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -25,14 +28,12 @@ export default function Profile(props: any) {
       )
       .then((response) => {
         console.log(response);
-        // server
-        // const relativePath = response.data.split("/member/image/")[1];
-        // const imageUrl = "/member/image/" + relativePath;
-        // console.log(imageUrl);
-        // setImageUrl1(imageUrl);
 
-        // local
-        setImageUrl1(response.data);
+        // const imageUrl = response.data.split("https://ailymit.store")[1]
+        // console.log(imageUrl);
+
+        setImgUrl(response.data);
+        dispatch(setImageUrl(`${response.data}?${Date.now()}`));
       })
       .catch((error) => {
         // Handle errors if needed
@@ -40,13 +41,13 @@ export default function Profile(props: any) {
   }, []);
 
   useEffect(() => {
-    console.log(imageUrl1);
+    console.log(imgUrl);
   });
   return (
     <div className={classes.img}>
-      {imageUrl1 && (
+      {imgUrl && (
         <Image
-          src={`${imageUrl1}?${Date.now()}`} // 현재 시각의 프사를 가져옴
+          src={`${imgUrl}?${Date.now()}`} // 현재 시각의 프사를 가져옴
           priority
           width={180}
           height={180}
