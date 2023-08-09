@@ -1,5 +1,4 @@
 "use client";
-import Profilecopy from "@/components/MyPage/Profilecopy";
 import classes from "@/components/MyPage/styles/Edit.module.scss";
 import axios from "axios";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -226,7 +225,7 @@ export default function Edit() {
           </form>
         </div>
         <div style={{ marginTop: "88px" }}>
-          <Profilecopy src={imgUrl} />
+          <Profile src={imgUrl} />
           <button
             className={classes.edit_btn}
             onClick={() => {

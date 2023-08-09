@@ -4,6 +4,9 @@ import classes from "@/components/MyPage/styles/MyPageNavigation.module.scss";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Profile from "@/components/MyPage/Profile";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setImageUrl } from "@/store/image";
 
 const menuData = [
   { name: "대시보드", path: "dashboard" },
@@ -15,16 +18,51 @@ const menuData = [
 export default function MyPageNavigation() {
   const [userName, setUserName] = useState<string | null>(null);
   const pathname = usePathname();
+  const [imgUrl, setImgUrl] = useState<string>("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const name = sessionStorage.getItem("name") || localStorage.getItem("name");
     setUserName(name);
   }, []);
 
+  useEffect(() => {
+    axios
+      .post(
+        "https://ailymit.store/member/member/userimage",
+        {
+          phonenumber:
+            sessionStorage.getItem("phone_number") ||
+            localStorage.getItem("phone_number"),
+        },
+        {
+          headers: {
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+
+        // const imageUrl = response.data.split("https://ailymit.store")[1]
+        // console.log(imageUrl);
+
+        // setImgUrl(response.data);
+        const url = `${response.data}?${Date.now()}`;
+        setImgUrl(url);
+        dispatch(setImageUrl(url));
+      })
+      .catch((error) => {
+        // Handle errors if needed
+      });
+  }, []);
+
   return (
     <div className={classes.box}>
       <div className={classes.profile}>
-        <Profile />
+        <Profile src={imgUrl} />
         <p>{userName}</p>
       </div>
       <ul className={classes.my_page}>
