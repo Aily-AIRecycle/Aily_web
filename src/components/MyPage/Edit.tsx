@@ -142,7 +142,7 @@ export default function Edit() {
         });
       
         if (uicResponse.status === 200) {
-          const uploadResponse = await axios.post(`/member/member/upload/${formData.nickname}`, formdata, {
+          const uploadResponse = axios.post(`/member/member/upload/${formData.nickname}`, formdata, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
