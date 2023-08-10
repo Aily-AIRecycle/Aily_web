@@ -24,6 +24,7 @@ const CropImageModal = (props: any) => {
   );
 
   const showCroppedImage = useCallback(async () => {
+    sessionStorage.setItem("cropimage","yes")
     if (croppedAreaPixels) {
       try {
         const croppedImage = await getCroppedImg(
