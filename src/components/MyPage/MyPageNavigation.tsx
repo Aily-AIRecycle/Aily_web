@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import classes from "@/components/MyPage/styles/MyPageNavigation.module.scss";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Profile from "@/components/MyPage/Profile";
@@ -60,17 +59,19 @@ export default function MyPageNavigation() {
   }, []);
 
   return (
-    <div className={classes.box}>
-      <div className={classes.profile}>
+    <div className="mt-[88px] mr-11">
+      <div className="flex flex-col items-center mb-12">
         <Profile src={imgUrl} />
-        <p>{userName}</p>
+        <p className="text-[28px] mt-3">{userName}</p>
       </div>
-      <ul className={classes.my_page}>
+      <ul className="flex flex-col justify-center items-center">
         {menuData.map((menu, index: number) => (
           <li
             key={index}
-            className={`${classes.menu} ${
-              pathname === `/my-page/${menu.path}` ? classes.menu_active : ""
+            className={`${"flex items-center justify-center w-[280px] h-10 text-[16px] border-l-[12px] border-solid"} ${
+              pathname === `/my-page/${menu.path}`
+                ? "border-[#f8b195]"
+                : "border-white"
             }`}
           >
             <Link href={`/my-page/${menu.path}`}>{menu.name}</Link>
