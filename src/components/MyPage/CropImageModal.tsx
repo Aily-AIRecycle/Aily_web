@@ -1,5 +1,3 @@
-import Image from "next/image";
-import classes from "@/components/MyPage/styles/CropImage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { cropModalActions } from "@/store/cropModal";
 import { useState, useCallback } from "react";
@@ -41,19 +39,20 @@ const CropImageModal = (props: any) => {
 
   return (
     <>
-      <div className={classes.box}>
-        <div className={classes.header}>
+      <div className="bg-white w-[30rem] rounded-lg absolute left-[calc(50%-20rem)] top-[calc(50%-30rem)] flex flex-col items-center">
+        <div className="w-[28rem] h-14 flex items-center justify-between">
           <h1>원하는 부분을 잘라주세요.</h1>
           <button
             onClick={() => {
               dispatch(cropModalActions.click());
             }}
+            className="flex items-center justify-center"
           >
-            X
+            <span className="material-symbols-outlined">close</span>
           </button>
         </div>
-        <div className={classes.cropper_wrap}>
-          <div className={classes.cropper}>
+        <div className="w-full h-[32rem] flex justify-center items-center py-3 border-y border-solid border-[#d9d9d9]">
+          <div className="w-[28rem] h-[28rem] absolute">
             <Cropper
               image={props.imgUrl}
               crop={crop}
@@ -65,15 +64,17 @@ const CropImageModal = (props: any) => {
             />
           </div>
         </div>
-        <button
-          onClick={() => {
-            showCroppedImage();
-            dispatch(cropModalActions.click());
-          }}
-          className={classes.button}
-        >
-          자르기
-        </button>
+        <div>
+          <button
+            onClick={() => {
+              showCroppedImage();
+              dispatch(cropModalActions.click());
+            }}
+            className="bg-[#f8b195] my-5 w-[28rem] h-10 rounded-lg text-[16px] text-white"
+          >
+            자르기
+          </button>
+        </div>
       </div>
     </>
   );
