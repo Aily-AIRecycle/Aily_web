@@ -1,5 +1,4 @@
 "use client";
-import classes from "@/components/MyPage/styles/Edit.module.scss";
 import axios from "axios";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Profile from "@/components/MyPage/Profile";
@@ -18,7 +17,12 @@ import useFormValidation, {
   UpdateFormData,
 } from "@/hooks/use-formValidation";
 import { validationRules } from "@/app/join/validation_rules";
+import MyPageInput from "./MyPageInput";
 
+const data = "flex flex-col mb-3";
+const input =
+  "border-[1px] border-solid border-[#a0a0a0] rounded-lg px-3 py-0 w-[500px] h-10";
+const label = "text-[20px]";
 export default function Edit() {
   const domain = "https://ailymit.store";
   // const domain = "";
@@ -159,12 +163,18 @@ export default function Edit() {
     }
   }
 
+  const editFields = [
+    { label: "전화번호", name: "phonenumber" },
+    { label: "생년월일", name: "birth" },
+    { label: "성별", name: "gender" },
+  ];
+
   return (
     <>
       {showModal &&
         createPortal(
           <div
-            className={classes.modal}
+            className="bg-black opacity-60 w-full h-full fixed top-0"
             onClick={() => {
               dispatch(cropModalActions.click());
             }}
@@ -176,33 +186,28 @@ export default function Edit() {
           <CropImageModal imgUrl={loadImgUrl} showModal={showModal} />,
           document.body
         )}
-      <div
-        style={{
-          display: "flex",
-          width: "994px",
-          height: "875px",
-        }}
-      >
-        <div className={classes.box}>
-          <p className={classes.title}>내 정보 수정</p>
+      <div className="flex w-[994px] h-[875px]">
+        <div className="mt-5 mr-[100px]">
+          <p className="text-[28px] mb-[50px]">내 정보 수정</p>
           <form>
-            <ul className={classes.edit}>
-              <li className={classes.data}>
-                <label htmlFor="email">이메일</label>
-                <input
+            <ul className="mb-10">
+              <li className={data}>
+                <MyPageInput
+                  label="이메일"
                   name="email"
-                  className={classes.input}
                   value={formData.email}
                   onChange={onChangeHandler}
-                  autoFocus
-                ></input>
+                  autoFocus={true}
+                />
               </li>
-              <li className={classes.data}>
-                <label htmlFor="nickname">이름</label>
-                <div className={classes.name}>
+              <li className={data}>
+                <label htmlFor="nickname" className={label}>
+                  이름
+                </label>
+                <div className="flex w-[500px]">
                   <input
                     name="nickname"
-                    className={classes.input}
+                    className={input}
                     value={formData.nickname}
                     onChange={onChangeHandler}
                   ></input>
@@ -214,41 +219,26 @@ export default function Edit() {
                   />
                 </div>
               </li>
-              <li className={classes.data}>
-                <label htmlFor="phonenumber">전화번호</label>
-                <input
-                  name="phonenumber"
-                  className={classes.input}
-                  value={formData.phonenumber}
-                  readOnly
-                ></input>
-              </li>
-              <li className={classes.data}>
-                <label htmlFor="birth">생년월일</label>
-                <input
-                  name="gender"
-                  className={classes.input}
-                  value={formData.birth}
-                  readOnly
-                ></input>
-              </li>
-              <li className={classes.data}>
-                <label htmlFor="gender">성별</label>
-                <input
-                  name="gender"
-                  className={classes.input}
-                  value={formData.gender}
-                  readOnly
-                ></input>
-              </li>
+              {editFields.map((field) => (
+                <li className={data}>
+                  <MyPageInput
+                    key={field.name}
+                    label={field.label}
+                    name={field.name}
+                    value={formData[field.name]}
+                    onChange={onChangeHandler}
+                    readOnly={true}
+                  />
+                </li>
+              ))}
             </ul>
             <SubmitButton value="수정" onClick={submitHandler} />
           </form>
         </div>
-        <div style={{ marginTop: "88px" }}>
+        <div className="mt-[88px]">
           <Profile src={imgUrl} />
           <button
-            className={classes.edit_btn}
+            className="w-[50px] h-[50px] flex justify-center items-center rounded-full border-[1px] border-solid border-black bg-white relative bottom-[50px]"
             onClick={() => {
               setShowBox(!showBox);
             }}
@@ -256,12 +246,13 @@ export default function Edit() {
             <Image src={edit} alt="edit" width={30} height={30} />
           </button>
           {showBox && (
-            <div className={classes.edit_box}>
+            <div className="relative top-[-30px] border-[1px] border-solid border-[#d9d9d9] py-[5px]">
               <label
                 htmlFor="file"
                 onClick={() => {
                   dispatch(cropModalActions.crop());
                 }}
+                className="w-full flex justify-center text-inherit leading-normal align-middle cursor-pointer hover:bg-[#e7e7e7]"
               >
                 사진 업로드
               </label>
@@ -272,12 +263,15 @@ export default function Edit() {
                   accept="image/*"
                   name="image"
                   onChange={handleFileChange}
-                  style={{ display: "none" }}
+                  className="hidden absolute w-0 h-0 overflow-hidden hover:bg-[#e7e7e7]"
                 />
               </form>
 
               {imgUrl !== null && (
-                <button onClick={() => dispatch(setImageUrl(null))}>
+                <button
+                  onClick={() => dispatch(setImageUrl(null))}
+                  className="w-full hover:bg-[#e7e7e7]"
+                >
                   사진 제거
                 </button>
               )}
