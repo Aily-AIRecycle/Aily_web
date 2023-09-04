@@ -17,7 +17,7 @@ const MyPage = () => {
     <>
       <Provider store={store}>
         <Header />
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="flex justify-center bg-[#fafbfb]">
           <MyPageNavigation />
           {pathname === "/my-page/dashboard" && <Dashboard />}
           {pathname === "/my-page/edit" && <Edit />}

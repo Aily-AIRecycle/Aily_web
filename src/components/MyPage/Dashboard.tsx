@@ -6,7 +6,7 @@ import PointHistory from "@/components/MyPage/PointHistory";
 export default function Dashboard() {
   return (
     <>
-      <div className="mt-10 mb-28">
+      <div className="h-full my-10 p-10 bg-white rounded-3xl">
         <p className="text-[28px] mb-6">대시보드</p>
         <div className="flex mb-11">
           <Point />

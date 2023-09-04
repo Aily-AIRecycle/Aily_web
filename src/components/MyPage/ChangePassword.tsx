@@ -14,7 +14,7 @@ import { validationRules } from "@/app/join/validation_rules";
 
 const li = "flex flex-col mb-3";
 const input =
-  "border-solid border-[1px] border-[#a0a0a0] rounded-lg pl-3 w-[500px] h-10";
+  "border-[1px] border-solid border-[#a0a0a0] rounded-lg px-3 w-full h-10";
 const label = "text-[20px]";
 
 export default function ChangePassword() {
@@ -60,7 +60,7 @@ export default function ChangePassword() {
 
   return (
     <>
-      <div className="w-[994px] h-[875px] mt-5">
+      <div className="my-10 p-10 w-[1074px] h-full bg-white rounded-3xl">
         <p className="text-[28px] mb-[50px]">비밀번호 변경</p>
         <form onSubmit={changePasswordHandler}>
           <ul>

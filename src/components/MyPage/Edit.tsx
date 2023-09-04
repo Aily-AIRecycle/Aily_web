@@ -21,7 +21,7 @@ import MyPageInput from "./MyPageInput";
 
 const data = "flex flex-col mb-3";
 const input =
-  "border-[1px] border-solid border-[#a0a0a0] rounded-lg px-3 py-0 w-[500px] h-10";
+  "border-[1px] border-solid border-[#a0a0a0] rounded-lg px-3 w-full h-10";
 const label = "text-[20px]";
 export default function Edit() {
   const domain = "https://ailymit.store";
@@ -186,8 +186,8 @@ export default function Edit() {
           <CropImageModal imgUrl={loadImgUrl} showModal={showModal} />,
           document.body
         )}
-      <div className="flex w-[994px] h-[875px]">
-        <div className="mt-5 mr-[100px]">
+      <div className="flex justify-between h-full bg-white w-[1074px]  my-10 p-10 rounded-3xl">
+        <div className="w-full mr-[100px]">
           <p className="text-[28px] mb-[50px]">내 정보 수정</p>
           <form>
             <ul className="mb-10">
@@ -204,7 +204,7 @@ export default function Edit() {
                 <label htmlFor="nickname" className={label}>
                   이름
                 </label>
-                <div className="flex w-[500px]">
+                <div className="flex">
                   <input
                     name="nickname"
                     className={input}

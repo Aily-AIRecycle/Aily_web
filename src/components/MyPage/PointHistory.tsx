@@ -42,7 +42,7 @@ export default function PointHistory() {
   }, []);
 
   return (
-    <div className="w-[700px] h-[250px] bg-[#ffe8df] rounded-xl flex justify-center items-center shadow-xl">
+    <div className="w-[700px] h-[250px] bg-[#ffe8df] rounded-xl flex justify-center items-center shadow-lg">
       <div className="w-[670px] h-[220px] pt-3 pb-3 pl-5 pr-5 bg-white rounded-xl">
         <p className="text-[24px]">적립내역</p>
         <div className="h-[150px] overflow-auto">
