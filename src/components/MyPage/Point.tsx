@@ -6,39 +6,21 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Point() {
-  interface Data {
-    GEN: number;
-    CAN: number;
-    profile: string;
-    phonenumber: string;
-    nickname: string;
-    point: number;
-    PET: number;
-  }
+
 
   const [userName, setUserName] = useState<string | null>(null);
-  const [data, setData] = useState<Data | null>(null);
+  const [userPoint, setUserPoint] = useState<string | null>(sessionStorage.getItem("totalpoint"));
+
 
   useEffect(() => {
     const name = sessionStorage.getItem("name") || localStorage.getItem("name");
+    const point = sessionStorage.getItem("totalpoint")
     setUserName(name);
+    setUserPoint(point);
+
   }, []);
 
-  useEffect(() => {
-    axios
-      .post("/member/member/mypage", {
-        nickname:
-          sessionStorage.getItem("name") || localStorage.getItem("name"),
-      })
-      .then((response) => {
-        // Handle the POST request response
-        setData(response.data);
-      })
-      .catch((error) => {
-        // Handle the POST request error
-        console.error(error);
-      });
-  }, []);
+
 
   return (
     <div className={classes.box}>
@@ -46,7 +28,7 @@ export default function Point() {
         <Image src={wallet} alt="wallet" width={36} />
         <p>{userName}님의 포인트</p>
       </div>
-      {data && <p className={classes.point}>{data.point}P</p>}
+      <p className={classes.point}>{userPoint}P</p>
     </div>
   );
 }

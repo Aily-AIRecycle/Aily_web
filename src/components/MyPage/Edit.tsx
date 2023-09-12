@@ -75,6 +75,7 @@ export default function Edit() {
           birth: dataFromServer.birth,
           gender: dataFromServer.gender,
         });
+        sessionStorage.setItem("totalpoint",dataFromServer.myPage.point)
       });
   }, []);
 
