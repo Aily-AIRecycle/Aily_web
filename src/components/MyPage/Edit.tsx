@@ -1,6 +1,4 @@
 "use client";
-import Profilecopy from "@/components/MyPage/Profile";
-import classes from "@/components/MyPage/styles/Edit.module.scss";
 import axios from "axios";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Profile from "@/components/MyPage/Profile";
@@ -18,39 +16,33 @@ import useFormValidation, {
   ChangeHandler,
   UpdateFormData,
 } from "@/hooks/use-formValidation";
+import MyPageInput from "./MyPageInput";
+import { validationRules } from "@/app/join/validation_rules";
+
+const data = "flex flex-col mb-3";
+const input =
+  "border-[1px] border-solid border-[#a0a0a0] rounded-lg px-3 w-full h-10";
+const label = "text-[20px]";
 
 export default function Edit() {
+  const domain = "https://ailymit.store";
+  // const domain = "";
+
   useEffect(() => {
     // Set "CUN" item in sessionStorage
     sessionStorage.setItem("CUN", "error");
   }, []);
   // 사용자가 설정한 사진 또는 서버에서 가저온 사진 url
   const imgUrl = useSelector((state: any) => state.image.imageUrl);
-  // const [imgUrl, setImgUrl] = useState(null);
   const [loadImgUrl, setLoadImgUrl] = useState<string | null>(null);
-  const [serverLoadImgUrl, setServerLoadImgUrl] = useState<string | null>(null);
+  const [isAvailableName, setIsAvailableName] = useState(true);
   const [showBox, setShowBox] = useState(false);
   const dispatch = useDispatch();
   const showModal = useSelector((state: any) => state.cropModal.showModal);
   const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex =
-    /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
-  const nameRegex = /^[a-zA-Z가-힣]{2,50}$/;
-  const phoneRegex = /^01(?:0|1|[6-9])\d{4}\d{4}$/;
-  const birthRegex =
-    /^(?:(?:19|20)\d{2})(?:(?:(?:0[1-9]|1[0-2])(?:0[1-9]|1\d|2[0-8]))|(?:02(?:29))|(?:(?:0[13-9]|1[0-2])(?:29|30))|(?:0[13578]|1[02])31)$/;
 
-  const validationRules = {
-    email: (value: string) => emailRegex.test(value),
-    password: (value: string) => passwordRegex.test(value),
-    nickname: (value: string) => nameRegex.test(value),
-    phonenumber: (value: string) => phoneRegex.test(value),
-    birth: (value: string) => birthRegex.test(value),
-    gender: (value: string) => value !== "",
-  };
-
-  const [nameChanged, setNameChanged] = useState(false);
+  const [isAuthNameBtnDisabled, setIsAuthNameBtnDisabled] = useState(false);
+  const name = sessionStorage.getItem("name") || localStorage.getItem("name");
 
   const [formData, errors, onChangeHandler, onUpdateFormData]: [
     any,
@@ -61,7 +53,7 @@ export default function Edit() {
 
   useEffect(() => {
     axios
-      .post("/member/member/UIS", {
+      .post(`${domain}/member/member/UIS`, {
         phonenumber:
           sessionStorage.getItem("phone_number") ||
           localStorage.getItem("phone_number"),
@@ -75,13 +67,17 @@ export default function Edit() {
           birth: dataFromServer.birth,
           gender: dataFromServer.gender,
         });
-        sessionStorage.setItem("totalpoint",dataFromServer.myPage.point)
+        // sessionStorage.setItem("totalpoint", dataFromServer.myPage.point);
       });
   }, []);
 
   useEffect(() => {
-    console.log(showModal);
-  }, [showModal]);
+    if (name === formData.nickname) {
+      setIsAvailableName(true);
+    } else {
+      setIsAvailableName(false);
+    }
+  }, [formData.nickname]);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
@@ -93,61 +89,58 @@ export default function Edit() {
       };
 
       reader.readAsDataURL(file);
-      
     }
   };
 
-  
-
-
-  const submitHandler = async () => {
-    
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const formdata = new FormData();
 
-    if (nameChanged && sessionStorage.getItem("CUN") !== "yes") {
+    if (!isAvailableName && sessionStorage.getItem("CUN") !== "yes") {
       alert("이름 중복 확인을 해주세요.");
       return;
-    }else if (!loadImgUrl) {
-      if(sessionStorage.getItem("CUN") == "yes"){
+    } else if (!loadImgUrl) {
+      if (sessionStorage.getItem("CUN") == "yes") {
         axios
-          .post("/member/member/UIC", {
+          .post(`${domain}/member/member/UIC`, {
             phonenumber: formData.phonenumber,
             email: formData.email, // Include the unchanged email field
             nickname: formData.nickname,
             birth: formData.birth,
             gender: formData.gender,
           })
-          .then((response) => {
-            
-          })
+          .then((response) => {})
           .catch((error) => {
             // Handle errors if needed
           });
-          sessionStorage.setItem("name", formData.nickname);
-          localStorage.setItem("name", formData.nickname);
-          alert("이름 변경이 완료 되었습니다.");
+        sessionStorage.setItem("name", formData.nickname);
+        localStorage.setItem("name", formData.nickname);
+        alert("이름 변경이 완료 되었습니다.");
       }
       return;
-    }else if (sessionStorage.getItem("CUN") === "yes" && loadImgUrl) {
-      const blob = await fetch(loadImgUrl).then(res => res.blob());
+    } else if (sessionStorage.getItem("CUN") === "yes" && loadImgUrl) {
+      const blob = await fetch(loadImgUrl).then((res) => res.blob());
       formdata.append("image", blob);
-    
-      try {
 
-        const uicResponse = await axios.post("/member/member/UIC", {
+      try {
+        const uicResponse = await axios.post(`${domain}/member/member/UIC`, {
           phonenumber: formData.phonenumber,
           email: formData.email,
           nickname: formData.nickname,
           birth: formData.birth,
           gender: formData.gender,
         });
-      
+
         if (uicResponse.status === 200) {
-          const uploadResponse = axios.post(`/member/member/upload/${formData.nickname}`, formdata, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
+          const uploadResponse = axios.post(
+            `${domain}/member/member/upload/${formData.nickname}`,
+            formdata,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
             }
-          });
+          );
         }
         sessionStorage.setItem("name", formData.nickname);
         localStorage.setItem("name", formData.nickname);
@@ -157,44 +150,38 @@ export default function Edit() {
         console.error("Error:", error);
         // Handle errors if needed
       }
-    }else if(loadImgUrl){
-      const blob = await fetch(loadImgUrl).then(res => res.blob());
+    } else if (loadImgUrl) {
+      const blob = await fetch(loadImgUrl).then((res) => res.blob());
       formdata.append("image", blob);
       axios
-      .post(`/member/member/upload/${formData.nickname}`, formdata,{
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then((response) => {
-      })
-      .catch((error) => {
-      });   
-        sessionStorage.setItem("name", formData.nickname);
-        localStorage.setItem("name", formData.nickname);
-        alert("사진 변경이 되었습니다.");
-    }else if(sessionStorage.getItem("CUN") == "no"){
-        alert("아이디가 중복됩니다. 다시 시도 해주세요");
-    }else if(sessionStorage.getItem("CUN") == "error"){
+        .post(`${domain}/member/member/upload/${formData.nickname}`, formdata, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {})
+        .catch((error) => {});
+      sessionStorage.setItem("name", formData.nickname);
+      localStorage.setItem("name", formData.nickname);
+      alert("사진 변경이 되었습니다.");
+    } else if (sessionStorage.getItem("CUN") === "no") {
+      alert("아이디가 중복됩니다. 다시 시도 해주세요");
+    } else if (sessionStorage.getItem("CUN") === "error") {
       alert("ERROR Code = U102. 관리자에게 문의해주세요.");
     }
-}
- 
-
+  };
 
   function checknickname() {
     axios
-      .get("/member/member/ChNick/" + formData.nickname)
+      .get(`${domain}/member/member/ChNick/${formData.nickname}`)
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {
-          sessionStorage.setItem("CUN","yes")
+          sessionStorage.setItem("CUN", "yes");
           alert("사용이 가능합니다!");
-        } else if(res.data === "no"){
-          sessionStorage.setItem("CUN","no")
-          alert(
-            "이름이 중복됩니다. 다른 이름을 사용해 주세요."
-          );
+        } else if (res.data === "no") {
+          sessionStorage.setItem("CUN", "no");
+          alert("이름이 중복됩니다. 다른 이름을 사용해 주세요.");
         }
       })
       .catch()
@@ -204,14 +191,19 @@ export default function Edit() {
         }, 10000);
       });
   }
- 
- 
+
+  const editFields = [
+    { label: "전화번호", name: "phonenumber" },
+    { label: "생년월일", name: "birth" },
+    { label: "성별", name: "gender" },
+  ];
+
   return (
     <>
       {showModal &&
         createPortal(
           <div
-            className={classes.modal}
+            className="bg-black opacity-60 w-full h-full fixed top-0"
             onClick={() => {
               dispatch(cropModalActions.click());
             }}
@@ -222,70 +214,61 @@ export default function Edit() {
         createPortal(
           <CropImageModal imgUrl={loadImgUrl} showModal={showModal} />,
           document.body
-          
         )}
-      <div
-        style={{
-          display: "flex",
-          width: "994px",
-          height: "875px",
-        }}
-      >
-        <div className={classes.box}>
-          <p className={classes.title}>내 정보 수정</p>
+      <div className="flex justify-between h-full bg-white w-[1074px]  my-10 p-10 rounded-3xl">
+        <div className="w-full mr-[100px]">
+          <p className="text-[28px] mb-[50px]">내 정보 수정</p>
           <form>
-            <ul className={classes.edit}>
-              <li className={classes.data}>
-                <label htmlFor="email">이메일</label>
-                <input
+            <ul className="mb-10">
+              <li className={data}>
+                <MyPageInput
+                  label="이메일"
                   name="email"
                   value={formData.email}
                   onChange={onChangeHandler}
-                  autoFocus
-                ></input>
+                  autoFocus={true}
+                />
               </li>
-              <li className={classes.data}>
-                <label htmlFor="nickname">이름</label>
-                <input
-                 name="nickname"
-                 value={formData.nickname}
-                 onChange={(event) => {
-                   setNameChanged(true);
-                   onChangeHandler(event);
-                 }}
-                ></input>
-                <Button
-                value="이름 중복 확인"
-                color={"#f8b195"}
-                onClick={
-                    checknickname
-                }
-              />
+              <li className={data}>
+                <label htmlFor="nickname" className={label}>
+                  이름
+                </label>
+                <div className="flex">
+                  <input
+                    name="nickname"
+                    className={input}
+                    value={formData.nickname}
+                    onChange={onChangeHandler}
+                  ></input>
+
+                  <Button
+                    value="이름 중복 확인"
+                    color={"#f8b195"}
+                    onClick={checknickname}
+                    disabled={isAuthNameBtnDisabled}
+                  />
+                </div>
               </li>
-              <li className={classes.data}>
-                <label htmlFor="phonenumber">전화번호</label>
-                <input
-                  name="phonenumber"
-                  value={formData.phonenumber}
-                  readOnly
-                ></input>
-              </li>
-              <li className={classes.data}>
-                <label htmlFor="birth">생년월일</label>
-                <input name="gender" value={formData.birth} readOnly></input>
-              </li>
-              <li className={classes.data}>
-                <label htmlFor="gender">성별</label>
-                <input name="gender" value={formData.gender} readOnly></input>
-              </li>
+              {editFields.map((field) => (
+                <li className={data}>
+                  <MyPageInput
+                    key={field.name}
+                    label={field.label}
+                    name={field.name}
+                    value={formData[field.name]}
+                    onChange={onChangeHandler}
+                    readOnly={true}
+                  />
+                </li>
+              ))}
             </ul>
             <SubmitButton value="수정" onClick={submitHandler} />
           </form>
         </div>
-        <div style={{ marginTop: "88px" }}>
-          <Profilecopy src={imgUrl} />
+        <div className="mt-[88px]">
+          <Profile src={imgUrl} />
           <button
-            className={classes.edit_btn}
+            className="w-[50px] h-[50px] flex justify-center items-center rounded-full border-[1px] border-solid border-black bg-white relative bottom-[50px]"
             onClick={() => {
               setShowBox(!showBox);
             }}
@@ -293,28 +276,32 @@ export default function Edit() {
             <Image src={edit} alt="edit" width={30} height={30} />
           </button>
           {showBox && (
-            <div className={classes.edit_box}>
+            <div className="relative top-[-30px] border-[1px] border-solid border-[#d9d9d9] py-[5px]">
               <label
                 htmlFor="file"
                 onClick={() => {
                   dispatch(cropModalActions.crop());
                 }}
+                className="w-full flex justify-center text-inherit leading-normal align-middle cursor-pointer hover:bg-[#e7e7e7]"
               >
                 사진 업로드
               </label>
               <form encType="multipart/form-data">
-              <input
-                type="file"
-                id="file"
-                accept="image/*"
-                name="image"
-                onChange={handleFileChange}
-                style={{ display: "none" }}
-              />
+                <input
+                  type="file"
+                  id="file"
+                  accept="image/*"
+                  name="image"
+                  onChange={handleFileChange}
+                  className="hidden absolute w-0 h-0 overflow-hidden hover:bg-[#e7e7e7]"
+                />
               </form>
 
               {imgUrl !== null && (
-                <button onClick={() => dispatch(setImageUrl(null))}>
+                <button
+                  onClick={() => dispatch(setImageUrl(null))}
+                  className="w-full hover:bg-[#e7e7e7]"
+                >
                   사진 제거
                 </button>
               )}
