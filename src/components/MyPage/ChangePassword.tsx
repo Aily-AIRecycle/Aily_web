@@ -1,6 +1,5 @@
 import { FormEvent } from "react";
 import useInput from "@/hooks/use-input";
-import classes from "@/components/MyPage/styles/ChangePassword.module.scss";
 import SubmitButton from "../UI/SubmitButton";
 import useFormValidation from "@/hooks/use-formValidation";
 import {
@@ -12,6 +11,11 @@ import {
 import ErrorText from "@/components/UI/ErrorText";
 import axios from "axios";
 import { validationRules } from "@/app/join/validation_rules";
+
+const li = "flex flex-col mb-3";
+const input =
+  "border-[1px] border-solid border-[#a0a0a0] rounded-lg px-3 w-full h-10";
+const label = "text-[20px]";
 
 export default function ChangePassword() {
   // const domain = "https://ailymit.store";
@@ -56,12 +60,14 @@ export default function ChangePassword() {
 
   return (
     <>
-      <div className={classes.box}>
-        <p className={classes.title}>비밀번호 변경</p>
+      <div className="my-10 p-10 w-[1074px] h-full bg-white rounded-3xl">
+        <p className="text-[28px] mb-[50px]">비밀번호 변경</p>
         <form onSubmit={changePasswordHandler}>
           <ul>
-            <li className={classes.data}>
-              <label htmlFor="password">현재 비밀번호</label>
+            <li className={li}>
+              <label htmlFor="password" className={label}>
+                현재 비밀번호
+              </label>
               <input
                 type="password"
                 name="password"
@@ -69,30 +75,37 @@ export default function ChangePassword() {
                 value={password.value}
                 onChange={password.onChange}
                 autoFocus
+                className={input}
               />
             </li>
-            <li className={classes.data}>
-              <label htmlFor="check_password">새 비밀번호</label>
+            <li className={li}>
+              <label htmlFor="check_password" className={label}>
+                새 비밀번호
+              </label>
               <input
                 type="password"
                 placeholder=" 새 비밀번호"
                 name="password"
                 value={formData.password}
                 onChange={onChangeHandler}
+                className={input}
               />
             </li>
-            <li className={classes.data}>
-              <label htmlFor="check_password">새 비밀번호 확인</label>
+            <li className={li}>
+              <label htmlFor="check_password" className={label}>
+                새 비밀번호 확인
+              </label>
               <input
                 type="password"
                 placeholder=" 새 비밀번호 확인"
                 name="check_password"
                 value={checkNewPassword.value}
                 onChange={checkNewPassword.onChange}
+                className={input}
               />
             </li>
           </ul>
-          <div className={classes.errors}>
+          <div className="h-[100px]">
             {errors.password && (
               <ErrorText text="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요." />
             )}

@@ -1,4 +1,3 @@
-import classes from "@/components/MyPage/styles/PointHistory.module.scss";
 import AccumulationHistory from "@/components/MyPage/AccumulationHistory";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -43,10 +42,10 @@ export default function PointHistory() {
   }, []);
 
   return (
-    <div className={classes.box_wrap}>
-      <div className={classes.box}>
-        <p className={classes.title}>적립내역</p>
-        <div className={classes.history}>
+    <div className="w-[700px] h-[250px] bg-[#ffe8df] rounded-xl flex justify-center items-center shadow-lg">
+      <div className="w-[670px] h-[220px] pt-3 pb-3 pl-5 pr-5 bg-white rounded-xl">
+        <p className="text-[24px]">적립내역</p>
+        <div className="h-[150px] overflow-auto">
           {data &&
             data.map((item, index) => (
               <AccumulationHistory key={index} history={item} />

@@ -6,6 +6,9 @@ import Edit from "@/components/MyPage/Edit";
 import ChangePassword from "@/components/MyPage/ChangePassword";
 import { Provider } from "react-redux";
 import store from "@/store";
+import Header from "@/components/UI/Header";
+import MyPageNavigation from "@/components/MyPage/MyPageNavigation";
+import Footer from "@/components/UI/Footer";
 
 const MyPage = () => {
   const pathname = usePathname();
@@ -13,10 +16,15 @@ const MyPage = () => {
   return (
     <>
       <Provider store={store}>
-        {pathname === "/my-page/dashboard" && <Dashboard />}
-        {pathname === "/my-page/edit" && <Edit />}
-        {pathname === "/my-page/password" && <ChangePassword />}
-        {pathname === "/my-page/leave" && <Leave />}
+        <Header />
+        <div className="flex justify-center bg-[#fafbfb]">
+          <MyPageNavigation />
+          {pathname === "/my-page/dashboard" && <Dashboard />}
+          {pathname === "/my-page/edit" && <Edit />}
+          {pathname === "/my-page/password" && <ChangePassword />}
+          {pathname === "/my-page/leave" && <Leave />}
+        </div>
+        <Footer />
       </Provider>
     </>
   );

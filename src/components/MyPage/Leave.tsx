@@ -1,9 +1,13 @@
 "use client";
-import classes from "@/components/MyPage/styles/Leave.module.scss";
 import axios from "axios";
 import useInput from "@/hooks/use-input";
 import { useState, MouseEvent } from "react";
 import SubmitButton from "../UI/SubmitButton";
+
+const li = "flex flex-col mb-4";
+const label = "text-[20px] mb-1";
+const input =
+  "border-[1px] border-solid border-[#a0a0a0] rounded-lg px-3 w-full h-10";
 
 export default function Leave() {
   const password = useInput("");
@@ -54,35 +58,41 @@ export default function Leave() {
 
   return (
     <>
-      <div className={classes.box}>
-        <p className={classes.title}>회원 탈퇴</p>
+      <div className="justify-between h-full bg-white w-[1074px]  my-10 p-10 rounded-3xl">
+        <p className="text-[28px] mb-[50px]">회원 탈퇴</p>
         <form>
           <ul>
-            <li className={classes.data}>
-              <label htmlFor="password">현재 비밀번호</label>
+            <li className={li}>
+              <label htmlFor="password" className={label}>
+                현재 비밀번호
+              </label>
               <input
                 type="password"
                 name="password"
                 placeholder="계정을 삭제하려면 현재 비밀번호를 입력해주세요."
                 value={password.value}
                 onChange={password.onChange}
+                className={input}
               />
             </li>
-            <li className={classes.data}>
-              <label htmlFor="check_password">비밀번호 확인</label>
+            <li className={li}>
+              <label htmlFor="check_password" className={label}>
+                비밀번호 확인
+              </label>
               <input
                 type="password"
                 placeholder="비밀번호 확인"
                 name="check_password"
                 value={checkPassword.value}
                 onChange={checkPassword.onChange}
+                className={input}
               />
             </li>
           </ul>
-          <p style={{ color: "#ee5446", marginBottom: "20px" }}>
+          <p className="text-[#ee5446] mb-5">
             계정 삭제시 모든 포인트가 소멸되며 복구가 불가능합니다.
           </p>
-          <div className={classes.agree}>
+          <div className="mb-[100px] flex items-center">
             <input
               type="checkbox"
               name="agree"
@@ -91,7 +101,9 @@ export default function Leave() {
                 setAgree(!agree);
               }}
             />
-            <label htmlFor="agree">동의합니다.</label>
+            <label htmlFor="agree" className="ml-1">
+              동의합니다.
+            </label>
           </div>
           <SubmitButton onClick={handleWithdrawal} value="회원 탈퇴" />
         </form>

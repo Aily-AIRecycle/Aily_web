@@ -2,16 +2,16 @@
 
 import ColumnChart from "@/components/MyPage/ColumnChart";
 import TotalDonutChart from "@/components/MyPage/TotalDonutChart";
-import classes from "@/components/MyPage/styles/Chart.module.scss";
 
+const p = "text-[20px] pl-[10px]";
 export default function Chart() {
   return (
-    <div className={classes.box}>
-      <div className={classes.date}>
-        <p>주간</p>
-        <p>월간</p>
+    <div className="shadow-myBoxShadow rounded-[20px] bg-white">
+      <div className="flex pt-5 pl-5">
+        <p className={p}>주간</p>
+        <p className={p}>월간</p>
       </div>
-      <div className={classes.chart}>
+      <div className="flex justify-between items-center">
         <ColumnChart />
         <TotalDonutChart />
       </div>
