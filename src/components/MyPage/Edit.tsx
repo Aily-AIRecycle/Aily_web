@@ -25,8 +25,6 @@ const input =
 const label = "text-[20px]";
 
 export default function Edit() {
-  const domain = "https://ailymit.store";
-  // const domain = "";
 
   useEffect(() => {
     // Set "CUN" item in sessionStorage
@@ -42,7 +40,7 @@ export default function Edit() {
   const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
 
   const [isAuthNameBtnDisabled, setIsAuthNameBtnDisabled] = useState(false);
-  const name = sessionStorage.getItem("name") || localStorage.getItem("name");
+
 
   const [formData, errors, onChangeHandler, onUpdateFormData]: [
     any,
@@ -53,7 +51,7 @@ export default function Edit() {
 
   useEffect(() => {
     axios
-      .post(`${domain}/member/member/UIS`, {
+      .post(`/member/member/UIS`, {
         phonenumber:
           sessionStorage.getItem("phone_number") ||
           localStorage.getItem("phone_number"),
@@ -71,13 +69,7 @@ export default function Edit() {
       });
   }, []);
 
-  useEffect(() => {
-    if (name === formData.nickname) {
-      setIsAvailableName(true);
-    } else {
-      setIsAvailableName(false);
-    }
-  }, [formData.nickname]);
+
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
@@ -102,7 +94,7 @@ export default function Edit() {
     } else if (!loadImgUrl) {
       if (sessionStorage.getItem("CUN") == "yes") {
         axios
-          .post(`${domain}/member/member/UIC`, {
+          .post(`/member/member/UIC`, {
             phonenumber: formData.phonenumber,
             email: formData.email, // Include the unchanged email field
             nickname: formData.nickname,
@@ -116,6 +108,7 @@ export default function Edit() {
         sessionStorage.setItem("name", formData.nickname);
         localStorage.setItem("name", formData.nickname);
         alert("이름 변경이 완료 되었습니다.");
+        window.location.reload();
       }
       return;
     } else if (sessionStorage.getItem("CUN") === "yes" && loadImgUrl) {
@@ -123,7 +116,7 @@ export default function Edit() {
       formdata.append("image", blob);
 
       try {
-        const uicResponse = await axios.post(`${domain}/member/member/UIC`, {
+        const uicResponse = await axios.post(`/member/member/UIC`, {
           phonenumber: formData.phonenumber,
           email: formData.email,
           nickname: formData.nickname,
@@ -133,7 +126,7 @@ export default function Edit() {
 
         if (uicResponse.status === 200) {
           const uploadResponse = axios.post(
-            `${domain}/member/member/upload/${formData.nickname}`,
+            `/member/member/upload/${formData.nickname}`,
             formdata,
             {
               headers: {
@@ -146,6 +139,7 @@ export default function Edit() {
         localStorage.setItem("name", formData.nickname);
         alert("내 정보 수정이 완료되었습니다.");
         sessionStorage.setItem("cropimage", "no");
+        window.location.reload();
       } catch (error) {
         console.error("Error:", error);
         // Handle errors if needed
@@ -154,7 +148,7 @@ export default function Edit() {
       const blob = await fetch(loadImgUrl).then((res) => res.blob());
       formdata.append("image", blob);
       axios
-        .post(`${domain}/member/member/upload/${formData.nickname}`, formdata, {
+        .post(`/member/member/upload/${formData.nickname}`, formdata, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -164,6 +158,7 @@ export default function Edit() {
       sessionStorage.setItem("name", formData.nickname);
       localStorage.setItem("name", formData.nickname);
       alert("사진 변경이 되었습니다.");
+      window.location.reload();
     } else if (sessionStorage.getItem("CUN") === "no") {
       alert("아이디가 중복됩니다. 다시 시도 해주세요");
     } else if (sessionStorage.getItem("CUN") === "error") {
@@ -173,7 +168,7 @@ export default function Edit() {
 
   function checknickname() {
     axios
-      .get(`${domain}/member/member/ChNick/${formData.nickname}`)
+      .get(`/member/member/ChNick/${formData.nickname}`)
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {
@@ -266,13 +261,16 @@ export default function Edit() {
           </form>
         </div>
         <div className="mt-[88px]">
-          <Profile src={imgUrl} />
+        {imgUrl !== null && (
+  <Profile src={imgUrl} />
+)}
           <button
             className="w-[50px] h-[50px] flex justify-center items-center rounded-full border-[1px] border-solid border-black bg-white relative bottom-[50px]"
             onClick={() => {
               setShowBox(!showBox);
             }}
           >
+            
             <Image src={edit} alt="edit" width={30} height={30} />
           </button>
           {showBox && (

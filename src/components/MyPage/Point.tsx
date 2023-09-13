@@ -7,15 +7,13 @@ import { useEffect, useState } from "react";
 export default function Point() {
   const [userPoint, setUserPoint] = useState(0);
   const [userName, setUserName] = useState<string | null>(null);
-  const domain = "https://ailymit.store";
-  // const domain = "";
 
   useEffect(() => {
     const name = sessionStorage.getItem("name") || localStorage.getItem("name");
     setUserName(name);
 
     axios
-      .post(`${domain}/member/member/UIS`, {
+      .post(`/member/member/UIS`, {
         phonenumber:
           sessionStorage.getItem("phone_number") ||
           localStorage.getItem("phone_number"),

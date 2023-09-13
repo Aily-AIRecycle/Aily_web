@@ -28,7 +28,7 @@ export default function MyPageNavigation() {
   useEffect(() => {
     axios
       .post(
-        "https://ailymit.store/member/member/userimage",
+        "/member/member/userimage",
         {
           phonenumber:
             sessionStorage.getItem("phone_number") ||
