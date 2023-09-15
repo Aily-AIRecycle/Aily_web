@@ -22,7 +22,7 @@ const CropImageModal = (props: any) => {
   );
 
   const showCroppedImage = useCallback(async () => {
-    sessionStorage.setItem("cropimage","yes")
+    sessionStorage.setItem("cropimage", "yes");
     if (croppedAreaPixels) {
       try {
         const croppedImage = await getCroppedImg(
@@ -40,7 +40,7 @@ const CropImageModal = (props: any) => {
 
   return (
     <>
-      <div className="bg-white w-[30rem] rounded-lg absolute left-[calc(50%-20rem)] top-[calc(50%-30rem)] flex flex-col items-center">
+      <div className="bg-white w-[30rem] rounded-lg absolute left-[calc(50%-14rem)] top-[10%] flex flex-col items-center">
         <div className="w-[28rem] h-14 flex items-center justify-between">
           <h1>원하는 부분을 잘라주세요.</h1>
           <button
@@ -52,8 +52,8 @@ const CropImageModal = (props: any) => {
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
-        <div className="w-full h-[32rem] flex justify-center items-center py-3 border-y border-solid border-[#d9d9d9]">
-          <div className="w-[28rem] h-[28rem] absolute">
+        <div className="w-full h-[28rem] flex justify-center items-center py-3 border-y border-solid border-[#d9d9d9]">
+          <div className="w-[26rem] h-[26rem] absolute">
             <Cropper
               image={props.imgUrl}
               crop={crop}
