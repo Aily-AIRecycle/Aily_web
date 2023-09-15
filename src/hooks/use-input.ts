@@ -1,11 +1,9 @@
 import { useState } from "react";
 
-function useInput(initValue: any)
-{
+function useInput<T>(initValue: T) {
   const [value, setValue] = useState(initValue);
 
-  function onChange(e: { target: { value: any; }; })
-  {
+  function onChange(e: { target: { value: T } }) {
     setValue(e.target.value);
   }
 

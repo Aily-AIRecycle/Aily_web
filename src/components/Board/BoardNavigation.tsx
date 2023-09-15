@@ -1,7 +1,7 @@
 "use client";
 import useWindowWidth from "@/hooks/use-windowWidth";
 import classes from "@/components/Board/styles/BoardNavigation.module.scss";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 
@@ -20,7 +20,7 @@ function BoardNavigation() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const optionChangeHandler = (event: any) => {
+  const optionChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
     router.push(event.target.value);
   };

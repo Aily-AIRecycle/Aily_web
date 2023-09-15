@@ -1,4 +1,13 @@
-export default function MyPageInput(props: any) {
+import { ChangeEventHandler } from "react";
+
+export default function MyPageInput(props: {
+  name: string;
+  label: string;
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  autoFocus?: boolean;
+  readOnly?: boolean;
+}) {
   return (
     <>
       <label htmlFor={props.name} className="text-[20px]">

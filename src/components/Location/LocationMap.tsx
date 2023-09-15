@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { locationActions } from "@/store/location";
 import { markerActions } from "@/store/marker";
 import { resultActions } from "@/store/result";
+import { ToolkitStore } from "@/store";
 
 declare global {
   interface Window {
@@ -39,8 +40,8 @@ const markerPositions = [
 
 const LocationMap = () => {
   const dispatch = useDispatch();
-  const keyword = useSelector((state: any) => state.keyword.keyword);
-  const markers = useSelector((state: any) => state.marker.marker);
+  const keyword = useSelector((state: ToolkitStore) => state.keyword.keyword);
+  const markers = useSelector((state: ToolkitStore) => state.marker.marker);
   const [kakaoMapsLoaded, setKakaoMapsLoaded] = useState(false);
 
   const onLoadKakaoAPI = useCallback(() => {
@@ -61,7 +62,7 @@ const LocationMap = () => {
     return () => {
       document.head.removeChild(script);
     };
-  }, []);
+  }, [onLoadKakaoAPI]);
 
   // 지도 생성, 지도 컨트롤 생성
   useEffect(() => {
@@ -142,6 +143,7 @@ const LocationMap = () => {
           return null;
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword, kakaoMapsLoaded, dispatch]);
 
   return <div id="map" className={classes.map}></div>;

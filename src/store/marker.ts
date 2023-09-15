@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Marker {}
 
-interface MarkerState {
+export interface MarkerState {
   marker: Marker[];
 }
 

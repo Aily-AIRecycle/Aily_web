@@ -2,7 +2,7 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ImageState {
+export interface ImageState {
   imageUrl: string | null;
 }
 

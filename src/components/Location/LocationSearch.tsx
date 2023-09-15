@@ -1,17 +1,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import classes from "@/components/Location/styles/LocationSearch.module.scss";
-import { useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  EventHandler,
+  FormEvent,
+  useEffect,
+  useState,
+} from "react";
 import { keywordActions } from "@/store/keyword";
 import { resultActions } from "@/store/result";
+import { ToolkitStore } from "@/store";
+import { Location } from "@/store/location";
 
 const LocationSearch = () => {
   const dispatch = useDispatch();
-  const locations = useSelector((state: any) => state.location.location);
-  const result = useSelector((state: any) => state.result.result);
+  const locations = useSelector(
+    (state: ToolkitStore) => state.location.location
+  );
+  const result = useSelector((state: ToolkitStore) => state.result.result);
 
   const [inputKeyword, setKeyword] = useState("");
 
-  const keywordChangeHandler = (e: any) => {
+  const keywordChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value.trim());
   };
 
@@ -38,7 +48,7 @@ const LocationSearch = () => {
     console.log(locations);
   }, [locations]);
 
-  const submitHandler = (e: any) => {
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
@@ -60,7 +70,7 @@ const LocationSearch = () => {
       )}
       <ul className={classes.list}>
         {locations &&
-          locations.map((marker: any) => (
+          locations.map((marker: Location) => (
             <li key={marker.id} className={classes.li}>
               <span className={classes.title}>{marker.title}</span>
               <span className={classes.address}>{marker.address}</span>

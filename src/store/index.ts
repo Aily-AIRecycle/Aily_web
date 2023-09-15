@@ -1,10 +1,25 @@
 import { configureStore } from "@reduxjs/toolkit";
-import markerReducer from "./marker";
+import markerReducer, { MarkerState } from "./marker";
 import keywordReducer from "./keyword";
 import resultReducer from "./result";
-import locationReducer from "./location";
+import locationReducer, { LocationState } from "./location";
 import cropModalReducer from "./cropModal";
-import imageReducer from "./image";
+import imageReducer, { ImageState } from "./image";
+
+export interface ToolkitStore {
+  marker: MarkerState;
+  keyword: {
+    keyword: string;
+  };
+  result: {
+    result: boolean;
+  };
+  location: LocationState;
+  cropModal: {
+    showModal: boolean;
+  };
+  image: ImageState;
+}
 
 const store = configureStore({
   reducer: {
