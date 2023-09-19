@@ -1,20 +1,19 @@
 "use client";
 import axios from "axios";
 import useInput from "@/hooks/use-input";
-import { useState, MouseEvent } from "react";
-import SubmitButton from "../UI/SubmitButton";
+import { useState } from "react";
 
 const li = "flex flex-col mb-4";
 const label = "text-[20px] mb-1";
 const input =
-  "border-[1px] border-solid border-[#a0a0a0] rounded-lg px-3 w-full h-10";
+  "border border-solid border-[#a0a0a0] rounded-lg px-3 w-full h-10";
 
 export default function Leave() {
   const password = useInput("");
   const checkPassword = useInput("");
   const [agree, setAgree] = useState(false);
 
-  const handleWithdrawal = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleWithdrawal = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const pw = password.value.trim();
@@ -60,7 +59,7 @@ export default function Leave() {
     <>
       <div className="justify-between h-full bg-white w-[1074px]  my-10 p-10 rounded-3xl">
         <p className="text-[28px] mb-[50px]">회원 탈퇴</p>
-        <form>
+        <form onSubmit={handleWithdrawal}>
           <ul>
             <li className={li}>
               <label htmlFor="password" className={label}>
@@ -105,7 +104,12 @@ export default function Leave() {
               동의합니다.
             </label>
           </div>
-          <SubmitButton onClick={handleWithdrawal} value="회원 탈퇴" />
+          <button
+            type="submit"
+            className="w-full h-[54px] bg-[#F6F8FA] rounded-[10px] border border-solid border-[#D6D8DB] text-[#D1222E] font-semibold text-xl hover:bg-[#E2E8F0] hover:border-[#BAC0C8] hover:text-[#BD1E2D]"
+          >
+            회원 탈퇴
+          </button>
         </form>
       </div>
     </>
