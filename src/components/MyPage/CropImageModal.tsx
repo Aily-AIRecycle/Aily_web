@@ -42,8 +42,8 @@ const CropImageModal = (props: any) => {
 
   return (
     <>
-      <div className="bg-white w-[30rem] rounded-lg absolute left-[calc(50%-14rem)] top-[10%] flex flex-col items-center">
-        <div className="w-[28rem] h-14 flex items-center justify-between">
+      <div className="bg-white sm:w-[480px] w-[90%] sm:h-[584px]  rounded-lg absolute sm:left-[calc(50%-240px)] left-[calc(5%)] top-[10%] flex flex-col items-center">
+        <div className="sm:w-[28rem] w-[90%] h-14 flex items-center justify-between">
           <h1>원하는 부분을 잘라주세요.</h1>
           <button
             onClick={() => {
@@ -54,8 +54,8 @@ const CropImageModal = (props: any) => {
             <Image src={close} alt="close" />
           </button>
         </div>
-        <div className="w-full h-[28rem] flex justify-center items-center py-3 border-y border-solid border-[#d9d9d9]">
-          <div className="w-[26rem] h-[26rem] absolute">
+        <div className="w-full sm:h-[28rem] h-[20rem] flex justify-center items-center py-3 border-y border-solid border-[#d9d9d9]">
+          <div className="sm:w-[26rem] sm:h-[26rem] flex w-[90%] h-full relative">
             <Cropper
               image={props.imgUrl}
               crop={crop}
@@ -67,13 +67,13 @@ const CropImageModal = (props: any) => {
             />
           </div>
         </div>
-        <div>
+        <div className="w-full flex justify-center items-center">
           <button
             onClick={() => {
               showCroppedImage();
               dispatch(cropModalActions.click());
             }}
-            className="bg-[#f8b195] my-5 w-[28rem] h-10 rounded-lg text-[16px] text-white"
+            className="bg-[#f8b195] my-5 w-[90%] sm:w-[28rem] h-10 rounded-lg text-[16px] text-white"
           >
             자르기
           </button>
