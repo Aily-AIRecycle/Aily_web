@@ -1,9 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cropModalActions } from "@/store/cropModal";
 import { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "./cropImage";
 import { setImageUrl } from "@/store/image";
+import close from "img/mypage/close.svg";
+import Image from "next/image";
 
 const CropImageModal = (props: any) => {
   const dispatch = useDispatch();
@@ -49,7 +51,7 @@ const CropImageModal = (props: any) => {
             }}
             className="flex items-center justify-center"
           >
-            <span className="material-symbols-outlined">close</span>
+            <Image src={close} alt="close" />
           </button>
         </div>
         <div className="w-full h-[28rem] flex justify-center items-center py-3 border-y border-solid border-[#d9d9d9]">

@@ -11,6 +11,7 @@ import {
 import ErrorText from "@/components/UI/ErrorText";
 import axios from "axios";
 import { validationRules } from "@/app/join/validation_rules";
+import Title from "@/components/MyPage/Title";
 
 const li = "flex flex-col mb-3";
 const input =
@@ -60,8 +61,8 @@ export default function ChangePassword() {
 
   return (
     <>
-      <div className="my-10 p-10 w-[1074px] h-full bg-white rounded-3xl">
-        <p className="text-[28px] mb-[50px]">비밀번호 변경</p>
+      <div className="web:my-10 web:p-10 sm:px-10 mobile:pb-10 web:w-[1074px] h-full bg-white rounded-3xl">
+        <Title text="비밀번호 변경" />
         <form onSubmit={changePasswordHandler}>
           <ul>
             <li className={li}>

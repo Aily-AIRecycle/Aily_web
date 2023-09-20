@@ -14,6 +14,8 @@ module.exports = {
       },
       screens: {
         mq: { raw: "(max-width: 800px)" },
+        web: "1400px",
+        mobile: { max: "1400px" },
       },
       boxShadow: {
         myBoxShadow:

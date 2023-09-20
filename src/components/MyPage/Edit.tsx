@@ -18,6 +18,7 @@ import useFormValidation, {
 } from "@/hooks/use-formValidation";
 import MyPageInput from "./MyPageInput";
 import { validationRules } from "@/app/join/validation_rules";
+import Title from "@/components/MyPage/Title";
 
 const data = "flex flex-col mb-3";
 const input =
@@ -25,7 +26,6 @@ const input =
 const label = "text-[20px]";
 
 export default function Edit() {
-
   useEffect(() => {
     // Set "CUN" item in sessionStorage
     sessionStorage.setItem("CUN", "error");
@@ -40,7 +40,6 @@ export default function Edit() {
   const [isAuthMailBtnDisabled, setAuthMailBtnDisabled] = useState(false);
 
   const [isAuthNameBtnDisabled, setIsAuthNameBtnDisabled] = useState(false);
-
 
   const [formData, errors, onChangeHandler, onUpdateFormData]: [
     any,
@@ -68,8 +67,6 @@ export default function Edit() {
         // sessionStorage.setItem("totalpoint", dataFromServer.myPage.point);
       });
   }, []);
-
-
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
@@ -210,101 +207,103 @@ export default function Edit() {
           <CropImageModal imgUrl={loadImgUrl} showModal={showModal} />,
           document.body
         )}
-      <div className="flex justify-between h-full bg-white w-[1074px]  my-10 p-10 rounded-3xl">
-        <div className="w-full mr-[100px]">
-          <p className="text-[28px] mb-[50px]">내 정보 수정</p>
-          <form>
-            <ul className="mb-10">
-              <li className={data}>
-                <MyPageInput
-                  label="이메일"
-                  name="email"
-                  value={formData.email}
-                  onChange={onChangeHandler}
-                  autoFocus={true}
-                />
-              </li>
-              <li className={data}>
-                <label htmlFor="nickname" className={label}>
-                  이름
-                </label>
-                <div className="flex">
-                  <input
-                    name="nickname"
-                    className={input}
-                    value={formData.nickname}
-                    onChange={onChangeHandler}
-                  ></input>
-
-                  <Button
-                    value="이름 중복 확인"
-                    color={"#f8b195"}
-                    onClick={checknickname}
-                    disabled={isAuthNameBtnDisabled}
-                  />
-                </div>
-              </li>
-              {editFields.map((field) => (
+      <div className="bg-white web:w-[1074px] h-full web:my-10 web:p-10 sm:px-10 mobile:pb-10 rounded-3xl">
+        <Title text="내 정보 수정" />
+        <div className=" flex-col-reverse md:flex-row flex justify-between">
+          <div className="w-full md:mr-[100px]">
+            <form>
+              <ul className="mb-10">
                 <li className={data}>
                   <MyPageInput
-                    key={field.name}
-                    label={field.label}
-                    name={field.name}
-                    value={formData[field.name]}
+                    label="이메일"
+                    name="email"
+                    value={formData.email}
                     onChange={onChangeHandler}
-                    readOnly={true}
+                    autoFocus={true}
                   />
                 </li>
-              ))}
-            </ul>
-            <SubmitButton value="수정" onClick={submitHandler} />
-          </form>
-        </div>
-        <div className="mt-[88px]">
-        {imgUrl !== null && (
-  <Profile src={imgUrl} />
-)}
-          <button
-            className="w-[50px] h-[50px] flex justify-center items-center rounded-full border-[1px] border-solid border-black bg-white relative bottom-[50px]"
-            onClick={() => {
-              setShowBox(!showBox);
-            }}
-          >
-            
-            <Image src={edit} alt="edit" width={30} height={30} />
-          </button>
-          {showBox && (
-            <div className="relative top-[-30px] border-[1px] border-solid border-[#d9d9d9] py-[5px]">
-              <label
-                htmlFor="file"
-                onClick={() => {
-                  dispatch(cropModalActions.crop());
-                }}
-                className="w-full flex justify-center text-inherit leading-normal align-middle cursor-pointer hover:bg-[#e7e7e7]"
-              >
-                사진 업로드
-              </label>
-              <form encType="multipart/form-data">
-                <input
-                  type="file"
-                  id="file"
-                  accept="image/*"
-                  name="image"
-                  onChange={handleFileChange}
-                  className="hidden absolute w-0 h-0 overflow-hidden hover:bg-[#e7e7e7]"
-                />
-              </form>
+                <li className={data}>
+                  <label htmlFor="nickname" className={label}>
+                    이름
+                  </label>
+                  <div className="flex">
+                    <input
+                      name="nickname"
+                      className={input}
+                      value={formData.nickname}
+                      onChange={onChangeHandler}
+                    ></input>
 
-              {imgUrl !== null && (
-                <button
-                  onClick={() => dispatch(setImageUrl(null))}
-                  className="w-full hover:bg-[#e7e7e7]"
-                >
-                  사진 제거
-                </button>
-              )}
+                    <Button
+                      value="이름 중복 확인"
+                      color={"#f8b195"}
+                      onClick={checknickname}
+                      disabled={isAuthNameBtnDisabled}
+                    />
+                  </div>
+                </li>
+                {editFields.map((field) => (
+                  <li className={data}>
+                    <MyPageInput
+                      key={field.name}
+                      label={field.label}
+                      name={field.name}
+                      value={formData[field.name]}
+                      onChange={onChangeHandler}
+                      readOnly={true}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <SubmitButton value="수정" onClick={submitHandler} />
+            </form>
+          </div>
+          <div>
+            <div className="md:invisible md:w-0 md:h-0 text-[20px] mb-6">
+              프로필 사진
             </div>
-          )}
+            <Profile src={imgUrl} />
+            <button
+              className="w-[50px] h-[50px] flex justify-center items-center rounded-full border border-solid border-black bg-white relative bottom-[50px]"
+              onClick={() => {
+                setShowBox(!showBox);
+              }}
+            >
+              <Image src={edit} alt="edit" width={30} height={30} />
+            </button>
+            {showBox && (
+              <div className="relative top-[-30px] border-[1px] border-solid border-[#d9d9d9] py-[5px]">
+                <label
+                  htmlFor="file"
+                  onClick={() => {
+                    dispatch(cropModalActions.crop());
+                  }}
+                  className="w-full flex justify-center text-inherit leading-normal align-middle cursor-pointer hover:bg-[#e7e7e7]"
+                >
+                  사진 업로드
+                </label>
+                <form encType="multipart/form-data">
+                  <input
+                    type="file"
+                    id="file"
+                    accept="image/*"
+                    name="image"
+                    onChange={handleFileChange}
+                    className="hidden absolute w-0 h-0 overflow-hidden hover:bg-[#e7e7e7]"
+                  />
+                </form>
+
+                {imgUrl !== null && (
+                  <button
+                    onClick={() => dispatch(setImageUrl(null))}
+                    className="w-full hover:bg-[#e7e7e7]"
+                  >
+                    사진 제거
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>
