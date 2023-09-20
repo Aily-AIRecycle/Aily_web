@@ -17,12 +17,14 @@ const MyPage = () => {
     <>
       <Provider store={store}>
         <Header />
-        <div className="flex justify-center bg-[#fafbfb]">
-          <MyPageNavigation />
-          {pathname === "/my-page/dashboard" && <Dashboard />}
-          {pathname === "/my-page/edit" && <Edit />}
-          {pathname === "/my-page/password" && <ChangePassword />}
-          {pathname === "/my-page/leave" && <Leave />}
+        <div className="flex justify-center items-center">
+          <div className="web:flex justify-center web:bg-[#fafbfb] w-[90%] sm:w-full">
+            <MyPageNavigation />
+            {pathname === "/my-page/dashboard" && <Dashboard />}
+            {pathname === "/my-page/edit" && <Edit />}
+            {pathname === "/my-page/password" && <ChangePassword />}
+            {pathname === "/my-page/leave" && <Leave />}
+          </div>
         </div>
         <Footer />
       </Provider>

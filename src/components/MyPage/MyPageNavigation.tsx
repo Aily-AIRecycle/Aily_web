@@ -6,6 +6,10 @@ import Profile from "@/components/MyPage/Profile";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setImageUrl } from "@/store/image";
+import useWindowWidth from "@/hooks/use-windowWidth";
+import Image from "next/image";
+import more from "img/mypage/more.svg";
+import less from "img/mypage/less.svg";
 
 const menuData = [
   { name: "대시보드", path: "dashboard" },
@@ -19,6 +23,8 @@ export default function MyPageNavigation() {
   const pathname = usePathname();
   const [imgUrl, setImgUrl] = useState<string>("");
   const dispatch = useDispatch();
+  const windowWidth = useWindowWidth();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const name = sessionStorage.getItem("name") || localStorage.getItem("name");
@@ -59,25 +65,69 @@ export default function MyPageNavigation() {
   }, []);
 
   return (
-    <div className="h-[855px] my-10 mr-11 rounded-3xl py-8  bg-white">
-      <div className="flex flex-col items-center mb-12">
-        <Profile src={imgUrl} />
-        <p className="text-[28px] mt-3">{userName}님</p>
-      </div>
-      <ul className="flex flex-col justify-center items-center">
-        {menuData.map((menu, index: number) => (
-          <li
-            key={index}
-            className={`${"flex items-center justify-center w-[280px] h-10 text-[16px] "} ${
-              pathname === `/my-page/${menu.path}`
-                ? "border-[#f8b195] border-l-[12px] border-solid pr-4"
-                : ""
-            }`}
-          >
-            <Link href={`/my-page/${menu.path}`}>{menu.name}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      {windowWidth! >= 1400 && (
+        <div className="w-[280px] h-[855px] my-10 mr-11 rounded-3xl py-8  bg-white">
+          <div className="flex flex-col items-center mb-12 ">
+            <Profile src={imgUrl} />
+            <p className="text-[28px] mt-3">{userName}님</p>
+          </div>
+          <ul className="flex flex-col justify-center items-center">
+            {menuData.map((menu, index: number) => (
+              <li
+                key={index}
+                className={`${"flex items-center justify-center w-full h-10 text-[16px] "} ${
+                  pathname === `/my-page/${menu.path}`
+                    ? "border-[#f8b195] border-l-[12px] border-solid pr-3"
+                    : ""
+                }`}
+              >
+                <Link href={`/my-page/${menu.path}`}>{menu.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {windowWidth! < 1400 && (
+        <>
+          <div className="sm:px-10">
+            <div
+              className="flex justify-between items-center pt-4"
+              onClick={() => {
+                setIsExpanded(!isExpanded);
+              }}
+            >
+              {menuData.map(
+                (menu, index: number) =>
+                  pathname === `/my-page/${menu.path}` && (
+                    <span className="text-[28px]" key={index}>
+                      {menu.name}
+                    </span>
+                  )
+              )}
+              {isExpanded ? (
+                <Image src={less} width={50} alt="less" />
+              ) : (
+                <Image src={more} width={50} alt="more" />
+              )}
+            </div>
+            {isExpanded && (
+              <ul>
+                {menuData.map((menu, index: number) => (
+                  <li
+                    key={index}
+                    className="flex items-center text-[20px] w-full h-10"
+                  >
+                    <Link href={`/my-page/${menu.path}`} className="w-full">
+                      {menu.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </>
+      )}
+    </>
   );
 }

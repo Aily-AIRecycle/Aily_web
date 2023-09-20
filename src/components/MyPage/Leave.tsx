@@ -2,6 +2,7 @@
 import axios from "axios";
 import useInput from "@/hooks/use-input";
 import { useState } from "react";
+import Title from "@/components/MyPage/Title";
 
 const li = "flex flex-col mb-4";
 const label = "text-[20px] mb-1";
@@ -57,8 +58,8 @@ export default function Leave() {
 
   return (
     <>
-      <div className="justify-between h-full bg-white w-[1074px]  my-10 p-10 rounded-3xl">
-        <p className="text-[28px] mb-[50px]">회원 탈퇴</p>
+      <div className="justify-between h-full bg-white web:w-[1074px] web:my-10 mobile:pb-10 web:p-10 sm:px-10 rounded-3xl">
+        <Title text="회원 탈퇴" />
         <form onSubmit={handleWithdrawal}>
           <ul>
             <li className={li}>
@@ -72,6 +73,7 @@ export default function Leave() {
                 value={password.value}
                 onChange={password.onChange}
                 className={input}
+                autoFocus={true}
               />
             </li>
             <li className={li}>
