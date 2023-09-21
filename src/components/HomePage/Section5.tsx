@@ -1,6 +1,7 @@
 import { animated, useInView, useSpring } from "@react-spring/web";
 
-function Section5() {
+function Section5()
+{
   const [ref, inView] = useInView();
   const fadeInEarth = useSpring({
     from: { opacity: 0 },
