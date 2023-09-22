@@ -13,7 +13,7 @@ interface Data {
 }
 
 export default function PointHistory() {
-  const [data, setData] = useState<Data[]>([]);
+  const [history, setHistory] = useState<Data[]>([]);
 
   useEffect(() => {
     axios
@@ -23,18 +23,20 @@ export default function PointHistory() {
       })
       .then((response) => {
         // Handle the POST request response
-        setData(
-          response.data.map((item: Data) => ({
-            day: item.day,
-            time: item.time,
-            can: item.can,
-            gen: item.gen,
-            pet: item.pet,
-            point: item.point,
-          }))
-        );
-        console.log(response.data);
-        console.log(data);
+        if (Array.isArray(response.data)) {
+          // 데이터가 배열인지 확인
+
+          setHistory(
+            response.data.map((item: Data) => ({
+              day: item.day,
+              time: item.time,
+              can: item.can,
+              gen: item.gen,
+              pet: item.pet,
+              point: item.point,
+            }))
+          );
+        }
       })
       .catch((error) => {
         // Handle the POST request error
@@ -47,10 +49,15 @@ export default function PointHistory() {
       <div className="web:w-[670px] web:h-[270px] mobile:w-[calc(100%-30px)] mobile:h-[calc(100%-30px)] pt-3 pb-3 pl-5 pr-5 bg-white rounded-xl">
         <p className="text-[24px]">적립내역</p>
         <div className="h-[210px] overflow-auto">
-          {data &&
-            data.map((item, index) => (
+          {history.length > 0 ? (
+            history.map((item, index) => (
               <AccumulationHistory key={index} history={item} />
-            ))}
+            ))
+          ) : (
+            <div className="flex justify-center items-center w-full h-full">
+              적립 내역이 존재하지 않습니다.
+            </div>
+          )}
           {/* {DATA.map((item, index) => (
             <AccumulationHistory key={index} history={item} />
           ))} */}

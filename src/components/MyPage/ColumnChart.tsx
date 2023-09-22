@@ -7,13 +7,31 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-const ColumnChart: React.FC = () => {
+interface ColumnChartProps {
+  width: number;
+}
+
+const ColumnChart: React.FC<ColumnChartProps> = (props: ColumnChartProps) => {
   const [series, setSeries] = useState<{ name: string; data: number[] }[]>([
     {
       name: "적립내역",
       data: [],
     },
   ]);
+
+  const [sum, setSum] = useState(0);
+
+  useEffect(() => {
+    console.log(series[0].data);
+
+    const sum: number = series[0].data.reduce(
+      (accumulator: number, currentValue: number) => {
+        return accumulator + currentValue;
+      },
+      0
+    );
+    setSum(sum);
+  }, [series]);
 
   useEffect(() => {
     axios
@@ -23,10 +41,15 @@ const ColumnChart: React.FC = () => {
       .then((response) => {
         const data = response.data;
         const monthlyData: number[] = new Array(12).fill(0);
-        data.forEach((item: any) => {
-          const month = parseInt(item.day.split(" ")[1].split("월")[0]) - 1;
-          monthlyData[month] += item.can + item.gen + item.pet;
-        });
+        console.log(monthlyData);
+        if (Array.isArray(data)) {
+          data.forEach((item: any) => {
+            const month = parseInt(item.day.split(" ")[1].split("월")[0]) - 1;
+            monthlyData[month] += item.can + item.gen + item.pet;
+          });
+        }
+        console.log(monthlyData);
+        console.log(typeof response.data);
         setSeries([
           {
             name: "적립내역",
@@ -136,13 +159,21 @@ const ColumnChart: React.FC = () => {
 
   return (
     <div id="chart">
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="bar"
-        width={590}
-        height={350}
-      />
+      {sum > 0 ? (
+        <ReactApexChart
+          options={options}
+          series={series}
+          type="bar"
+          width={props.width}
+          height={350}
+        />
+      ) : (
+        <div
+          className={`w-[${props.width}px] h-[350px] flex justify-center items-center text-md`}
+        >
+          1년 동안 분리수거를 하지 않았어요😮
+        </div>
+      )}
     </div>
   );
 };

@@ -7,10 +7,26 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-interface TotalDonutChartProps {}
+interface TotalDonutChartProps {
+  width: number; // width 속성을 프로퍼티로 선언
+}
 
-const TotalDonutChart: React.FC<TotalDonutChartProps> = () => {
+const TotalDonutChart: React.FC<TotalDonutChartProps> = (
+  props: TotalDonutChartProps
+) => {
   const [series, setSeries] = useState<number[]>([]);
+  const [sum, setSum] = useState(0);
+
+  useEffect(() => {
+    console.log(series);
+    const sum: number = series.reduce(
+      (accumulator: number, currentValue: number) => {
+        return accumulator + currentValue;
+      },
+      0
+    );
+    setSum(sum);
+  });
 
   useEffect(() => {
     axios
@@ -120,14 +136,22 @@ const TotalDonutChart: React.FC<TotalDonutChartProps> = () => {
   }
 
   return (
-    <div id="chart">
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="donut"
-        width={400}
-        height={350}
-      />
+    <div id="chart" className="w-full">
+      {sum > 0 ? (
+        <ReactApexChart
+          options={options}
+          series={series}
+          type="donut"
+          width={props.width}
+          height={350}
+        />
+      ) : (
+        <div
+          className={`w-[calc(100%-${props.width}px)] h-[350px] flex justify-center items-center text-md`}
+        >
+          아직 버린 쓰레기가 없어요😮
+        </div>
+      )}
     </div>
   );
 };
