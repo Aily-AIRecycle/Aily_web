@@ -19,8 +19,6 @@ const input =
 const label = "text-[20px]";
 
 export default function ChangePassword() {
-  // const domain = "https://ailymit.store";
-  const domain = "";
   const password = useInput("");
   const checkNewPassword = useInput("");
 
@@ -41,7 +39,7 @@ export default function ChangePassword() {
       alert("바꾸려는 비밀번호가 일치하지 않습니다.");
     } else {
       axios
-        .post(`${domain}/member/member/ChPwd/ch`, {
+        .post(`/member/member/ChPwd/ch`, {
           email:
             sessionStorage.getItem("user_email") ||
             localStorage.getItem("user_email"),
