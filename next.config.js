@@ -6,7 +6,7 @@ module.exports = {
     domains: ["ailymit.store"],
     remotePatterns: [
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "localhost",
       },
     ],
@@ -18,7 +18,7 @@ module.exports = {
     return [
       {
         source: `/member/:path*`,
-        destination: `http://ailymit.store/member/:path*`,
+        destination: `https://ailymit.store/member/:path*`,
       },
     ];
   },
