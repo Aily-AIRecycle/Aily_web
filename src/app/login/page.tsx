@@ -19,10 +19,6 @@ function Login() {
   function loginHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log("click login");
-    console.log("EMAIL: ", email.value);
-    console.log("PW: ", password.value);
-
     axios
       .post("/member/member/login", {
         email: email.value,

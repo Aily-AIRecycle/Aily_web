@@ -23,8 +23,6 @@ import { FormData, Errors, ChangeHandler } from "@/hooks/use-formValidation";
 import { validationRules } from "@/app/join/validation_rules";
 
 function Join(): JSX.Element {
-  // const domain = "https://ailymit.store";
-  const domain = "";
   const [passwordShown, setPasswordShown] = useState(false);
 
   const [authNumber, setAuthNumber] = useState("");
@@ -84,7 +82,7 @@ function Join(): JSX.Element {
       formData.phonenumber
     ) {
       axios
-        .post(`${domain}/member/member/join`, {
+        .post(`/member/member/join`, {
           email: formData.email,
           password: formData.password,
           nickname: formData.nickname,
@@ -107,14 +105,14 @@ function Join(): JSX.Element {
 
   function authEmailHandler() {
     axios
-      .post(`${domain}/member/member/EmailCheck`, {
+      .post(`/member/member/EmailCheck`, {
         email: formData.email,
       })
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {
           axios
-            .post(`${domain}/member/member/auth-email`, {
+            .post(`/member/member/auth-email`, {
               email: formData.email,
             })
             .then((res) => {
@@ -139,7 +137,7 @@ function Join(): JSX.Element {
 
   function checknickname() {
     axios
-      .get(`${domain}member/member/ChNick/${formData.nickname}`)
+      .get(`/member/member/ChNick/${formData.nickname}`)
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {
