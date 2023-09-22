@@ -262,7 +262,7 @@ export default function Edit() {
             <div className="md:invisible md:w-0 md:h-0 text-[20px] mb-6">
               프로필 사진
             </div>
-            <Profile src={imgUrl} />
+            <Profile src={imgUrl} width={180} height={180} />
             <button
               className="w-[50px] h-[50px] flex justify-center items-center rounded-full border border-solid border-black bg-white relative bottom-[50px]"
               onClick={() => {

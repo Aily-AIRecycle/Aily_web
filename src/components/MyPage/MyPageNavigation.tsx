@@ -69,7 +69,7 @@ export default function MyPageNavigation() {
       {windowWidth! >= 1400 && (
         <div className="w-[280px] h-[855px] my-10 mr-11 rounded-3xl py-8  bg-white">
           <div className="flex flex-col items-center mb-12 ">
-            <Profile src={imgUrl} />
+            <Profile src={imgUrl} width={180} height={180} />
             <p className="text-[28px] mt-3">{userName}님</p>
           </div>
           <ul className="flex flex-col justify-center items-center">
@@ -106,9 +106,9 @@ export default function MyPageNavigation() {
                   )
               )}
               {isExpanded ? (
-                <Image src={less} width={50} alt="less" />
+                <Image src={less} width={24} alt="less" />
               ) : (
-                <Image src={more} width={50} alt="more" />
+                <Image src={more} width={24} alt="more" />
               )}
             </div>
             {isExpanded && (
