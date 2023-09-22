@@ -9,7 +9,7 @@ import bars from "img/header/bars-solid.svg";
 import x from "img/header/x-solid.svg";
 import logo from "img/aily_logo.svg";
 
-const Header = (): ReactElement | null => {
+const Header = (): ReactElement => {
   const windowWidth = useWindowWidth();
   const width = 250;
   const [xPosition, setX] = useState(-width);
@@ -23,8 +23,7 @@ const Header = (): ReactElement | null => {
   }
 
   let header;
-  if (windowWidth === null) {
-  } else if (windowWidth > 1000) {
+  if (windowWidth! > 1000) {
     header = (
       <header className={classes.head_wrap}>
         <div className={classes.head}>
