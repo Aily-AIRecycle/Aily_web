@@ -20,6 +20,14 @@ module.exports = {
         source: `/member/:path*`,
         destination: `https://ailymit.store/member/:path*`,
       },
+      {
+        source: `/data/:path*`,
+        destination: `https://ailymit.store/data/:path*`,
+      },
+      {
+        source: `/board/:path*`,
+        destination: `https://ailymit.store/board/:path*`,
+      },
     ];
   },
 };

@@ -8,6 +8,9 @@
     },
     "/data": {
       "target": "https://ailymit.store/data"
+    },
+    "/board": {
+      "target": "https://ailymit.store/board"
     }
   },
   "dependencies": {
