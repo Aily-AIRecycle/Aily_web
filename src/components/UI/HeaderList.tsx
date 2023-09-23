@@ -17,31 +17,49 @@ function HeaderList(props: any) {
   return (
     <ul className={props.ul}>
       <li className={props.li}>
-        <Link href="/boards/all">게시판</Link>
+        <Link href="/boards/all" className={props.link}>
+          게시판
+        </Link>
       </li>
       <li className={props.li}>
-        <Link href="/location">위치</Link>
+        <Link href="/location" className={props.link}>
+          위치
+        </Link>
       </li>
       <li className={props.li}>
-        <Link href="/dictionary/all">재활용 사전</Link>
+        <Link href="/dictionary/all" className={props.link}>
+          재활용 사전
+        </Link>
       </li>
       <li className={props.li}>
-        <Link href="/statistics">통계</Link>
+        <Link href="/statistics" className={props.link}>
+          통계
+        </Link>
       </li>
       {name === "ok" && (
         <>
           <li className={props.li}>
-            <Link href="/my-page/dashboard">내 정보</Link>
+            <Link href="/my-page/dashboard" className={props.link}>
+              내 정보
+            </Link>
           </li>
           <li className={props.li} onClick={handleLogout}>
-            <Link href="/">로그아웃</Link>
+            <Link href="/" className={props.link}>
+              로그아웃
+            </Link>
           </li>
-          {id === "테스트" && <Link href="/hidden">관리자 대쉬보드</Link>}
+          {id === "테스트" && (
+            <Link href="/hidden" className={props.link}>
+              관리자 대쉬보드
+            </Link>
+          )}
         </>
       )}
       {name !== "ok" && (
         <li className={props.li}>
-          <Link href="/login">로그인</Link>
+          <Link href="/login" className={props.link}>
+            로그인
+          </Link>
         </li>
       )}
     </ul>

@@ -21,6 +21,10 @@ module.exports = {
         myBoxShadow:
           "0px 4px 12px 0px rgba(28, 64, 97, 0.06), 0px 12px 36px 0px rgba(51, 82, 100, 0.1)",
       },
+      transitionProperty: {
+        header: "top, color",
+        headerAfter: "transition, opactiy",
+      },
     },
   },
   plugins: [],
