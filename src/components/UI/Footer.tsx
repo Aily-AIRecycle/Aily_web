@@ -1,40 +1,46 @@
-"use client";
-import classes from "@/components/UI/styles/Footer.module.scss";
+// 필요한 타입 정의
+type Team = {
+  teamName: string;
+  members: string[];
+};
+
 import logo from "img/footer_logo.svg";
 import github from "img/github.svg";
 import Image from "next/image";
+import { TeamInfo } from "./TeamInfo";
 
 function Footer() {
+  const teams: Team[] = [
+    { teamName: "AIoT", members: ["이인호", "이상훈", "백은호"] },
+    { teamName: "프론트엔드", members: ["신윤찬", "김현희", "최혁진"] },
+    { teamName: "백엔드", members: ["이승규", "남정현", "이종원"] },
+  ];
+
   return (
-    <div className={classes.footer}>
-      <div className={classes.footer_wrap}>
-        <div className={classes.div}>
-          <ul>
-            <li>AIoT</li>
-            <li>이인호</li>
-            <li>이상훈</li>
-            <li>백은호</li>
-          </ul>
-          <ul>
-            <li>프론트엔드</li>
-            <li>신윤찬</li>
-            <li>김현희</li>
-            <li>최혁진</li>
-          </ul>
-          <ul>
-            <li>백엔드</li>
-            <li>이승규</li>
-            <li>남정현</li>
-            <li>이종원</li>
-          </ul>
+    <div className="bg-[#ffcab5] flex justify-center">
+      <div className="w-4/5">
+        <div className="flex justify-around mt-6">
+          {teams.map((team, index) => (
+            <TeamInfo
+              key={index}
+              teamName={team.teamName}
+              members={team.members}
+            />
+          ))}
         </div>
 
-        <div className={classes.bottom}>
-          <div>
-            <Image src={logo} width={50} height={50} alt="logo" />
-            <h6>© 2023 Aily. All rights reserved.</h6>
+        <div className="border-t border-solid border-white mt-[100px] mb-8 pt-4 flex justify-between">
+          <div className="flex items-end ml-7">
+            <Image
+              src={logo}
+              width={50}
+              height={50}
+              alt="logo"
+              className="mr-6"
+            />
+            <h6 className="text-white">© 2023 Aily. All rights reserved.</h6>
           </div>
-          <a href="https://github.com/Aily-AIRecycle">
+          <a href="https://github.com/Aily-AIRecycle" target="_blank">
             <Image src={github} width={30} height={30} alt="github" />
           </a>
         </div>

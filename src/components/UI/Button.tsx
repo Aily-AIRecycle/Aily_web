@@ -1,17 +1,22 @@
-import classes from "@/components/UI/styles/Button.module.scss";
+import React from "react";
 
-function Button(props: any) {
+type ButtonProps = {
+  color: string;
+  value: string;
+  onClick: React.MouseEventHandler<HTMLInputElement>;
+  disabled?: boolean;
+};
+
+function Button({ color, value, onClick, disabled }: ButtonProps) {
   return (
-    <>
-      <input
-        type="button"
-        value={props.value}
-        className={classes.button}
-        onClick={props.onClick}
-        style={{ backgroundColor: props.color }}
-        disabled={props.disabled}
-      />
-    </>
+    <input
+      type="button"
+      value={value}
+      className={`w-[120px] h-10 px-2 rounded-[30px] ml-[10px] text-white hover:cursor-pointer`}
+      onClick={onClick}
+      disabled={disabled}
+      style={{ backgroundColor: color }}
+    />
   );
 }
 
