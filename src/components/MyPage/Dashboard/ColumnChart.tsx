@@ -160,7 +160,7 @@ const ColumnChart: React.FC<ColumnChartProps> = (props: ColumnChartProps) => {
   }
 
   return (
-    <div id="chart">
+    <>
       {sum > 0 ? (
         <ReactApexChart
           options={options}
@@ -170,13 +170,15 @@ const ColumnChart: React.FC<ColumnChartProps> = (props: ColumnChartProps) => {
           height={350}
         />
       ) : (
-        <div
-          className={`w-[${props.width}px] h-[350px] flex justify-center items-center text-md`}
-        >
-          1년 동안 분리수거를 하지 않았어요😮
+        <div id="chart" className="lg:w-1/2">
+          <div
+            className={`w-full h-[350px] flex justify-center items-center text-md`}
+          >
+            1년 동안 분리수거를 하지 않았어요😮
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

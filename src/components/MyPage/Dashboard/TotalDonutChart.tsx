@@ -136,7 +136,7 @@ const TotalDonutChart: React.FC<TotalDonutChartProps> = (
   }
 
   return (
-    <div id="chart" className="w-full">
+    <>
       {sum > 0 ? (
         <ReactApexChart
           options={options}
@@ -146,13 +146,15 @@ const TotalDonutChart: React.FC<TotalDonutChartProps> = (
           height={350}
         />
       ) : (
-        <div
-          className={`w-[calc(100%-${props.width}px)] h-[350px] flex justify-center items-center text-md`}
-        >
-          아직 버린 쓰레기가 없어요😮
+        <div id="chart" className="lg:w-1/2">
+          <div
+            className={`w-full h-[350px] flex justify-center items-center text-md`}
+          >
+            아직 버린 쓰레기가 없어요😮
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

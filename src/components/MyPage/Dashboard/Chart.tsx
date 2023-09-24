@@ -22,6 +22,7 @@ export default function Chart() {
       setColX((windowWidth! * 9) / 10);
       setDonutX((windowWidth! * 9) / 10);
     }
+    console.log(colX, donutX);
   }, [windowWidth]);
 
   return (
