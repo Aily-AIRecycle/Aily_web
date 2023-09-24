@@ -1,7 +1,7 @@
 "use client";
 
-import ColumnChart from "@/components/MyPage/ColumnChart";
-import TotalDonutChart from "@/components/MyPage/TotalDonutChart";
+import ColumnChart from "@/components/MyPage/Dashboard/ColumnChart";
+import TotalDonutChart from "@/components/MyPage/Dashboard/TotalDonutChart";
 import useWindowWidth from "@/hooks/use-windowWidth";
 import { useEffect, useState } from "react";
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import wallet from "img/main/wallet.svg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Profile from "./Profile";
+import Profile from "../Profile";
 import { useSelector } from "react-redux";
 import { ToolkitStore } from "@/store";
 

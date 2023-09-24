@@ -1,4 +1,4 @@
-import AccumulationHistory from "@/components/MyPage/AccumulationHistory";
+import AccumulationHistory from "@/components/MyPage/Dashboard/AccumulationHistory";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DATA from "./data";
@@ -36,6 +36,8 @@ export default function PointHistory() {
               point: item.point,
             }))
           );
+          console.log(response.data);
+          console.log(history);
         }
       })
       .catch((error) => {
@@ -44,6 +46,9 @@ export default function PointHistory() {
       });
   }, []);
 
+  useEffect(() => {
+    console.log(history);
+  }, [history]);
   return (
     <div className="web:w-[700px] web:h-[300px] md:w-[calc(100%-300px)] mobile:h-[300px] bg-[#ffe8df] rounded-xl flex justify-center items-center shadow-lg">
       <div className="web:w-[670px] web:h-[270px] mobile:w-[calc(100%-30px)] mobile:h-[calc(100%-30px)] pt-3 pb-3 pl-5 pr-5 bg-white rounded-xl">

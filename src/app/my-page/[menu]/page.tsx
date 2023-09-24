@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import Dashboard from "@/components/MyPage/Dashboard";
+import Dashboard from "@/components/MyPage/Dashboard/Dashboard";
 import Leave from "@/components/MyPage/Leave";
 import Edit from "@/components/MyPage/Edit";
 import ChangePassword from "@/components/MyPage/ChangePassword";

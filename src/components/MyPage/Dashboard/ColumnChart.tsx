@@ -15,6 +15,7 @@ const ColumnChart: React.FC<ColumnChartProps> = (props: ColumnChartProps) => {
   const [series, setSeries] = useState<{ name: string; data: number[] }[]>([
     {
       name: "적립내역",
+      // data: [1, 2, 3, 4, 5, 6, 13, 6, 3, 20, 7, 2],
       data: [],
     },
   ]);
@@ -43,6 +44,7 @@ const ColumnChart: React.FC<ColumnChartProps> = (props: ColumnChartProps) => {
         const monthlyData: number[] = new Array(12).fill(0);
         console.log(monthlyData);
         if (Array.isArray(data)) {
+          console.log("배열이엇다");
           data.forEach((item: any) => {
             const month = parseInt(item.day.split(" ")[1].split("월")[0]) - 1;
             monthlyData[month] += item.can + item.gen + item.pet;

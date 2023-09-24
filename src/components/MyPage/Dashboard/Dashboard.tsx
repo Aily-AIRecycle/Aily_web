@@ -1,7 +1,7 @@
 "use client";
-import Chart from "@/components/MyPage/Chart";
-import Point from "@/components/MyPage/Point";
-import PointHistory from "@/components/MyPage/PointHistory";
+import Chart from "@/components/MyPage/Dashboard/Chart";
+import Point from "@/components/MyPage/Dashboard/Point";
+import PointHistory from "@/components/MyPage/Dashboard/PointHistory";
 import Title from "@/components/MyPage/Title";
 
 export default function Dashboard() {
