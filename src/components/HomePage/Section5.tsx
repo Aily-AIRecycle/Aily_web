@@ -21,7 +21,7 @@ function Section5()
 
   return (
     <div className="w-full aspect-[16/10] bg-[#FFF9F6] place-itmes-center">
-      <div className="text-5xl mt-[8.3vh] mb-[2.8vh] mq:text-2xl font-bold text-center">
+      <div className="text-5xl mt-[8.3vh] mb-[2.8vh] mq:text-2xl font-bold text-center text-[#3e3e3e]">
         <h1 className="mb-[3.5vh] mq:mb-[1vh]">
           일상 속 지구를 위한 친환경 실천
         </h1>
