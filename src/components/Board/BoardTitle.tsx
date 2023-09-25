@@ -1,16 +1,8 @@
 import classes from "@/components/Board/styles/BoardTitle.module.scss";
 import Link from "next/link";
+import { Article } from "@/components/Board/article";
 
-function BoardTitle(props: {
-  article: {
-    id: string;
-    title: string;
-    category: number;
-    writer: string;
-    date: string;
-  };
-  boardName: string;
-}) {
+function BoardTitle(props: { article: Article; boardName: string }) {
   const { article } = props;
   const { id, title, category, writer, date } = article;
 

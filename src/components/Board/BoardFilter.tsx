@@ -6,7 +6,7 @@ const category_type: {
   [key: string]: number;
 } = { notice: 1, "q&a": 2, faq: 3, suggestion: 4 };
 
-const BoardFilter: React.FC<{ boardName: string }> = (props) => {
+function BoardFilter(props: { boardName: string }) {
   if (props.boardName === "all") {
     if (ARTICLE_DATA.length === 0) {
       return <NoContent />;
@@ -34,6 +34,6 @@ const BoardFilter: React.FC<{ boardName: string }> = (props) => {
       />
     ));
   }
-};
+}
 
 export default BoardFilter;
