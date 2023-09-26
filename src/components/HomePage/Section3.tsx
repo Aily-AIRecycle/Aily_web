@@ -1,6 +1,7 @@
 import { useInView, useSpring, animated, config } from "@react-spring/web";
 
-function Section3() {
+function Section3()
+{
   const [ref, inView] = useInView();
   const { number } = useSpring({
     from: { number: 0 },
@@ -10,35 +11,35 @@ function Section3() {
 
   const bill = useSpring({
     from: {
-      x: "300px",
-      y: "150px",
+      x: "150px",
+      y: "50px",
     },
     to: {
-      x: inView ? "0px" : "300px",
-      y: inView ? "0px" : "150px",
+      x: inView ? "0px" : "150px",
+      y: inView ? "0px" : "50px",
     },
   });
 
   const coin = useSpring({
     from: {
-      x: "300px",
-      y: "-150px",
+      x: "150px",
+      y: "-50px",
     },
     to: {
-      x: inView ? "0px" : "300px",
-      y: inView ? "0px" : "-150px",
+      x: inView ? "0px" : "50px",
+      y: inView ? "0px" : "-50px",
     },
     delay: 200,
   });
 
   const cash = useSpring({
     from: {
-      x: "-300px",
-      y: "50px",
+      x: "-150px",
+      y: "20px",
     },
     to: {
-      x: inView ? "0px" : "-300px",
-      y: inView ? "0px" : "50px",
+      x: inView ? "0px" : "-150px",
+      y: inView ? "0px" : "20px",
     },
     delay: 400,
   });
@@ -46,8 +47,8 @@ function Section3() {
   return (
     <div className="bg-[#FFE8DF] w-full text-center aspect-[16/10]">
       <div className=" mt-[13.8vh] mq:mt-[8vh] mq:mb-[8vh]">
-        <h1 className="text-5xl mb-[2.8vh] mq:text-3xl">포인트 제도</h1>
-        <h2 className="text-2xl mq:text-sm font-extralight text-[#726969] mb-[6.5vh] mq:text-lg">
+        <h1 className="text-5xl mb-[2.8vh] mq:text-3xl font-bold text-[#3e3e3e]">포인트 제도</h1>
+        <h2 className="text-2xl mq:text-sm font-light text-[#726969] mb-[6.5vh] mq:text-lg">
           분리수거할 때 적립되는 포인트는 현금처럼 사용이 가능합니다.
         </h2>
         <div ref={ref} className="relative grid place-items-center">
