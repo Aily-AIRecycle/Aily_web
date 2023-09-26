@@ -38,7 +38,7 @@ function Section5()
           style={{ ...fadeUp, ...fadeInHand }}
           src="img/main/hand.svg"
           alt="hand"
-          className=" w-[18.7vw] mq:w-[36vw] mr-auto ml-auto mb-[19.2vh] mq:mb-[13vh]"
+          className="w-[18.7vw] mq:w-[36vw] mr-auto ml-auto mb-[19.2vh] mq:mb-[13vh]"
         />
       </div>
     </div>
