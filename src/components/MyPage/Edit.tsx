@@ -22,7 +22,7 @@ import Title from "@/components/MyPage/Title";
 
 const data = "flex flex-col mb-3";
 const input =
-  "border-[1px] border-solid border-[#a0a0a0] rounded-lg px-3 w-full h-10";
+  "border border-solid border-[#a0a0a0] rounded-lg px-3 w-full h-10";
 const label = "text-[20px]";
 
 export default function Edit() {
@@ -243,9 +243,8 @@ export default function Edit() {
                   </div>
                 </li>
                 {editFields.map((field) => (
-                  <li className={data}>
+                  <li className={data} key={field.name}>
                     <MyPageInput
-                      key={field.name}
                       label={field.label}
                       name={field.name}
                       value={formData[field.name]}
