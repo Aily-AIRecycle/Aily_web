@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 function HeaderList(props: any) {
   const handleLogout = () => {
@@ -10,9 +11,15 @@ function HeaderList(props: any) {
     // Redirect to the login page after logout
   };
 
-  const name =
-    sessionStorage.getItem("loginok") || localStorage.getItem("loginok");
-  const id = sessionStorage.getItem("name") || localStorage.getItem("name");
+  const [name, setName] = useState<string | null>(null);
+  const [id, setId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setName(
+      sessionStorage.getItem("loginok") || localStorage.getItem("loginok")
+    );
+    setId(sessionStorage.getItem("name") || localStorage.getItem("name"));
+  });
 
   return (
     <ul className={props.ul}>
