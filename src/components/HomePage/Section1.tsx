@@ -2,8 +2,7 @@ import useIntersectionObserver from "@/hooks/use-intersectionObserver";
 import { useSpring, animated } from "@react-spring/web";
 import { useRef } from "react";
 
-function Section1()
-{
+function Section1() {
   const triggerRef = useRef<HTMLDivElement | null>(null);
   const dataRef = useIntersectionObserver(triggerRef, {
     freezeOnceVisible: true,
@@ -15,7 +14,7 @@ function Section1()
   });
   return (
     <div className="w-full grid place-items-center mt-[13.8vh] mq:mt-[8vh]">
-      <h1 className="text-5xl mb-[2.8vh] mq:text-3xl font-bold">
+      <h1 className="text-5xl mb-[2.8vh] mq:text-3xl font-bold text-[#3e3e3e]">
         자연을 생각하는 분리수거 로봇
       </h1>
       <h2 className="text-2xl font-light text-[#726969] mb-[6.5vh] mq:text-lg">

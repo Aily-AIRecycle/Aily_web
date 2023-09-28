@@ -3,7 +3,8 @@ module.exports = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["ailymit.store"],
+    formats: ["image/avif", "image/webp"],
+    domains: ["ailymit.store", "play.google.com"],
     remotePatterns: [
       {
         protocol: "https",

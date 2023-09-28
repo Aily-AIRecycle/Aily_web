@@ -1,7 +1,6 @@
 import { animated, useInView, useSpring } from "@react-spring/web";
 
-function Section5()
-{
+function Section5() {
   const [ref, inView] = useInView();
   const fadeInEarth = useSpring({
     from: { opacity: 0 },
@@ -25,7 +24,7 @@ function Section5()
         <h1 className="mb-[3.5vh] mq:mb-[1vh]">
           일상 속 지구를 위한 친환경 실천
         </h1>
-        <h1 className="mb-[3.3vh]">Aily와 함께 시작하세요.</h1>
+        <h1 className="mb-[3.3vh] text-[#3e3e3e]">Aily와 함께 시작하세요.</h1>
       </div>
       <div ref={ref}>
         <animated.img

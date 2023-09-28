@@ -1,7 +1,8 @@
-import { useInView, useSpring, animated, config } from "@react-spring/web";
+import { useInView, useSpring, animated } from "@react-spring/web";
+import wallet from "img/main/wallet.svg";
+import Image from "next/image";
 
-function Section3()
-{
+function Section3() {
   const [ref, inView] = useInView();
   const { number } = useSpring({
     from: { number: 0 },
@@ -47,8 +48,10 @@ function Section3()
   return (
     <div className="bg-[#FFE8DF] w-full text-center aspect-[16/10]">
       <div className=" mt-[13.8vh] mq:mt-[8vh] mq:mb-[8vh]">
-        <h1 className="text-5xl mb-[2.8vh] mq:text-3xl font-bold text-[#3e3e3e]">포인트 제도</h1>
-        <h2 className="text-2xl mq:text-sm font-light text-[#726969] mb-[6.5vh] mq:text-lg">
+        <h1 className="text-5xl mb-[2.8vh] mq:text-3xl font-bold text-[#3e3e3e]">
+          포인트 제도
+        </h1>
+        <h2 className="text-2xl font-light text-[#726969] mb-[6.5vh] mq:text-lg">
           분리수거할 때 적립되는 포인트는 현금처럼 사용이 가능합니다.
         </h2>
         <div ref={ref} className="relative grid place-items-center">
@@ -66,8 +69,8 @@ function Section3()
           />
 
           <div className="z-10 aspect-square w-1/3 bg-[#ffffff] rounded-[5.6vw] border-solid border-8 border-[#F8B195] shadow-[1vw_1vw_0.5vw_0.25vw_rgba(0,0,0,0.25)]">
-            <img
-              src="img/main/wallet.svg"
+            <Image
+              src={wallet}
               alt="wallet"
               className="w-[5.2vw] ml-[3.8vw] mt-[7.5vh] mq:mt-[2vh] absolute"
             />
