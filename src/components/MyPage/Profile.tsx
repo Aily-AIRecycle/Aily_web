@@ -3,7 +3,8 @@ import Image from "next/image";
 export default function Profile(props: any) {
   return (
     <div
-      className={`w-[${props.width}px] h-[${props.height}px] border-solid border-[#d9d9d9] border rounded-full flex justify-center items-center`}
+      style={{ width: `${props.width}px`, height: `${props.height}px` }}
+      className={`border-solid border-[#d9d9d9] border rounded-full flex justify-center items-center`}
     >
       {props.src && (
         <Image
