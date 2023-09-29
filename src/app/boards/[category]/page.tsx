@@ -1,26 +1,33 @@
 "use client";
 import BoardFilter from "@/components/Board/BoardFilter";
-import classes from "@/app/boards/[category]/Board.module.scss";
-import { Provider } from "react-redux";
-import store from "@/store";
+import { useEffect } from "react";
 
 function Page({ params }: { params: { category: string } }) {
+  useEffect(() => {
+    console.log(params.category);
+  });
   return (
     <>
-      <Provider store={store}>
-        <div className={classes.board}>
-          <div className={classes.boardHead}>
-            <div className={classes.id}>No</div>
-            <div className={classes.category}>카테고리</div>
-            <div className={classes.title}>제목</div>
-            <div className={classes.writer}>작성자</div>
-            <div className={classes.date}>작성일</div>
+      <div className="lg:mx-[10%] lg:mb-[150px] mx-[5%] my-0 pb-[150px]">
+        <div className="flex h-[50px] items-center border-y border-solid border-t-black border-b-[#d9d9d9]">
+          <div className="lg:w-[10%] lg:flex lg:justify-center hidden">No</div>
+          <div className="lg:w-1/5 lg:flex lg:justify-center hidden">
+            카테고리
           </div>
-          <ul className={classes.list}>
-            <BoardFilter boardName={params.category} />
-          </ul>
+          <div className="lg:w-1/2 flex justify-center w-4/5 lg:text-base text-[15px]">
+            제목
+          </div>
+          <div className="lg:w-[10%] lg:flex lg:justify-center hidden">
+            작성자
+          </div>
+          <div className="w-1/5 flex justify-center lg:text-base text-[15px]">
+            작성일
+          </div>
         </div>
-      </Provider>
+        <ul className="flex flex-col-reverse">
+          <BoardFilter boardName={params.category} />
+        </ul>
+      </div>
     </>
   );
 }
