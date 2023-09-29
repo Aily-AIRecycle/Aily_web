@@ -29,12 +29,16 @@ function Section5() {
       <div ref={ref}>
         <animated.img
           style={fadeInEarth}
+          width={100}
+          height={100}
           src="img/main/earth.svg"
           alt="earth"
           className="w-[20.8vw] mq:w-[40vw] mb-[5.5vh] mq:mb-[3vh] mr-auto ml-auto"
         />
         <animated.img
           style={{ ...fadeUp, ...fadeInHand }}
+          width={100}
+          height={100}
           src="img/main/hand.svg"
           alt="hand"
           className="w-[18.7vw] mq:w-[36vw] mr-auto ml-auto mb-[19.2vh] mq:mb-[13vh]"

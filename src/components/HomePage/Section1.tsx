@@ -23,9 +23,11 @@ function Section1() {
       <animated.img
         ref={triggerRef as React.RefObject<HTMLImageElement>}
         style={{ ...springs }}
-        src="img/main/phone.png"
+        width={100}
+        height={100}
+        src="img/main/phone.avif"
         alt="phone"
-        className="h-[84vh]"
+        className="w-auto h-[84vh]"
       />
       <div className="bg-[#ffcab5] w-full h-[63vh] mt-[-53vh] z-[-1]" />
     </div>

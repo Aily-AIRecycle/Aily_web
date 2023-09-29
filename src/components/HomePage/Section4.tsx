@@ -18,7 +18,9 @@ function Section4() {
       <animated.img
         ref={ref}
         style={fadeIn}
-        src="img/main/Map.png"
+        width={100}
+        height={100}
+        src="img/main/map.avif"
         alt="map"
         className="w-[79vw] inline-block mb-[9.2vh] ml-[4.2vw]"
       />

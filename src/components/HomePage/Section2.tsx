@@ -33,29 +33,43 @@ function Section2() {
       <div className="items-center place-content-center w-full flex aspect-[18/1] mb-[13.4vh] mq:mb-[6vh]">
         <animated.img
           style={{ ...fadeIn }}
-          src="img/main/qrphone.png"
+          width={100}
+          height={100}
+          src="img/main/qrphone.avif"
           alt="qrPhone"
+          loading="lazy"
           className="w-[18vw] mq:w-[25vw]"
         />
         <div className="w-[8.9vw] mq:w-[15vw] ml-[7.3vw] mr-[7.3vw]">
           <animated.img
             ref={ref}
             style={{ ...arrowtop }}
+            width={100}
+            height={100}
             src="img/main/arrowtop.png"
+            loading="lazy"
             alt="arrowtop"
+            className="w-auto"
           />
           <animated.img
             ref={ref}
             style={{ ...arrowbottom }}
+            width={100}
+            height={100}
             src="img/main/arrowbottom.png"
+            loading="lazy"
             alt="arrowbottom"
+            className="w-auto"
           />
         </div>
         <animated.img
           ref={ref}
           style={{ ...fadeIn }}
-          src="img/main/AiLYre.png"
+          width={100}
+          height={100}
+          src="img/main/ailyre.avif"
           alt="aily"
+          loading="lazy"
           className="w-[23vw] mq:w-[30vw]"
         />
       </div>
