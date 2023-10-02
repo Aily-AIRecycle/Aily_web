@@ -8,7 +8,7 @@ export type Article = {
   date: string;
 };
 
-const ARTICLE_DATA: Article[] = [
+export const ARTICLE_DATA: Article[] = [
   {
     id: "1",
     category: "공지",
@@ -40,4 +40,10 @@ const ARTICLE_DATA: Article[] = [
   },
 ];
 
-export default ARTICLE_DATA;
+export const menuData = [
+  { name: "전체", path: "all" },
+  { name: "공지사항", path: "notice" },
+  { name: "Q&A", path: "q&a" },
+  { name: "FAQ", path: "faq" },
+  { name: "건의사항", path: "suggestion" },
+];

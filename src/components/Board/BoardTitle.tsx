@@ -13,7 +13,7 @@ function BoardTitle(props: { article: Article; boardName: string }) {
       </div>
       <div className="lg:w-1/2 w-4/5 flex lg:text-base text-xs font-light">
         <Link
-          href={`/boards/${props.boardName}/${id}`}
+          href={`${props.boardName}/${id}`}
           className="no-underline text-black "
         >
           {title}

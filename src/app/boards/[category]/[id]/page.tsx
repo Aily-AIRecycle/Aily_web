@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import classes from "@/app/boards/[category]/[id]/BoardContent.module.scss";
-import ARTICLE_DATA from "@/components/Board/article";
+import { ARTICLE_DATA } from "@/components/Board/article";
 import { Article } from "@/components/Board/article";
 
 function Page({ params }: { params: { id: string } }): JSX.Element {

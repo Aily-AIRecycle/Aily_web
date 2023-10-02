@@ -8,17 +8,7 @@ export type Article = {
   date: string;
 };
 
-// { name: "일반쓰레기", path: "gen" },
-// { name: "캔류 · 고철", path: "can" },
-// { name: "페트", path: "pet" },
-// { name: "종이 · 종이팩", path: "paper" },
-// { name: "유리", path: "glass" },
-// { name: "비닐", path: "vinyl" },
-// { name: "플라스틱", path: "plastic" },
-// { name: "음식물", path: "food" },
-// { name: "의류 · 원단", path: "cloth" },
-
-const ARTICLE_DATA: Article[] = [
+export const ARTICLE_DATA: Article[] = [
   {
     id: "1",
     category: "음식물",
@@ -61,4 +51,16 @@ const ARTICLE_DATA: Article[] = [
   },
 ];
 
-export default ARTICLE_DATA;
+export const menuData = [
+  { name: "전체", path: "all" },
+  { name: "일반쓰레기", path: "gen" },
+  { name: "캔류 · 고철", path: "can" },
+  { name: "페트", path: "pet" },
+  { name: "종이 · 종이팩", path: "paper" },
+  { name: "유리", path: "glass" },
+  { name: "비닐", path: "vinyl" },
+  { name: "플라스틱", path: "plastic" },
+  { name: "음식물", path: "food" },
+  { name: "의류 · 원단", path: "cloth" },
+  { name: "ETC", path: "etc" },
+];

@@ -1,6 +1,14 @@
 "use client";
+import { ARTICLE_DATA } from "@/components/Board/article";
 import BoardFilter from "@/components/Board/BoardFilter";
 import { useEffect } from "react";
+
+const categoryType: Record<string, number> = {
+  notice: 1,
+  "q&a": 2,
+  faq: 3,
+  suggestion: 4,
+};
 
 function Page({ params }: { params: { category: string } }) {
   useEffect(() => {
@@ -25,7 +33,11 @@ function Page({ params }: { params: { category: string } }) {
           </div>
         </div>
         <ul className="flex flex-col-reverse">
-          <BoardFilter boardName={params.category} />
+          <BoardFilter
+            boardName={params.category}
+            categoryType={categoryType}
+            data={ARTICLE_DATA}
+          />
         </ul>
       </div>
     </>
