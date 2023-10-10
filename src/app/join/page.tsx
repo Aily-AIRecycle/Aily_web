@@ -143,7 +143,7 @@ function Join(): JSX.Element {
         if (res.data === "yes") {
           alert("사용이 가능합니다!");
         } else {
-          alert("이름이 중복됩니다. 다른 이름을 사용해 주세요.");
+          alert("닉네임이 중복됩니다. 다른 닉네임을 사용해 주세요.");
         }
       })
       .catch()
@@ -192,7 +192,7 @@ function Join(): JSX.Element {
               />
               <Button
                 value="확인"
-                color={"#D9D9D9"}
+                color="#d9d9d9"
                 onClick={authCheckHandler}
                 disabled={isAuthNumberBtnDisabled}
               />
@@ -230,14 +230,14 @@ function Join(): JSX.Element {
               <Image src={user} width={25} alt="name" />
               <input
                 type="text"
-                placeholder="이름"
+                placeholder="닉네임"
                 className={classes.short_input}
                 name="nickname"
                 value={formData.nickname}
                 onChange={onChangeHandler}
               />
               <Button
-                value="이름 중복 확인"
+                value="닉네임 중복 확인"
                 color={"#f8b195"}
                 onClick={checknickname}
               />
@@ -280,7 +280,7 @@ function Join(): JSX.Element {
           </div>
           <div className={classes.error_area2}>
             {errors.nickname && (
-              <ErrorText text="· 이름: 이름을 입력해주세요." />
+              <ErrorText text="· 닉네임: 닉네임을 입력해주세요." />
             )}
             {errors.phonenumber && (
               <ErrorText text="· 전화번호: 올바른 전화번호를 입력해주세요." />
