@@ -86,7 +86,7 @@ export default function Edit() {
     const formdata = new FormData();
 
     if (!isAvailableName && sessionStorage.getItem("CUN") !== "yes") {
-      alert("이름 중복 확인을 해주세요.");
+      alert("닉네임 중복 확인을 해주세요.");
       return;
     } else if (!loadImgUrl) {
       if (sessionStorage.getItem("CUN") == "yes") {
@@ -104,7 +104,7 @@ export default function Edit() {
           });
         sessionStorage.setItem("name", formData.nickname);
         localStorage.setItem("name", formData.nickname);
-        alert("이름 변경이 완료 되었습니다.");
+        alert("닉네임 변경이 완료 되었습니다.");
         window.location.reload();
       }
       return;
@@ -173,7 +173,7 @@ export default function Edit() {
           alert("사용이 가능합니다!");
         } else if (res.data === "no") {
           sessionStorage.setItem("CUN", "no");
-          alert("이름이 중복됩니다. 다른 이름을 사용해 주세요.");
+          alert("닉네임이 중복됩니다. 다른 닉네임을 사용해 주세요.");
         }
       })
       .catch()
@@ -224,7 +224,7 @@ export default function Edit() {
                 </li>
                 <li className={data}>
                   <label htmlFor="nickname" className={label}>
-                    이름
+                    닉네임
                   </label>
                   <div className="flex">
                     <input
@@ -235,7 +235,7 @@ export default function Edit() {
                     ></input>
 
                     <Button
-                      value="이름 중복 확인"
+                      value="닉네임 중복 확인"
                       color={"#f8b195"}
                       onClick={checknickname}
                       disabled={isAuthNameBtnDisabled}
@@ -244,13 +244,16 @@ export default function Edit() {
                 </li>
                 {editFields.map((field) => (
                   <li className={data} key={field.name}>
-                    <MyPageInput
-                      label={field.label}
+                    <label htmlFor={field.name} className="text-[20px]">
+                      {field.label}
+                    </label>
+                    <input
                       name={field.name}
                       value={formData[field.name]}
                       onChange={onChangeHandler}
+                      className="border border-solid border-[#a0a0a0] bg-gray-200 rounded-lg px-3 w-full h-10"
                       readOnly={true}
-                    />
+                    ></input>
                   </li>
                 ))}
               </ul>
