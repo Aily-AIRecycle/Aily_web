@@ -34,7 +34,7 @@ function HeaderList(props: any) {
         </Link>
       </li>
       <li className={props.li}>
-        <Link href="/dictionary/all" className={props.link}>
+        <Link href="/dict" className={props.link}>
           재활용 사전
         </Link>
       </li>
