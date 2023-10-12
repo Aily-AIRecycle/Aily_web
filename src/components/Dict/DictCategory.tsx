@@ -6,16 +6,13 @@ import Link from "next/link";
 import { useRecoilState } from "recoil";
 import { categoryPath } from "@/atoms";
 import { useEffect } from "react";
+import { CategoryList } from "./item";
 
 export default function DictCategory({
   category,
   img,
   path,
-}: {
-  category: string;
-  img: StaticImageData;
-  path: string;
-}) {
+}: CategoryList) {
   const [currCategory, setCurrCategory] = useRecoilState(categoryPath);
 
   const onClick = () => {
@@ -40,7 +37,6 @@ export default function DictCategory({
         </div>
         <Image src={arrow} alt="arrow" width={30} />
       </Link>
-      {/* </div> */}
     </>
   );
 }
