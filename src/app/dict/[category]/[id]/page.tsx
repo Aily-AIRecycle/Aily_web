@@ -31,7 +31,7 @@ function Page({
     console.log(params.category);
   });
   const article = ARTICLE_DATA.filter(
-    (article: Article) => article.category_id === parseInt(params.id)
+    (article: Article) => article.id === params.id
   )[0];
 
   return (
