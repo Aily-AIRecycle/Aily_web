@@ -31,7 +31,7 @@ function Page({
     console.log(params.category);
   });
   const article = ARTICLE_DATA.filter(
-    (article: Article) => article.id === params.id
+    (article: Article) => article.category_id === parseInt(params.id)
   )[0];
 
   return (
@@ -44,10 +44,10 @@ function Page({
         <div className="lg:text-[20px] text-[18px] w-full h-20 border-t-2 border-b border-solid border-t-[#726969] border-b-[#bcbcbc] flex flex-col justify-evenly font-medium">
           {article.title}
           <ul className="flex">
-            <li className="text-[12px] pr-1 mr-1 border-r border-solid border-[#9d9d9d]">
+            <li className="text-[12px] font-light pr-1 mr-1 border-r border-solid border-[#9d9d9d]">
               {article.writer}
             </li>
-            <li className="text-[12px]">{article.date}</li>
+            <li className="text-[12px] font-light">{article.date}</li>
           </ul>
         </div>
         <div className="w-full">

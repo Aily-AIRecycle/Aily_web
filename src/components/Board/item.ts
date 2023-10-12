@@ -22,7 +22,7 @@ export const ARTICLE_DATA: Article[] = [
   {
     id: "2",
     category: "종이 · 종이팩",
-    category_id: 2,
+    category_id: 4,
     title: "책",
     writer: "Aily",
     content:
