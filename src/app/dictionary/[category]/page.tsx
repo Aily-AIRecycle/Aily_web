@@ -1,6 +1,6 @@
 "use client";
 import BoardFilter from "@/components/Board/BoardFilter";
-import { ARTICLE_DATA } from "@/components/Board/item";
+import { ARTICLE_DATA } from "@/components/Dict/item";
 import { useEffect } from "react";
 
 const categoryType: Record<string, number> = {

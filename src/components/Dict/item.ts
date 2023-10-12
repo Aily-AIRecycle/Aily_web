@@ -1,3 +1,14 @@
+import gen from "img/dict/gen.png";
+import can from "img/dict/can.png";
+import pet from "img/dict/pet.png";
+import paper from "img/dict/paper.png";
+import glass from "img/dict/glass.png";
+import vinly from "img/dict/vinyl.png";
+import plastic from "img/dict/plastic.png";
+import food from "img/dict/garbage.png";
+import cloth from "img/dict/cloth.png";
+import { StaticImageData } from "next/image";
+
 export type Article = {
   id: string;
   category: string;
@@ -29,18 +40,9 @@ export const ARTICLE_DATA: Article[] = [
       "안녕하세요, Aily 입니다.\n\n물이나 이물질을 묻지 않게 하고 구겨지지 않게 배출합니다.\n양장본 책은 겉표지(일반쓰레기)와 속지(종이)를 분리해서 배출합니다.",
     date: "2023.07.17",
   },
+  
   {
     id: "3",
-    category: "ETC",
-    category_id: 10,
-    title: "형광등",
-    writer: "Aily",
-    content:
-      "안녕하세요, Aily 입니다.\n\n형광등은 반드시 아파트 단지내 또는 가까운 주민센터 등에 설치된 형광등 전용 수거함으로 버려주세요.\n\n만약 형광등이 깨졌다면 불연성 쓰레기 봉투에 담아 버려주시고, 깨진 형광등이 수거하는 사람을 다치게 할 수 있으니 쓰레기 봉투가 찢어지지 않게 신문지 등으로 잘 싸서 버려주세요.",
-    date: "2023.07.21",
-  },
-  {
-    id: "4",
     category: "플라스틱",
     category_id: 7,
     title: "화장품(스틱)",
@@ -62,5 +64,23 @@ export const menuData = [
   { name: "플라스틱", path: "plastic" },
   { name: "음식물", path: "food" },
   { name: "의류 · 원단", path: "cloth" },
-  { name: "ETC", path: "etc" },
+
+];
+
+export type CategoryList = {
+  category: string;
+  img: StaticImageData;
+  path: string;
+};
+
+export const categoryList : CategoryList[] = [
+  { category: "일반쓰레기", img: gen, path: "gen" },
+  { category: "캔류 · 고철", img: can, path: "can" },
+  { category: "페트", img: pet, path: "pet" },
+  { category: "종이 · 종이팩", img: paper, path: "paper" },
+  { category: "유리", img: glass, path: "glass" },
+  { category: "비닐", img: vinly, path: "vinyl" },
+  { category: "플라스틱", img: plastic, path: "plastic" },
+  { category: "음식물", img: food, path: "food" },
+  { category: "의류 · 원단", img: cloth, path: "cloth" },
 ];

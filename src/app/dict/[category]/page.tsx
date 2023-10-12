@@ -1,8 +1,8 @@
 "use client";
 import BoardFilter from "@/components/Board/BoardFilter";
-import { ARTICLE_DATA } from "@/components/Board/item";
+import { ARTICLE_DATA } from "@/components/Dict/item";
 import { useEffect, useState } from "react";
-import { categoryList } from "../page";
+import { categoryList } from "@/components/Dict/item";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
@@ -16,7 +16,6 @@ const categoryType: Record<string, number> = {
   plastic: 7,
   food: 8,
   cloth: 9,
-  etc: 10,
 };
 
 function Page({ params }: { params: { category: string } }) {

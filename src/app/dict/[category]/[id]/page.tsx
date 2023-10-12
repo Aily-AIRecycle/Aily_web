@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { ARTICLE_DATA } from "@/components/Board/item";
-import { Article } from "@/components/Board/item";
+import { ARTICLE_DATA } from "@/components/Dict/item";
+import { Article } from "@/components/Dict/item";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { categoryList } from "../../page";
+import { categoryList } from "@/components/Dict/item";
 import Image, { StaticImageData } from "next/image";
 
 function Page({

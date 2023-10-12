@@ -1,7 +1,7 @@
 import BoardNavigation from "@/components/Board/BoardNavigation";
 import Footer from "@/components/UI/Footer";
 import Header from "@/components/UI/Header";
-import { menuData } from "@/components/Board/item";
+import { menuData } from "@/components/Dict/item";
 import BoardHeader from "@/components/Board/BoardHeader";
 
 export const metadata = {

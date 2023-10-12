@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import classes from "@/app/dictionary/[category]/[id]/DictContent.module.scss";
-import { ARTICLE_DATA } from "@/components/Board/item";
-import { Article } from "@/components/Board/item";
+import { ARTICLE_DATA } from "@/components/Dict/item";
+import { Article } from "@/components/Dict/item";
 
 function Page({ params }: { params: { id: string } }): JSX.Element {
   const article = ARTICLE_DATA.filter(
