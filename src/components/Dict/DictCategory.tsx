@@ -28,7 +28,7 @@ export default function DictCategory({
   return (
     <>
       <Link
-        className="w-4/5 h-14 flex justify-between items-center mb-5 px-4 shadow-md rounded-full"
+        className="lg:w-4/5 w-[90%] h-14 flex justify-between items-center mb-5 px-4 shadow-md rounded-full"
         href={{
           pathname: `/dict/${path}`,
         }}
