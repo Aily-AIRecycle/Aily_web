@@ -1,27 +1,10 @@
 "use client";
 import Image from "next/image";
-import { StaticImageData } from "next/image";
 import arrow from "img/dict/arrow.png";
 import Link from "next/link";
-import { useRecoilState } from "recoil";
-import { categoryPath } from "@/atoms";
-import { useEffect } from "react";
 import { CategoryList } from "./item";
 
-export default function DictCategory({
-  category,
-  img,
-  path,
-}: CategoryList) {
-  const [currCategory, setCurrCategory] = useRecoilState(categoryPath);
-
-  const onClick = () => {
-    setCurrCategory(path);
-  };
-
-  useEffect(() => {
-    console.log(currCategory);
-  }, [currCategory]);
+export default function DictCategory({ category, img, path }: CategoryList) {
   return (
     <>
       <Link
@@ -29,7 +12,6 @@ export default function DictCategory({
         href={{
           pathname: `/dict/${path}`,
         }}
-        onClick={onClick}
       >
         <div className="flex items-center">
           <Image src={img} alt="gen" width={30} />
