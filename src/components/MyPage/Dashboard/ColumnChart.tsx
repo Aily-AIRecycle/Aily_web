@@ -36,7 +36,7 @@ const ColumnChart: React.FC<ColumnChartProps> = (props: ColumnChartProps) => {
 
   useEffect(() => {
     axios
-      .post("/member/member/historypax", {
+      .post("/member/historypax", {
         nickname: sessionStorage.getItem("name"),
       })
       .then((response) => {

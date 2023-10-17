@@ -19,7 +19,7 @@ export default function Point() {
     setUserName(name);
 
     axios
-      .post(`/member/member/UIS`, {
+      .post(`/member/UIS`, {
         phonenumber:
           sessionStorage.getItem("phone_number") ||
           localStorage.getItem("phone_number"),

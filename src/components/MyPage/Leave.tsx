@@ -28,7 +28,7 @@ export default function Leave() {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
       axios
-        .post("/member/member/leavuser", {
+        .post("/member/leavuser", {
           phonenumber: sessionStorage.getItem("phone_number"),
           nickname: sessionStorage.getItem("name"),
           password: password.value,

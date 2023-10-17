@@ -20,7 +20,7 @@ function Login() {
     event.preventDefault();
 
     axios
-      .post("/member/member/login", {
+      .post("/member/login", {
         email: email.value,
         password: password.value,
       })

@@ -82,7 +82,7 @@ function Join(): JSX.Element {
       formData.phonenumber
     ) {
       axios
-        .post(`/member/member/join`, {
+        .post(`/member/join`, {
           email: formData.email,
           password: formData.password,
           nickname: formData.nickname,
@@ -105,14 +105,14 @@ function Join(): JSX.Element {
 
   function authEmailHandler() {
     axios
-      .post(`/member/member/EmailCheck`, {
+      .post(`/member/EmailCheck`, {
         email: formData.email,
       })
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {
           axios
-            .post(`/member/member/auth-email`, {
+            .post(`/member/auth-email`, {
               email: formData.email,
             })
             .then((res) => {
@@ -137,7 +137,7 @@ function Join(): JSX.Element {
 
   function checknickname() {
     axios
-      .get(`/member/member/ChNick/${formData.nickname}`)
+      .get(`/member/ChNick/${formData.nickname}`)
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {

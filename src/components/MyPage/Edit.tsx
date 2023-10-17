@@ -50,7 +50,7 @@ export default function Edit() {
 
   useEffect(() => {
     axios
-      .post(`/member/member/UIS`, {
+      .post(`/member/UIS`, {
         phonenumber:
           sessionStorage.getItem("phone_number") ||
           localStorage.getItem("phone_number"),
@@ -91,7 +91,7 @@ export default function Edit() {
     } else if (!loadImgUrl) {
       if (sessionStorage.getItem("CUN") == "yes") {
         axios
-          .post(`/member/member/UIC`, {
+          .post(`/member/UIC`, {
             phonenumber: formData.phonenumber,
             email: formData.email, // Include the unchanged email field
             nickname: formData.nickname,
@@ -113,7 +113,7 @@ export default function Edit() {
       formdata.append("image", blob);
 
       try {
-        const uicResponse = await axios.post(`/member/member/UIC`, {
+        const uicResponse = await axios.post(`/member/UIC`, {
           phonenumber: formData.phonenumber,
           email: formData.email,
           nickname: formData.nickname,
@@ -123,7 +123,7 @@ export default function Edit() {
 
         if (uicResponse.status === 200) {
           const uploadResponse = axios.post(
-            `/member/member/upload/${formData.nickname}`,
+            `/member/upload/${formData.nickname}`,
             formdata,
             {
               headers: {
@@ -145,7 +145,7 @@ export default function Edit() {
       const blob = await fetch(loadImgUrl).then((res) => res.blob());
       formdata.append("image", blob);
       axios
-        .post(`/member/member/upload/${formData.nickname}`, formdata, {
+        .post(`/member/upload/${formData.nickname}`, formdata, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -165,7 +165,7 @@ export default function Edit() {
 
   function checknickname() {
     axios
-      .get(`/member/member/ChNick/${formData.nickname}`)
+      .get(`/member/ChNick/${formData.nickname}`)
       .then((res) => {
         // 중복 아니면 res = 'yes'
         if (res.data === "yes") {

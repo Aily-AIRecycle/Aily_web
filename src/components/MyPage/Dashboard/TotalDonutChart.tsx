@@ -30,7 +30,7 @@ const TotalDonutChart: React.FC<TotalDonutChartProps> = (
 
   useEffect(() => {
     axios
-      .post("/member/member/usertotalDonut", {
+      .post("/member/usertotalDonut", {
         phonenumber:
           sessionStorage.getItem("phone_number") ||
           localStorage.getItem("phone_number"),

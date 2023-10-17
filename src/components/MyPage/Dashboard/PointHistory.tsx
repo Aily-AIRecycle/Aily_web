@@ -17,7 +17,7 @@ export default function PointHistory() {
 
   useEffect(() => {
     axios
-      .post("/member/member/historypax", {
+      .post("/member/historypax", {
         nickname:
           sessionStorage.getItem("name") || localStorage.getItem("name"),
       })

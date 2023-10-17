@@ -34,7 +34,7 @@ export default function MyPageNavigation() {
   useEffect(() => {
     axios
       .post(
-        "/member/member/userimage",
+        "/member/userimage",
         {
           phonenumber:
             sessionStorage.getItem("phone_number") ||
