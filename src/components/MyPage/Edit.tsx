@@ -109,7 +109,7 @@ export default function Edit() {
       }
       return;
     } else if (sessionStorage.getItem("CUN") === "yes" && loadImgUrl) {
-      const blob = await fetch(loadImgUrl).then((res) => res.blob());
+      const blob = await fetch(imgUrl).then((res) => res.blob());
       formdata.append("image", blob);
 
       try {
@@ -142,7 +142,7 @@ export default function Edit() {
         // Handle errors if needed
       }
     } else if (loadImgUrl) {
-      const blob = await fetch(loadImgUrl).then((res) => res.blob());
+      const blob = await fetch(imgUrl).then((res) => res.blob());
       formdata.append("image", blob);
       axios
         .post(`/member/upload/${formData.nickname}`, formdata, {
@@ -198,8 +198,7 @@ export default function Edit() {
             className="bg-black opacity-60 w-full h-full fixed top-0"
             onClick={() => {
               dispatch(cropModalActions.click());
-            }}
-          ></div>,
+            }}></div>,
           document.body
         )}
       {showModal &&
@@ -231,8 +230,7 @@ export default function Edit() {
                       name="nickname"
                       className={input}
                       value={formData.nickname}
-                      onChange={onChangeHandler}
-                    ></input>
+                      onChange={onChangeHandler}></input>
 
                     <Button
                       value="닉네임 중복 확인"
@@ -252,8 +250,7 @@ export default function Edit() {
                       value={formData[field.name]}
                       onChange={onChangeHandler}
                       className="border border-solid border-[#a0a0a0] bg-gray-200 rounded-lg px-3 w-full h-10"
-                      readOnly={true}
-                    ></input>
+                      readOnly={true}></input>
                   </li>
                 ))}
               </ul>
@@ -269,8 +266,7 @@ export default function Edit() {
               className="w-[50px] h-[50px] flex justify-center items-center rounded-full border border-solid border-black bg-white relative bottom-[50px]"
               onClick={() => {
                 setShowBox(!showBox);
-              }}
-            >
+              }}>
               <Image src={edit} alt="edit" width={30} height={30} />
             </button>
             {showBox && (
@@ -280,8 +276,7 @@ export default function Edit() {
                   onClick={() => {
                     dispatch(cropModalActions.crop());
                   }}
-                  className="w-full flex justify-center text-inherit leading-normal align-middle cursor-pointer hover:bg-[#e7e7e7]"
-                >
+                  className="w-full flex justify-center text-inherit leading-normal align-middle cursor-pointer hover:bg-[#e7e7e7]">
                   사진 업로드
                 </label>
                 <form encType="multipart/form-data">
@@ -298,8 +293,7 @@ export default function Edit() {
                 {imgUrl !== null && (
                   <button
                     onClick={() => dispatch(setImageUrl(null))}
-                    className="w-full hover:bg-[#e7e7e7]"
-                  >
+                    className="w-full hover:bg-[#e7e7e7]">
                     사진 제거
                   </button>
                 )}
