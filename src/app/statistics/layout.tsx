@@ -14,9 +14,7 @@ export default function MyPageLayout({
   return (
     <>
       <Header />
-      {/* <div style={{ display: "flex", justifyContent: "center" }}> */}
-      {children}
-      {/* </div> */}
+      <div className="min-h-[500px]">{children}</div>
       <Footer />
     </>
   );
