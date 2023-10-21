@@ -1,10 +1,11 @@
 "use client";
-import BoardFilter from "@/components/Board/BoardFilter";
-import { ARTICLE_DATA } from "@/components/Dict/item";
+import { ItemType } from "@/components/Dict/item";
 import { useEffect, useState } from "react";
 import { categoryList } from "@/components/Dict/item";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import BoardTitle from "@/components/Dict/BoardTitle";
+import axios from "axios";
 
 const categoryType: Record<string, number> = {
   gen: 1,
@@ -21,15 +22,27 @@ const categoryType: Record<string, number> = {
 function Page({ params }: { params: { category: string } }) {
   const [title, setTitle] = useState("");
   const [img, setImg] = useState<StaticImageData>();
+  const [data, setData] = useState<ItemType[]>([]);
   useEffect(() => {
     const matchingCategory = categoryList.find(
       (item) => item.path === params.category
     );
 
+    console.log(params.category);
+    console.log(matchingCategory);
+
     if (matchingCategory) {
       setTitle(matchingCategory.category);
       setImg(matchingCategory.img);
     }
+  }, [params.category]);
+
+  useEffect(() => {
+    console.log(params.category);
+    axios.get(`/board/${params.category}`).then((response) => {
+      console.log(response.data);
+      setData(response.data);
+    });
   }, [params.category]);
 
   return (
@@ -58,11 +71,15 @@ function Page({ params }: { params: { category: string } }) {
             </div>
           </div>
           <ul className="flex flex-col-reverse">
-            <BoardFilter
-              boardName={params.category}
-              categoryType={categoryType}
-              data={ARTICLE_DATA}
-            />
+            {data &&
+              data.map((item: ItemType, index) => (
+                <BoardTitle
+                  key={index}
+                  article={data[index]}
+                  boardName={title}
+                  path={params.category}
+                />
+              ))}
           </ul>
         </div>
         <div className="w-full mt-8">

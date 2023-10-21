@@ -9,6 +9,14 @@ import food from "img/dict/garbage.png";
 import cloth from "img/dict/cloth.png";
 import { StaticImageData } from "next/image";
 
+export type ItemType = {
+  id: number;
+  number: string;
+  title: string;
+  content: string;
+  imgfile: string;
+};
+
 export type Article = {
   id: string;
   category: string;
@@ -18,40 +26,6 @@ export type Article = {
   content: string;
   date: string;
 };
-
-export const ARTICLE_DATA: Article[] = [
-  {
-    id: "1",
-    category: "음식물",
-    category_id: 8,
-    title: "치킨(닭 뼈)",
-    writer: "Aily",
-    content:
-      "안녕하세요, Aily 입니다.\n치킨 드시고 남은 닭 뼈는 일반쓰레기로 버려주세요.",
-    date: "2023.07.12",
-  },
-  {
-    id: "2",
-    category: "종이 · 종이팩",
-    category_id: 4,
-    title: "책",
-    writer: "Aily",
-    content:
-      "안녕하세요, Aily 입니다.\n\n물이나 이물질을 묻지 않게 하고 구겨지지 않게 배출합니다.\n양장본 책은 겉표지(일반쓰레기)와 속지(종이)를 분리해서 배출합니다.",
-    date: "2023.07.17",
-  },
-  
-  {
-    id: "3",
-    category: "플라스틱",
-    category_id: 7,
-    title: "화장품(스틱)",
-    writer: "Aily",
-    content:
-      "안녕하세요, Aily 입니다.\n\n립스틱, 립밤, 선스틱은 냉동실에 2시간 이상 얼려두면 스틱과 스틱 안에 남아있는 내용물을 깔끔하게 분리할 수 있어요.\n남은 내용물(화장품)은 일반쓰레기(종량제봉투)로 버리고, 뚜껑과 용기(스틱)는 플라스틱 등 재질에 맞게 분리 배출해요.",
-    date: "2023.07.26",
-  },
-];
 
 export const menuData = [
   { name: "전체", path: "all" },
@@ -64,7 +38,6 @@ export const menuData = [
   { name: "플라스틱", path: "plastic" },
   { name: "음식물", path: "food" },
   { name: "의류 · 원단", path: "cloth" },
-
 ];
 
 export type CategoryList = {
@@ -73,7 +46,7 @@ export type CategoryList = {
   path: string;
 };
 
-export const categoryList : CategoryList[] = [
+export const categoryList: CategoryList[] = [
   { category: "일반쓰레기", img: gen, path: "gen" },
   { category: "캔류 · 고철", img: can, path: "can" },
   { category: "페트", img: pet, path: "pet" },

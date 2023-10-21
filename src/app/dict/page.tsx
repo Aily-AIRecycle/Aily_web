@@ -1,7 +1,7 @@
 "use client";
 
 import DictCategory from "@/components/Dict/DictCategory";
-import { categoryList } from '../../components/Dict/item'
+import { categoryList } from "../../components/Dict/item";
 
 function Page() {
   return (
