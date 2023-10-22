@@ -14,6 +14,7 @@ function Page({
   const [title, setTitle] = useState("");
   const [img, setImg] = useState<StaticImageData>();
   const [article, setArtice] = useState<ItemType>();
+  const [contents, setContents] = useState("");
 
   useEffect(() => {
     console.log(params.category, params.id);
@@ -22,6 +23,9 @@ function Page({
       articles.map((data) => {
         if (data.id === parseInt(params.id)) {
           setArtice(data);
+          const originalText = data.content;
+          const sentences = originalText.split(" · ");
+          setContents(sentences.join("\n· "));
         }
       });
       console.log(response.data);
@@ -57,15 +61,16 @@ function Page({
               <li className="text-[12px] font-light pr-1 mr-1 ">Aily</li>
             </ul>
           </div>
-          <div className="w-full">
+          <div className="w-full pt-4">
+            <Image
+              src={article.imgfile}
+              alt="content"
+              width={300}
+              height={300}
+            />
             <pre className="w-full h-[500px] lg:px-[10px] py-[30px] mb-[30px] leading-8 border-b-2 border-solid border-[#726969] break-words whitespace-pre-wrap lg:text-[16px] text-[15px]">
-              {article!.content}
-              <Image
-                src={article.imgfile}
-                alt="content"
-                width={100}
-                height={100}
-              />
+              {/* {article.content} */}
+              {contents}
             </pre>
           </div>
           <div className="w-full">
