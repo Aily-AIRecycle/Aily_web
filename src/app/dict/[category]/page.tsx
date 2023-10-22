@@ -52,23 +52,18 @@ function Page({ params }: { params: { category: string } }) {
           {img && <Image src={img} width={30} height={30} alt="img" />}
           <span className=" text-lg ml-3">{title}</span>
         </div>
-        <div className=" min-h-[300px] border-y-2 border-solid border-[#726969]">
+        <div className="min-h-[300px] border-y-2 border-solid border-[#726969]">
           <div className="flex h-[50px] items-center border-b border-solid border-[#d9d9d9] ">
             <div className="lg:w-[10%] lg:flex lg:justify-center hidden">
               No
             </div>
-            <div className="lg:w-1/5 lg:flex lg:justify-center hidden">
+            <div className="lg:w-[30%] lg:flex lg:justify-center hidden">
               카테고리
             </div>
-            <div className="lg:w-1/2 flex justify-center w-4/5 lg:text-base text-[15px]">
+            <div className="lg:w-2/5 flex justify-center w-4/5 lg:text-base text-[15px]">
               제목
             </div>
-            <div className="lg:w-[10%] lg:flex lg:justify-center hidden">
-              작성자
-            </div>
-            <div className="w-1/5 flex justify-center lg:text-base text-[15px]">
-              작성일
-            </div>
+            <div className="w-1/5 flex justify-center ">작성자</div>
           </div>
           <ul className="flex flex-col-reverse">
             {data &&

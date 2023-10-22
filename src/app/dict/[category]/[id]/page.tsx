@@ -51,13 +51,10 @@ function Page({
             {img && <Image src={img} width={30} height={30} alt="img" />}
             <span className=" text-lg ml-3">{title}</span>
           </div>
-          <div className="lg:text-[20px] text-[18px] w-full h-20 border-t-2 border-b border-solid border-t-[#726969] border-b-[#bcbcbc] flex flex-col justify-evenly font-medium">
+          <div className="lg:text-[20px] text-[18px] w-full h-20 border-t-2 border-b border-solid border-t-[#726969] border-b-[#bcbcbc] flex flex-col justify-evenly font-medium lg:pl-3">
             {article!.title}
             <ul className="flex">
-              <li className="text-[12px] font-light pr-1 mr-1 border-r border-solid border-[#9d9d9d]">
-                Aily
-              </li>
-              <li className="text-[12px] font-light">2023.08.23</li>
+              <li className="text-[12px] font-light pr-1 mr-1 ">Aily</li>
             </ul>
           </div>
           <div className="w-full">
