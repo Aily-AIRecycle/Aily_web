@@ -46,55 +46,34 @@ This project is the web interface for Aily's recycle bin, built using [Next.js](
 - **TypeScript (v5.1.6)**: JavaScript language with static typing support.
 
 ## Project Structure
-
-### 🏠 app
-
-- **boards**: Module for boards
-
-  - **[category]**: Category-specific boards
-    - **[id]**: Boards for each category
-
-- **dict**: Module for dictionaries
-
-  - **[category]**: Category-specific dictionaries
-    - **[id]**: Dictionaries for each category
-
-- **join**: Module for user registration
-- **location**: Module for location
-
-- **login**: Module for login
-
-- **my-page**: Module for user profiles
-
-  - **[menu]**: Menu-specific components
-
-- **statistics**: Module for statistics
-
-- `favicon.ico` : Website favicon
-- `globals.css`: Global stylesheet
-- `layout.tsx`: Default layout component
-- `page.tsx`: Default page component
-
-### 🎨 components
-
-- **Board**: Components related to boards
-
-- **Dict**: Components related to dictionaries
-
-- **HomePage**: Components related to the homepage
-
-- **Location**: Components related to location
-- **MyPage**: Components related to user profiles
-
-  - **Dashboard**: Submodule for the dashboard
-
-- **StatisStics**: Components related to statistics
-
-- **UI**: Miscellaneous UI components
-
-### 🎣 hooks
-
-### 📦 store: Redux
+```bash
+📦src
+┣ 📂app
+┃ ┣ 📂boards
+┃ ┃ ┗ 📂[category]
+┃ ┃ ┃ ┣ 📂[id]
+┃ ┣ 📂dict
+┃ ┃ ┣ 📂[category]
+┃ ┃ ┃ ┣ 📂[id]
+┃ ┣ 📂join
+┃ ┣ 📂location
+┃ ┣ 📂login
+┃ ┣ 📂my-page
+┃ ┃ ┗ 📂[menu]
+┃ ┣ 📂statistics
+┣ 📂components
+┃ ┣ 📂Board
+┃ ┣ 📂Dict
+┃ ┣ 📂HomePage
+┃ ┣ 📂Location
+┃ ┃ ┣ 📂styles
+┃ ┣ 📂MyPage
+┃ ┃ ┣ 📂Dashboard
+┃ ┣ 📂StatisStics
+┃ ┗ 📂UI
+┣ 📂hooks
+┗ 📂store
+```
 
 ## Installation and Setup
 
